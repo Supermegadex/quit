@@ -1,0 +1,66 @@
+<dom-module id="audio-controls">
+    <template>
+        <style>
+            :host {
+                position: fixed;
+                right: 2px;
+                bottom: 90px !important;
+                z-index: 500;
+            }
+            #ctrl {
+                bottom: 90px;
+            }
+        </style>
+        <template is="dom-if" if="{{show1}}">
+            <div class="fixed-action-btn" id="ctrl">
+                <a class="btn-floating btn-large waves-effect blue">
+                    <template is="dom-if" if="{{show2}}"><i class="large material-icons" class="plpa" onclick="pa('pause')">pause</i></template>
+                    <template is="dom-if" if="{{show3}}"><i class="large material-icons" class="plpa" onclick="pa('play')">play_arrow</i></template>
+                </a>
+                <ul>
+                  <li><a class="btn-floating red waves-effect" onclick="pa('stop'); mute='true'"><i class="material-icons">volume_off</i></a></li>
+                </ul>
+            </div>
+        </template>
+        </template>
+    </template>
+    <script>
+    /* global Polymer */
+    
+        Polymer({
+            is: "audio-controls",
+            properties: {
+                playing: {
+                    type: Number,
+                    observer: "_player",
+                    value: 0
+                },
+                audio: {
+                    value: "nothin'",
+                    type: String,
+                    observer: "_changedMus"
+                },
+                show1: Boolean,
+                show2: Boolean,
+                show3: Boolean
+            },
+            _player: function(){
+                if(this.playing == 0){
+                    this.show1 = false;
+                    this.show2 = false;
+                    this.show3 = false;
+                }
+                if(this.playing == 1){
+                    this.show1 = true;
+                    this.show2 = true;
+                    this.show3 = false;
+                }
+                if(this.playing == 2){
+                    this.show1 = true;
+                    this.show2 = false;
+                    this.show3 = true;
+                }
+            }
+        });
+    </script>
+</dom-module>

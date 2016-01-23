@@ -1,0 +1,22 @@
+<p>When Frisk awoke, Asriel was nowhere to be found. They spent several minutes wandering about the house before they spotted, in a small ceramic pot, a yellow, grinning flower. <span class="mon">No.</span></p>
+<p><span class="mon">“You IDIOT! You thought little weenie Asriel could stop ME from coming back? It hardly took any effort to put him back in his place.</span> He looked down sorrowfully. <span class="mon">But, I still have to wonder: why, exactly did you let me go? Now that I know you're not mute, ANSWER ME! I-I just need to understand!"</span></p>
+<p><span class="mon">“For one, I don't like hurting anyone, not even a psychopathic murderer. I prefer to take a peaceful approach. By now, you know that it works, as even YOU couldn't stop my method. The reason I spared you is that I knew that it would be the only way to really win."</span> Frisk smiled. <span class="mon">“I get satisfaction from the way people react to me. Their smiles, their laughs, their happiness; it makes me feel like I've done something, you know? You never gave me satisfaction, but your real self sure made me feel good. All I want now is a happy ending!"</span></p>
+<p><span class="mon">“Why should I give you satisfaction when I am searching for it as well?"</span></p>
+<p id="ch2fire1"><span class="mon">“You'll never get ANY satisfaction if you don't have a SOUL! And, you don't have a choice, anyway. Come on!"</span></p>
+<p>With that, Frisk picked up the pot that Flowey was in and made the trek up to where their friends were waiting.</p>
+<script>
+    /* global pa Materialize */
+
+    $("#music").animate({volume: 0}, 2000);
+    window.setTimeout(function(){
+        pa("start", {name: "You Idiot"});
+        $("#music").animate({volume: 0.4}, 50);
+    }, 4000);
+    
+      var options = [
+        {selector: '#ch2fire1', offset: 200, callback: 'chS[2].fire()' },
+      ];
+      
+      Materialize.scrollFire(options);
+    
+</script>
