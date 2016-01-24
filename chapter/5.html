@@ -13,7 +13,9 @@
 <p><span class="mon">“My child!”</span> exclaimed Toriel and Asgore in unison, who both ran to give Asriel the biggest hug of his life. Frisk joined as well.</p>
 <p><span class="mon">“Dreemurr Family hug!”</span> Frisk playfully shouted. <span class="mon"><i>This is the best day of my life!</i></span></p>
 <script>
-    /* global pa chS Materialize */
+    /* global pa chS */
+    
+    chS[4].done = false
 
     $("#music").animate({volume: 0}, 300);
     window.setTimeout(function(){
@@ -21,13 +23,14 @@
         $("#music").animate({volume: 1.0}, 100);
     }, 800);
     
-      chS[4].fp=false;
-      
-      $(document).scroll(function(){
-        if(!chS[4].fp){
-          chS[4].fire();
-          chS[4].fp = true;
-        }
-      })
+    window.setTimeout(function(){
+        $(document).scroll(function(){
+            if(!chS[4].done){
+                chS[4].fire();
+                chS[4].done = true;
+            }
+        })
+    }, 100)
+    
     
 </script>

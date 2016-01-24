@@ -38,20 +38,23 @@
         width: 100%;
         height: 100%;
         display: block;
-        z-index: 50000;
+        z-index: 5000000;
       }
       #namelabel {
         font-size: 18px;
       }
       .centered {
         position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .hint {
+        text-decoration: underline dotted rgba(255, 255, 255, .2);
       }
     </style>
   </head>
-  <body>
+  <body class="blue-grey darken-1">
     <div class="white"></div>
     <div class="navbar-fixed">
       <ul id="dropdown1" class="dropdown-content">
@@ -97,6 +100,7 @@
     <script>
     var nam;
     var astate = document.querySelector("#audio-controls");
+    console.log("Hello, fellow developers! Prepare for error hell! If someone would help me with some stuff, I would be grateful! I am talking about some weird Polymer element attribute stuff. If you can help, my information is in the Afterword or the last chapter.");
     var mute = false;
       function chapter(c){
         document.querySelector("#story").chapter = c;
@@ -106,6 +110,7 @@
           if(action == "start"){
             document.querySelector("#music").src = "/music/" + options.name + ".mp3";
             document.querySelector("#music").play();
+            astate.audio = options.name;
             astate.playing = 1;
           }
           if(action == "play"){
@@ -116,6 +121,7 @@
         if(action == "stop"){
           document.querySelector("#music").src = "";
           astate.playing = 0;
+            astate.audio = "";
         }
         if(action == "pause"){
           document.querySelector("#music").pause();
@@ -175,8 +181,9 @@
           $("#nameStatus").html("I think you should think of your own name, my child.");
           $("#nameConf").hide();
         }if(nam.toLowerCase() == "gaster"){
-          $("#white").fadeIn(10);
-          location.reload();
+          $("#white").fadeIn(20, function(){
+            location.reload();
+          });
         }if(nam.toLowerCase() == "temmie"){
           $("#nameStatus").html("hOI!");
         }if(nam.toLowerCase() == "asgore"){
@@ -196,8 +203,8 @@
           $("#nameStatus").html("That's a little on-the-nose, isn't it..?");
         }if(nam.toLowerCase() == "gerson"){
           $("#nameStatus").html("Wah ha ha! Why not?");
-        }if(nam.toLowerCase() == "napsta" || nam.toLowerCase() == "napstablook"){
-          $("#nameStatus").html(".......<br>(They're powerless to stop you)");
+        }if(nam.toLowerCase() == "napsta" || nam.toLowerCase() == "napstablook" || nam.toLowerCase() == "blooky"){
+          $("#nameStatus").html(".................<br>(They're powerless to stop you)");
         }
       }
       $( document ).ready(function(){
@@ -253,10 +260,15 @@
             window.setTimeout(function(){
               $("#music").animate({volume: 1.0}, 5);
               pa("start", {name: "His Theme"});
-            }, 4100)
-          }
+            }, 4100);
+          },
+          done: false,
         }
       ];
+      
+      document.addEventListener('select', function() {
+        
+      }, false);
       
     </script>
       <script src="/js/smoothscroll.js"></script>
