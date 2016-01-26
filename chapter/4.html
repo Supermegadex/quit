@@ -3,9 +3,9 @@
 <p><span class="mon">“You're inside of my soul,"</span> answered Frisk.</p>
 <p><span class="mon">“Damn, I hurt like I just got mauled by a bear,"</span> <span class="chara"></span> said.</p>
 <p><span class="mon">“Why did you absorb us, Frisk?"</span></p>
-<p>Not knowing how Asriel knew their name, Frisk assumed that the body and SOUL were always connected. They were unable to speak, too much in shock to answer.</p>
-<p><span class="mon">“ANSWER US!"</span> <span class="chara"></span> shot.</p>
-<p><span class="mon">“I need to SAVE you, Asriel. I need you to be happy. <span class="chara"></span>, this doesn't have anything to do with you. You've hurt so many people, even your own brother. Your time is up."</span></p>
+<p>Not knowing how Asriel knew their name, Frisk assumed that the body and SOUL were always connected.</p>
+<p><span class="mon">“ANSWER YOUR LITTLE FRIEND!"</span> <span class="chara"></span> spat.</p>
+<p><span class="mon">“I need to SAVE you, Asriel. I need you to be happy. <span class="chara"></span>, this doesn't have anything to do with you. You've hurt so many people, even your own brother. I'm not going to try and save you"</span></p>
 <p><span class="mon">“What? Don't you know? I'm bound to Asriel's SOUL!"</span></p>
 <p><span class="mon">“They're right, Frisk. I absorbed their SOUL a long time ago. I'm sorry, you can't save my SOUL. And I don't know if I would be able to let go if I tried."</span></p>
 <p><span class="mon">“That's right, Asriel. I'm always here for you. I am your sibling, after all. We love each other, right?"</span> The fallen child grinned at Frisk. Their rosy cheeks and red eyes pierced Frisk's very being, but Frisk held on.</p>
@@ -21,11 +21,19 @@
 <p><span class="mon">“<span class="chara"></span> never treated me this way. They never really liked to talk, or play many games, or well, anything friendly. I'm glad you're here.”</span></p>
 <p><span class="mon">“I’m glad I could save you.”</span></p>
 <script>
-/* global pa Materialize */
+/* global pa Materialize musics Howl */
 
     $("#music").animate({volume: 0}, 500);
+    /*
     window.setTimeout(function(){
         pa("start", {name: "Undertale"});
         $("#music").animate({volume: 1.0}, 1000);
     }, 2000);
+    */
+     musics.undertale = new Howl({
+        src: ["/music/Undertale.ogg", "/music/Undertale.mp3"],
+        loop: true
+    });
+    musics.undertale.play();
+    musics.undertale.fade(0, 1, 2000);
 </script>
