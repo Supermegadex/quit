@@ -5,16 +5,13 @@
 <p id="ch2fire1"><span class="mon">“You'll never get ANY satisfaction if you don't have a SOUL! And, you don't have a choice, anyway. Come on!"</span></p>
 <p>With that, Frisk picked up the pot that Flowey was in and made the trek up to where their friends were waiting.</p>
 <script>
-    /* global pa Materialize */
+    /* global $Aud Materialize */
 
-    $("#music").animate({volume: 0}, 2000);
-    window.setTimeout(function(){
-        pa("start", {name: "You Idiot"});
-        $("#music").animate({volume: 0.4}, 50);
-    }, 4000);
+    $Aud.load(["Undertale"]);
+    $Aud.xfade("You Idiot", 5000, false, 5000);
     
       var options = [
-        {selector: '#ch2fire1', offset: 200, callback: 'chS[2].fire()' },
+        {selector: '#ch2fire1', offset: 200, callback: '$Aus.fade("You Idiot", 1, 0, 2000, true)' },
       ];
       
       Materialize.scrollFire(options);

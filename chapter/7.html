@@ -16,7 +16,7 @@
 <p><span class="mon">“Asgore’s been trying to perfect that recipe for years! Do you think you could teach both of us how to make it, Toriel?”</span> Undyne asked.</p>
 <p><span class="mon">“Indeed. Let us make our way to the ruins, as all of the ingredients are already there.”</span></p>
 <script>
-    /* global pa Materialize chS astate */
+    /* global pa Materialize chS $Aud */
     
     chS[7] = {
         fire: function(){
@@ -28,16 +28,16 @@
         },
     };
 
-    if(astate.audio != "Alphys"){
-        $("#music").animate({volume: 0}, 500);
-        window.setTimeout(function(){
-            pa("start", {name: "Alphys"});
-            $("#music").animate({volume: 1.0}, 100);
-        }, 500);
+    if($Aud.audio=="Alphys"){
+        $Aud.load(["Home-Music Box"]);
+    }
+    else{
+        $Aud.load(["Home-Music Box", "Alphys"]);
+        $Aud.xfade("Alphys", 1000, false, 1000);
     }
     
       var options = [
-        {selector: '#ch7fire1', offset: 300, callback: 'chS[7].fire()' },
+        {selector: '#ch7fire1', offset: 300, callback: '$Aud.xfade("Home-Music Box", 1000, false, 4000);' },
       ];
       
       Materialize.scrollFire(options);

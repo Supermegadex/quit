@@ -2,7 +2,7 @@
 <p>“We are searching for a ‘Frisk Moore.’” Said one of the men. “Her mother informed us that she climbed Mt. Ebott today.”</p>
 <p><span class="mon">“Oh! I almost thought you were talking to me!”</span> Frisk giggled. <span class="mon"><i>Today! I climbed Mt. Ebott a week ago!</i> “My name is Frisk Dreemurr. Nice to meet you, sir!”</span></p>
 <p>“There you are, Frisk!” They recoiled from their father. “What's wrong? Aren't you happy to see us?”</p>
-<p><span class="mon">“I don't know who you are. I am Prince Frisk Dreemurr, and this is my brother, Prince Asriel of the Underground.”</span> They gestured toward Asriel and smiled.</p>
+<p>Frisk backed away decisively. <span class="mon">“I don't know who you are. I am Prince Frisk Dreemurr, and this is my brother, Prince Asriel of the Underground.”</span> They gestured toward Asriel and smiled.</p>
 <p>“You don't have a brother! Especially not that scumbag!” their mother screeched.</p>
 <p><span class="mon" id="ch6fire1">“What did you call my brother?” “What did you call me?” “What did you call our son?”</span> Frisk, Asriel, and Asgore and Toriel, respectively, asked. Rhetorically, of course.</p>
 <p>“These beasts are nothing but dirty creatures without souls. Let's go, Frisk.” she responded.</p>
@@ -10,7 +10,7 @@
 <p>“I'll be damned,” said Frisk's father. “It doesn't matter, though. Come with us, girl! According to the laws of the United States of America--”</p>
 <p><span class="mon">“No! You are NOT my father, I am NOT a girl, and we are NOT in the United States!"</span> Frisk snapped. <span class="mon">“My father is Asgore Dreemurr, my mother is Toriel Dreemurr, I have a brother named Asriel Dreemurr, I do not associate with a gender, we are in the Underground, and you must not have heard me: my name is FRISK DREEMURR!"</span></p>
 <p>"Well, you match the photographic identification exactly. Frisk, you will come with us, now. We will also set up an appointment with a psychiatrist. That is not your real family. you must have experienced some kind of trauma—whoa!" The man was flung off of Frisk and more men tried to grasp them. He had used a swab to grab some skin off of Frisk.</p>
-<p>Quickly, Frisk formed a barrier between them and the men. They then held up a magical fireball, impossible for a human.</p>
+<p>Quickly, Frisk formed a barrier between them and the men. They then held up a magical fireball, the same talent that Toriel often performed.</p>
 <p><span class="mon">"I am very proud, Frisk; you are an extraordinary monster."</span> Toriel fought to hold back tears.</p>
 <p><span class="pap">"GO, FRISK! YOU ARE GREAT!"</span> called Papyrus.</p>
 <p><span class="sans">"goat get 'em, kid."</span></p>
@@ -35,7 +35,7 @@
 <p>“Wow! How interesting! I have much to learn from you, Alphys.”</p>
 <p>Alphys smiled, clearly happy that someone cared about her work so much.</p>
 <script>
-    /* global pa Materialize chS */
+    /* global pa $Aud Materialize chS */
     
     chS[6] = {
         fire: function(){
@@ -53,16 +53,13 @@
             }, 1500);
         }
     };
-
-    $("#music").animate({volume: 0}, 1000);
-    window.setTimeout(function(){
-        pa("start", {name: "Fallen Down"});
-        $("#music").animate({volume: 1.0}, 100);
-    }, 1000);
+    
+    $Aud.load(["Fallen Down", "True Hero", "Alphys", "Dogsong"]);
+    $Aud.xfade("Fallen Down", 6000, false, 100);
     
       var options = [
-        {selector: '#ch6fire1', offset: 400, callback: 'chS[6].fire()' },
-        {selector: '#ch6fire2', offset: 600, callback: 'chS[6].fire2()' },
+        {selector: '#ch6fire1', offset: 400, callback: '$Aud.xfade("True Hero", 6000, false, 4000)' },
+        {selector: '#ch6fire2', offset: 600, callback: '$Aud.xfade("Alphys", 5000, false, 1000)' },
       ];
       
       Materialize.scrollFire(options);

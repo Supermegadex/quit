@@ -1,7 +1,7 @@
 <p>Whoa! You...you read my story! Thanks! It's not even close to being finished, though (actually, I plan on continually writing this until I get bored of it, whereapon I will tie it up neatly).
 <br>Anyway, I'll give you some contact info of mine, as long as you promise to follow some rules:
 <ol style="text-indent: 0;">
-    <li>NO SPAM, PLEASE! If you so choose to clog my inbox, may you have a bad time.</li>
+    <li>NO SPAM, PLEASE! If you so choose to clog my inbox, may you have a <span class="hint" onclick="Materialize.toast(bt, 18000)">bad time.</span></li>
     <li>I appreciate constructive criticism! However, criticism without construction is unhelpful and therefore unwelcome.</li>
     <li>Ideas for the story? Send 'em in! I will not change anything about the AU's canon, though, so keep that in mind.</li>
     <li>Like the story? Send me an email! Telling me I'm doing well is what keeps me motivated.</li>
@@ -21,20 +21,18 @@
         $(".ooo").fadeIn();
         chS[0].fire();
     }
-    /* global pa chS */
+    /* global $Aud chS */
     
     chS[0] = {
         fire: function(){
-            $("#music").animate({volume: .0}, 10);
-            pa("stop");
+            $Aud.fade("Dogsong", 1, 0, 100, true);
         },
     };
+    
+    var bt = "<img src='http://i3.kym-cdn.com/photos/images/original/001/019/779/5b0.gif'>";
 
-    $("#music").animate({volume: 0}, 1000);
-    window.setTimeout(function(){
-        pa("start", {name: "Dogsong"});
-        $("#music").animate({volume: 1.0}, 100);
-    }, 1000);
+    $Aud.load(["Dogsong"]);
+    $Aud.xfade("Dogsong", 1000, false, 100);
     
 </script>
 </p>

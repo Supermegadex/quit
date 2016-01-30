@@ -13,16 +13,14 @@
 <p>Encouragement; kind words; a struggled, somewhat creepy caresses from Alphys; and shouting from Papyrus (<span class="pap">NYEH!</span>) all were thrown at Flowey, and he remembered what the emotions felt like. It was strange; a tingling was emanating from his body similar to what he felt while he was absorbing the souls of the Underground. Looking up, he saw a grey-and-red heart glowing into existence. Before Flowey could do anything, though, it was gone. Depressed, the plant cried even harder, unable to understand the sad truth of his existence.</p>
 <p id="ch3fire2">While everyone was paying attention to Flowey, Frisk had backed off. While they were expecting something, hoping anything would happen, they were not expecting Asriel's very SOUL to just show up. Before thinking of any consequences, Frisk absorbed the SOUL.</p>
 <script>
-    /* global pa Materialize */
+    /* global $Aud Materialize */
+    
+    $Aud.load(["Reunited", "Don't Give Up", "Final Power", "His Theme"]);
 
-    $("#music").animate({volume: 0}, 2000);
-    window.setTimeout(function(){
-        pa("start", {name: "Reunited"});
-        $("#music").animate({volume: 1.0}, 300);
-    }, 2000);
+    $Aud.xfade("Reunited", 2000, false, 2000);
     
     var options = [
-        {selector: '#ch3fire1', offset: 200, callback: 'chS[3].fire1()' },
+        {selector: '#ch3fire1', offset: 200, callback: '$Aud.xfade("Don\'t Give Up", 2000, false, 2000); $(".nxt").on("click", chS[3].clik)' },
       ];
       
       Materialize.scrollFire(options);

@@ -7,30 +7,9 @@ function chapter(c){
 document.querySelector("#story").chapter = c;
 }
 function pa(action, options){
-if(!mute){
-  if(action == "start"){
-    document.querySelector("#music").src = "/music/" + options.name + ".mp3";
-    document.querySelector("#music").play();
-    astate.audio = options.name;
-    astate.playing = 1;
+  if(action == "sfx"){
+    document.querySelector("#" + options.name).play();
   }
-  if(action == "play"){
-    document.querySelector("#music").play();
-    astate.playing = 1;
-  }
-}
-if(action == "stop"){
-  document.querySelector("#music").src = "";
-  astate.playing = 0;
-    astate.audio = "";
-}
-if(action == "pause"){
-  document.querySelector("#music").pause();
-  astate.playing = 2;
-}
-if(action == "sfx"){
-  document.querySelector("#" + options.name).play();
-}
 }
 function canc(){
 $("#nameCanc").hide();
@@ -49,7 +28,8 @@ $(".white").fadeIn(5000, function(){
   window.setTimeout(function(){
     $(".white").fadeOut(40, function(){
       window.setTimeout(function(){
-        pa("play");
+        /* global $Aud */
+        $Aud.play("Memory");
       }, 1000)
     });
     window.scrollTo(0, 0);

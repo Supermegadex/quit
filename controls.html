@@ -14,18 +14,20 @@
         <template is="dom-if" if="{{show1}}">
             <div class="fixed-action-btn" id="ctrl">
                 <a class="btn-floating btn-large waves-effect blue">
-                    <template is="dom-if" if="{{show2}}"><i class="large material-icons" class="plpa" onclick="pa('pause')">pause</i></template>
-                    <template is="dom-if" if="{{show3}}"><i class="large material-icons" class="plpa" onclick="pa('play')">play_arrow</i></template>
+                    <template is="dom-if" if="{{show2}}"><i class="large material-icons" class="plpa" onclick="$Aud.pause()">pause</i></template>
+                    <template is="dom-if" if="{{show3}}"><i class="large material-icons" class="plpa" onclick="$Aud.resume()">play_arrow</i></template>
                 </a>
                 <ul>
-                  <li><a class="btn-floating red waves-effect" onclick="pa('stop'); mute='true'"><i class="material-icons">volume_off</i></a></li>
+                  <li><a class="btn-floating red waves-effect" onclick="$Aud.mute='true'"><i class="material-icons">volume_off</i></a></li>
                 </ul>
             </div>
         </template>
         </template>
     </template>
     <script>
-    /* global Polymer */
+    /* global Polymer Howl */
+    
+    var $Aud;
     
         Polymer({
             is: "audio-controls",
@@ -35,13 +37,27 @@
                     observer: "_player",
                     value: 0
                 },
+                mute: {
+                    value: false,
+                    type: Boolean,
+                    observer: "_mute"
+                },
                 audio: {
-                    value: "nothin'",
+                    value: "nada",
                     type: String,
                 },
                 show1: Boolean,
                 show2: Boolean,
-                show3: Boolean
+                show3: Boolean,
+                musics: {
+                    type: Object,
+                    value: {}
+                }
+            },
+            _mute: function(){
+                if(this.mute){
+                    this.stop(this.audio);
+                }
             },
             _player: function(){
                 if(this.playing == 0){
@@ -59,6 +75,80 @@
                     this.show2 = false;
                     this.show3 = true;
                 }
+            },
+            created: function(){
+                $Aud = document.querySelector("audio-controls");
+            },
+            attached: function(){
+                this.load(readyMusic);
+            },
+            load: function(ab){
+                for(var i in ab){
+                    if(typeof this.musics[ab[i]] != "object"){
+                        this.musics[ab[i]] = new Howl({
+                            src: ["/music/" + ab[i] + ".mp3"],
+                            loop: true
+                        });
+                    }
+                }
+            },
+            pause: function(){
+                this.musics[this.audio].pause();
+                this.playing = 2;
+            },
+            resume: function(){
+                if(!this.mute){
+                    this.musics[this.audio].play();
+                    this.fade(this.audio, 0, 1, 0, 50);
+                    this.playing = 1;
+                }
+            },
+            play: function(ab){
+                if(!this.mute){
+                    this.musics[ab].play();
+                    this.audio = ab;
+                    this.playing = 1;
+                }
+            },
+            stop: function(ab){
+                this.musics[ab].stop();
+                this.audio = "nada";
+                this.playing = 0;
+            },
+            fade: function(ab, v1, v2, d, t){
+                this.musics[ab].fade(v1, v2, d);
+                if(t){
+                    this.stop(ab);
+                }
+            },
+            xfade: function(ab2, d, x, d2){
+                var mno = this.audio;
+                if(x){
+                    this.musics[ab2].play();
+                    this.musics[ab2].fade(0, 1, d);
+                    if(this.audio != "nada"){
+                        this.musics[this.audio].fade(1, 0, d);
+                        window.setTimeout(function(){
+                            $Aud.musics[mno].stop();
+                        }, d);
+                    }
+                }
+                else{
+                    if(this.audio != "nada"){
+                        this.musics[this.audio].fade(1, 0, d);
+                        window.setTimeout(function(){
+                            console.log(ab2);
+                            $Aud.musics[ab2].play();
+                            $Aud.musics[ab2].fade(0, 1, d2);
+                            $Aud.musics[mno].stop();
+                        }, d);
+                    }
+                    else{
+                        $Aud.musics[ab2].play();
+                        $Aud.musics[ab2].fade(0, 1, d2);
+                    }
+                }
+                this.audio=ab2;
             }
         });
     </script>
