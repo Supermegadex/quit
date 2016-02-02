@@ -8,10 +8,11 @@
       <link rel="stylesheet" href="/css/fonts/8bit/stylesheet.css">
       <link rel="stylesheet" href="http://csshake.surge.sh/csshake.min.css">
       <script src="/webcomponentsjs/webcomponents.js"></script>
-      <script src="/js/jquery.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
       <link href="story.html" rel="import">
       <link href="sfx.html" rel="import">
       <script src="/howler/howler.min.js"></script>
+      <!-- When debugging in mobile !script src="http://jsconsole.com/remote.js?supermegadex"></script!-->
       <script>
         var readyMusic = [
           "Memory",
@@ -30,8 +31,7 @@
         font-family: "8bitoperator";
       }
       story-box {
-        width: 90%;
-        height: 95%;
+        min-height: 100%;
       }
       #modal1, .modal-footer {
         background-color: #000000 !important;
@@ -76,7 +76,8 @@
   <li><a href="javascript:chapter(6)">Six</a></li>
   <li><a href="javascript:chapter(7)">Seven</a></li>
   <li class="divider"></li>
-  <li><a href="javascript:chapter(8)">Afterword</a> </li>
+  <li><a href="javascript:chapter(8)">Eight</a></li>
+  <li><a href="javascript:chapter(9)">Afterword</a></li>
 </ul>
     <nav>
       <div class="nav-wrapper">
@@ -97,14 +98,22 @@
       <a href="" class="modal-action waves-effect btn-flat mon" id="nameCanc" style="position: absolute !important; color: white; left: 7px;" onclick="canc()">No</a><a href="" id="nameConf" class="modal-action waves-effect btn-flat mon" style="color:white;" onclick="showS()">Done</a>
     </div>
   </div>
-  
-    <story-box chapters="8" id="story"></story-box>
+    
+    <!-- Story-viewing pane-->
+    <story-box chapters="9" id="story"></story-box>
+    
+    <!-- Audio Controls -->
     <audio-controls id="audio-controls"></audio-controls>
-    <audio src="/music/Memory.mp3" id="music" loop></audio>
+    
+    <!-- [[REDACTED]] -->
+    <!--audio src="/music/Memory.mp3" id="music" loop></audio-->
+    
+    <!-- sound effects import -->
     <sfx-audio></sfx-audio>
+    
+    <!-- Materialize, (apparently, somehow necesary) Angular.js, and main js file -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
     <script src="index.js"></script>
-    <script src="/js/smoothscroll.js"></script>
   </body>
 </html>

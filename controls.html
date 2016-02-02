@@ -80,7 +80,10 @@
                 $Aud = document.querySelector("audio-controls");
             },
             attached: function(){
-                this.load(readyMusic);
+                /* global readyMusic */
+                if(typeof readyMusic == "object"){
+                    this.load(readyMusic);
+                }
             },
             load: function(ab){
                 for(var i in ab){
@@ -119,6 +122,12 @@
                 this.musics[ab].fade(v1, v2, d);
                 if(t){
                     this.stop(ab);
+                }
+            },
+            unload: function(sound){
+                if(typeof this.musics[sound] == "object"){
+                    this.musics[sound].unload();
+                    this.musics[sound] = undefined;
                 }
             },
             xfade: function(ab2, d, x, d2){

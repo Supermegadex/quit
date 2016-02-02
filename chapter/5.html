@@ -17,6 +17,8 @@
     chS[4].done = false
 
     $Aud.load(["Final Power", "His Theme", "Home-Music Box", "Alphys"]);
+    $Aud.unload("Reunited");
+    $Aud.unload("Don't Give Up");
     $Aud.xfade("Final Power", 1000, true);
     
     window.setTimeout(function(){

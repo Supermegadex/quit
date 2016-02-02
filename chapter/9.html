@@ -1,0 +1,59 @@
+<p>Whoa! You...you read my story! Thanks! It's not even close to being finished, though (actually, I plan on continually writing this until I get bored of it, whereapon I will tie it up neatly).
+<br>Anyway, I'll give you some contact info of mine, as long as you promise to follow some rules:
+<ol style="text-indent: 0;">
+    <li>NO SPAM, PLEASE! If you so choose to clog my inbox, may you have a <span class="hint" onclick="Materialize.toast(bt, 18000)">bad time.</span></li>
+    <li>I appreciate constructive criticism! However, criticism without construction is unhelpful and therefore unwelcome.</li>
+    <li>Ideas for the story? Send 'em in! I will not change anything about the AU's canon, though, so keep that in mind.</li>
+    <li>Like the story? Send me an email! Telling me I'm doing well is what keeps me motivated.</li>
+</ol>
+<a onclick="contact()">If you think you can handle these rules, click here!</a>
+<br><h5><a href="" id="mail"></a></h5><br><span class="message"></span><br><br><br><div class="ooo">Can't wait to hear from you, <i><b><span class="chara"></span>!</b></i></div><br>&nbsp;
+Well, anyway, here are the ever-important credits:
+<ul>
+    <li>Pl511's orchestral arrangement of Hopes and Dreams | <a href="https://www.youtube.com/watch?v=CzhO_JSPznU">Youtube</a>&nbsp;<a href="https://www.facebook.com/Pl511">Facebook</a></li>
+    <li>Toby Fox, the amazing creator of UNDERTALE | <a href="http://undertale.com/">Get the game!!</a>&nbsp;<a href="https://twitter.com/FwugRadiation">Twitter</a></li>
+    <li><a href="http://materializecss.com/">Materialize Framework</a></li>
+    <li><a href="https://www.polymer-project.org/1.0/">Polymer Project</a></li>
+    <li><a href="https://github.com/goldfire/howler.js/tree/2.0">Howler.js</a></li>
+<ul>
+<br>
+Important stuff:
+<ul>
+    <li>
+    <img src="http://mirrors.creativecommons.org/presskit/icons/cc.svg" alt="CC">&nbsp;
+    <img src="http://mirrors.creativecommons.org/presskit/icons/by.svg"></img>&nbsp;
+    <img src="http://mirrors.creativecommons.org/presskit/icons/sa.svg"></img>
+    &nbsp;This <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" rel="dct:type">work</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Supermegadex</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+    </li>
+    <li>
+        All the code is published under the <b>GNU General Public License</b> and is on <a href="https://github.com/Supermegadex/Az">GitHub</a>
+    </li>
+</ul>
+<script>
+    $(function(){
+        $(".ooo").hide();
+    })
+    function contact(){
+        var mail = document.querySelector("#mail");
+        mail.innerText="delpino the dragon 1 at hotmail";
+        mail.href="mailto:delpinothedragon1@hotmail.com";
+        $(".message").html("Ha! See what I did there? You can't copy-and-paste it! (You can actually just click on it, though)");
+        $(".chara").smoothScroll();
+        $(".ooo").fadeIn();
+        chS[0].fire();
+    }
+    /* global $Aud chS */
+    
+    chS[0] = {
+        fire: function(){
+            $Aud.fade("Dogsong", 1, 0, 100, true);
+        },
+    };
+    
+    var bt = "<img src='http://i3.kym-cdn.com/photos/images/original/001/019/779/5b0.gif'>";
+
+    $Aud.load(["Dogsong"]);
+    $Aud.xfade("Dogsong", 1000, false, 100);
+    
+</script>
+</p>

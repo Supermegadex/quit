@@ -29,12 +29,15 @@
     };
 
     if($Aud.audio=="Alphys"){
-        $Aud.load(["Home-Music Box"]);
+        $Aud.load(["Home-Music Box", "Dogsong"]);
     }
     else{
-        $Aud.load(["Home-Music Box", "Alphys"]);
+        $Aud.load(["Home-Music Box", "Alphys", "Dogsong", "Undertale"]);
         $Aud.xfade("Alphys", 1000, false, 1000);
     }
+    
+    $Aud.unload("His Theme");
+    $Aud.unload("Final Power");
     
       var options = [
         {selector: '#ch7fire1', offset: 300, callback: '$Aud.xfade("Home-Music Box", 1000, false, 4000);' },
