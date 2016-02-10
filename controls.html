@@ -13,9 +13,9 @@
         </style>
         <template is="dom-if" if="{{show1}}">
             <div class="fixed-action-btn" id="ctrl">
-                <a class="btn-floating btn-large waves-effect blue">
-                    <template is="dom-if" if="{{show2}}"><i class="large material-icons" class="plpa" onclick="$Aud.pause()">pause</i></template>
-                    <template is="dom-if" if="{{show3}}"><i class="large material-icons" class="plpa" onclick="$Aud.resume()">play_arrow</i></template>
+                <a class="btn-floating btn-large waves-effect waves-blue blue accent">
+                    <template is="dom-if" if="{{show2}}"><i class="large material-icons accent" class="plpa" onclick="$Aud.musics[$Aud.audio].pause(); $Aud.playing=2">pause</i></template>
+                    <template is="dom-if" if="{{show3}}"><i class="large material-icons accent" class="plpa" onclick="$Aud.musics[$Aud.audio].play(); $Aud.playing=1">play_arrow</i></template>
                 </a>
                 <ul>
                   <li><a class="btn-floating red waves-effect" onclick="$Aud.mute='true'"><i class="material-icons">volume_off</i></a></li>
@@ -157,6 +157,7 @@
                         $Aud.musics[ab2].fade(0, 1, d2);
                     }
                 }
+                this.playing = 1;
                 this.audio=ab2;
             }
         });

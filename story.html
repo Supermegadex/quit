@@ -21,6 +21,11 @@
             .card {
                 min-height: 100%;
             }
+            #spinner {
+                position: fixed;
+                top: 80px;
+                right: 10px;
+            }
         </style>
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
@@ -28,20 +33,71 @@
               <div class="flow-text" id="content" style="text-indent: 40px !important;">Hmmm....Something didn't work! If you see this, Your browser might not support AJAX, but that's incredibly rare. I probably messed up the code somewhere. Check this out later to see if it's working.<p>Another possibility is that your browser (interestingly, Chrome seems to be doing this) is trying to load a necessary part of the code before it's ready. If it is, <a href="javascript:chapter(2); chapter(1)">clicking this</a> should make it work properly.</p><p>[update] Ugh! Chrome! You're supposed to be so great! Why, then, do you not recognize that "chapters" is an EXPLICITLY-DEFINED ATTRIBUTE!!! Sorry, Chrome users, but you're going to have to use the "chapters" menu on the navbar to navigate, not the "next" button for now or just use another browser for a better experience. ¯\_(ツ)_/¯</p><p>The VERY BEST experience is found on Microsoft Edge and Firefox for Windows. It also works on mobile WebKit (any browser running on iOS), but audio transitioning is EXTREMELY choppy. I have not tested it on Android, but I assume it works pretty well.</p></div>
             </div>
             <div class="card-action blue-grey">
-              <a class="waves-effect waves-pink btn-flat lst disabled" on-click="_previous">Previous</a><a class="waves-effect waves-pink btn-flat nxt" on-click="_next">Next</a>
+              <a class="waves-effect waves-pink btn-flat lst disabled" on-click="_previous">Previous</a>
+              <div class="preloader-wrapper" id="spinner">
+              <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+
+              <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                  <div class="circle"></div>
+                </div><div class="gap-patch">
+                  <div class="circle"></div>
+                </div><div class="circle-clipper right">
+                  <div class="circle"></div>
+                </div>
+              </div>
+            </div>
+              <a class="waves-effect waves-pink btn-flat nxt" on-click="_next">Next</a>
             </div>
           </div>
     </template>
     <script>
-    /* global Polymer */
-    
+    /* global Polymer History */
+    var $Story;
+    function chapter(c) {
+      if($Story.chapter == c){
+        console.log("Wat?");
+        $Story._loadStory();
+      }
+      else{
+      	$Story.chapter = c;
+      }
+    }
         Polymer({
             is: "story-box",
             properties: {
                 chapter: {
                     type: Number,
-                    observer: "_loadStory",
-                    value: 1
+                    value: 1,
+                    observer: "_loadStory"
                 },
                 chapters: Number,
                 name: {
@@ -51,24 +107,54 @@
                 }
             },
             ready: function(){
-                this._loadStory("TL", "DR");
-                this.chapters = this.chapters;
+              $Story = this;
+                if($Story.chapter == History.getState().url.split("/page/")[1]){
+                  $Story._loadStory();
+                }
+                window.onstatechange = function(){
+                  if($Story.init){
+                    $Story.chapter = Number(History.getState().url.split("/page/")[1]);
+                  }
+                };
+                this.listener = new window.keypress.Listener();
+                this.listener.simple_combo("right", function() {
+                    document.querySelector(".nxt").click();
+                });
+                this.listener.simple_combo("left", function() {
+                    document.querySelector(".lst").click();
+                });
             },
+            init: false,
             _loadStory: function(TL, DR){
+              console.log(this.init);
+              if(this.init){
+                $("#spinner").addClass("active");
                 var ch = this.chapter;
                 var na = this.name;
                 $.ajax("/chapter/" + ch + ".html").done(function(c){
                     window.scrollTo(0,0);
                     $("#content").html(c);
                     $(".chara").html(na);
-                })
+                    $("#spinner").removeClass("active");
+                });
+              }
+              else{
+                this.init = true;
+                if(History.getState().url.split("/page/")[1] == undefined){
+                  History.pushState(null, "Page " + this.chapter, "/page/" + this.chapter);
+                }
+                else{
+                  this.chapter = Number(History.getState().url.split("/page/")[1]);
+                }
+              }
             },
             _chara: function(){
                 $(".chara").html(this.name);
             },
             _next: function(){
                 if(this.chapter < this.chapters){
-                    this.chapter = this.chapter + 1;
+                  var lel = this.chapter + 1;
+                    History.pushState(null, "Page " + lel, "/page/" + lel);
                 }
                 if(this.chapter == this.chapters){
                     $(".nxt").addClass("disabled");
@@ -77,14 +163,15 @@
             },
             _previous: function(){
                 if(this.chapter > 1){
-                    this.chapter--;
+                  var lel = this.chapter - 1;
+                  History.pushState(null, "Page " + lel, "/page/" + lel);
                 }
                 if(this.chapter == 1){
                     $(".lst").addClass("disabled");
                 }
                 $(".nxt").removeClass("disabled");
             }
-        })
+        });
         
     </script>
 </dom-module>

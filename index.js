@@ -4,10 +4,6 @@ var astate = document.querySelector("#audio-controls");
 console.log("Hello, fellow developers! Prepare for error hell! If someone would help me with some stuff, I would be grateful! I am talking about some weird Polymer element attribute stuff. If you can help, my information is in the Afterword or the last chapter.");
 var mute = false;
 
-function chapter(c) {
-	document.querySelector("#story").chapter = c;
-}
-
 function pa(action, options) {
 	if (action == "sfx") {
 		document.querySelector("#" + options.name).play();
@@ -23,6 +19,7 @@ function canc() {
 }
 var st = function() {
 	document.querySelector("#story").name = nam;
+	localStorage.charaName = nam;
 	$("#nameConf").hide();
 	$("#nameCanc").hide();
 	$(".modal-content").html("<div class='shake-little shake-constant' style='width: 100%; text-align:center; padding:auto'><h1 class='mon centered' id='name'>" + nam + "</h1></div>");
@@ -33,7 +30,7 @@ var st = function() {
 				window.setTimeout(function() {
 					/* global $Aud */
 					$Aud.play("Memory");
-				}, 1000)
+				}, 1000);
 			});
 			window.scrollTo(0, 0);
 		}, 600);
@@ -110,22 +107,50 @@ function showS() {
 		$("#nameStatus").html(".................<br>(They're powerless to stop you)");
 	}
 }
+var hrefVar = function(item){
+  var svalue = location.search.match(new RegExp("[\?\&]" + item + "=([^\&]*)(\&?)","i"));
+  return svalue ? svalue[1] : svalue;
+};
 $(document).ready(function() {
-	$(".dropdown-button").dropdown();
-	$('.modal-trigger').leanModal({
-		dismissible: false, // Modal can be dismissed by clicking outside of the modal
-		opacity: 1, // Opacity of modal background
-		in_duration: 300, // Transition in duration
-		out_duration: 200, // Transition out duration
-	});
-	$("#modal1").openModal({
-		dismissible: false, // Modal can be dismissed by clicking outside of the modal
-		opacity: 1, // Opacity of modal background
-		in_duration: 100, // Transition in duration
-		out_duration: 100, // Transition out duration
-	});
-	$("#nameCanc").hide();
 	$(".white").hide();
+	$(".dropdown-button").dropdown();
+	if(localStorage.charaName == "undefined"){
+		if(location.search != ""){
+			location.search = "";
+		}
+		$('.modal-trigger').leanModal({
+			dismissible: false, // Modal can be dismissed by clicking outside of the modal
+			opacity: 1, // Opacity of modal background
+			in_duration: 300, // Transition in duration
+			out_duration: 200, // Transition out duration
+		});
+		$("#modal1").openModal({
+			dismissible: false, // Modal can be dismissed by clicking outside of the modal
+			opacity: 1, // Opacity of modal background
+			in_duration: 100, // Transition in duration
+			out_duration: 100, // Transition out duration
+		});
+		$("#nameCanc").hide();
+	}
+	else{
+		if(location.search != ""){
+			location.search = "";
+		}
+		$('.modal-trigger').leanModal({
+			dismissible: false, // Modal can be dismissed by clicking outside of the modal
+			opacity: 1, // Opacity of modal background
+			in_duration: 300, // Transition in duration
+			out_duration: 200, // Transition out duration
+		});
+		$("#modal2").openModal({
+			dismissible: false, // Modal can be dismissed by clicking outside of the modal
+			opacity: 1, // Opacity of modal background
+			in_duration: 100, // Transition in duration
+			out_duration: 100, // Transition out duration
+		});
+		$("#nameCanc").hide();
+	}
+	document.oncopy=function(){Materialize.toast("Please don't just copy and paste my work! It's publised under the CC-BY-SA license, but please get the Word Document from my OneDrive or HTML from GitHub instead.", 5000); return false};
 });
 var chS = [{
 	forease: "of use",
@@ -184,51 +209,57 @@ function sSelect() {
 		var st = window.getSelection().toString();
 		if (st.match(/Asriel/g) != null && toasties.az != true) {
 			toasties.az = true;
-			Materialize.toast("<img src='http://vignette4.wikia.nocookie.net/undertale/images/f/f9/Asriel-0.png/revision/latest?cb=20151014093800'>&nbsp;Asriel", 4000, 'AzT', function() {
+			Materialize.toast("<img src='http://vignette4.wikia.nocookie.net/undertale/images/f/f9/Asriel-0.png/revision/latest?cb=20151014093800'>&nbsp;Asriel", 4000, 'accent', function() {
 				toasties.az = false;
 			});
 		}
 		if (st.match(/Flowey/g) != null && toasties.flowey != true) {
 			toasties.flowey = true;
-			Materialize.toast("<img src='http://vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124'>&nbsp;Flowey", 4000, "FloweyT", function() {
+			Materialize.toast("<img src='http://vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124'>&nbsp;Flowey", 4000, "accent", function() {
 				toasties.flowey = false;
 			});
 		}
 		if (st.match(/Toriel/g) != null && toasties.toriel != true) {
 			toasties.toriel = true;
-			Materialize.toast("<img src='http://vignette3.wikia.nocookie.net/undertale/images/0/01/Toriel.png/revision/latest/scale-to-width-down/100?cb=20151013235609'>&nbsp;Toriel", 4000, "TorielT", function() {
+			Materialize.toast("<img src='http://vignette3.wikia.nocookie.net/undertale/images/0/01/Toriel.png/revision/latest/scale-to-width-down/100?cb=20151013235609'>&nbsp;Toriel", 4000, "accent", function() {
 				toasties.toriel = false;
 			});
 		}
 		if (st.match(/Asgore/g) != null && toasties.asgore != true) {
 			toasties.asgore = true;
-			Materialize.toast("<img src='http://vignette2.wikia.nocookie.net/undertale/images/f/f1/Untitled-3.png/revision/latest/scale-to-width-down/100?cb=20151228183442'>&nbsp;Asgore", 4000, "AsgoreT", function() {
+			Materialize.toast("<img src='http://vignette2.wikia.nocookie.net/undertale/images/f/f1/Untitled-3.png/revision/latest/scale-to-width-down/100?cb=20151228183442'>&nbsp;Asgore", 4000, "accent", function() {
 				toasties.asgore = false;
 			});
 		}
 		if (st.match(document.querySelector("#story").name) != null && toasties.chara != true) {
 			toasties.chara = true;
-			Materialize.toast("<img src='http://vignette1.wikia.nocookie.net/undertale/images/4/45/Spr_Chara.png/revision/latestscale-to-width-down/100?cb=20151025095809'>&nbsp;" + document.querySelector("#story").name, 4000, "CharaT", function() {
+			Materialize.toast("<img src='http://vignette1.wikia.nocookie.net/undertale/images/4/45/Spr_Chara.png/revision/latestscale-to-width-down/100?cb=20151025095809'>&nbsp;" + document.querySelector("#story").name, 4000, "accent", function() {
 				toasties.chara = false;
 			});
 		}
 		if (st.match(/Frisk/g) != null && toasties.frisk != true) {
 			toasties.frisk = true;
-			Materialize.toast("<img src='http://vignette4.wikia.nocookie.net/undertale/images/d/d3/Frisk.png/revision/latest/scale-to-width-down/100?cb=20151018200133'>&nbsp;Frisk", 4000, "friskT", function() {
+			Materialize.toast("<img src='http://vignette4.wikia.nocookie.net/undertale/images/d/d3/Frisk.png/revision/latest/scale-to-width-down/100?cb=20151018200133'>&nbsp;Frisk", 4000, "accent", function() {
 				toasties.frisk = false;
 			});
 		}
 		if (st.match(/Papyrus/g) != null && toasties.pap != true) {
 			toasties.pap = true;
-			Materialize.toast("<img src='http://vignette2.wikia.nocookie.net/undertale/images/2/21/Papyrus1.PNG/revision/latest/scale-to-width-down/100?cb=20151207170725'>&nbsp;Papyrus", 4000, "PapyrusT", function() {
+			Materialize.toast("<img src='http://vignette2.wikia.nocookie.net/undertale/images/2/21/Papyrus1.PNG/revision/latest/scale-to-width-down/100?cb=20151207170725'>&nbsp;Papyrus", 4000, "accent", function() {
 				toasties.pap = false;
 			});
 		}
 		if (st.match(/Sans/g) != null && toasties.sans != true) {
 			toasties.sans = true;
-			Materialize.toast("<img src='http://vignette2.wikia.nocookie.net/undertale/images/4/44/Sansanimated.gif/revision/latest/scale-to-width-down/100?cb=20151219105528'>&nbsp;Sans", 4000, "PapyrusT", function() {
+			Materialize.toast("<img src='http://vignette2.wikia.nocookie.net/undertale/images/4/44/Sansanimated.gif/revision/latest/scale-to-width-down/100?cb=20151219105528'>&nbsp;Sans", 4000, "accent", function() {
 				toasties.sans = false;
 			});
 		}
 	}, 5);
+}
+function reset(){
+	localStorage.charaName = undefined;
+	$(".white").fadeIn(6000, function(){
+		location.href="/";
+	});
 }

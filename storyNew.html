@@ -1,0 +1,35 @@
+<dom-module id="story-box">
+    <template>
+        
+    </template>
+    <script>
+        /* global Polymer */
+    
+        Polymer({
+            is: "story-box",
+            properties: {
+                chapter: {
+                    type: Number,
+                    observer: "_chUpdate"
+                },
+                chapters: Number,
+                name: {
+                    type: String,
+                    observer: "_name",
+                    value: "Chara"
+                }
+            },
+            ready: function(){
+                if(location.pathname.match("page") != null){
+                    this.chapter = Number(location.href.split("/page/")[1]);
+                }
+                else{
+                    this.chapter = 1;
+                }
+            }
+            _chUpdate: function(){
+                
+            }
+        });
+    </script>
+</dom-module>
