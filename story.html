@@ -108,6 +108,21 @@
             },
             ready: function(){
               $Story = this;
+              var myElement = document.getElementById('content');
+              
+              // create a simple instance
+              // by default, it only adds horizontal recognizers
+              var mc = new Hammer(myElement);
+              
+              // listen to events...
+              mc.on("swipeleft swiperight", function(ev) {
+                  if(ev.type == "swiperight"){
+                    document.querySelector(".lst").click();
+                  }
+                  else{
+                    document.querySelector(".nxt").click();
+                  }
+              });
                 if($Story.chapter == History.getState().url.split("/page/")[1]){
                   $Story._loadStory();
                 }

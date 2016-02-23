@@ -35,9 +35,6 @@ var st = function() {
 			window.scrollTo(0, 0);
 		}, 600);
 	});
-	window.setInterval(function() {
-		sSelect();
-	}, 500);
 };
 var namecnt = false;
 
@@ -114,6 +111,9 @@ var hrefVar = function(item){
 $(document).ready(function() {
 	$(".white").hide();
 	$(".dropdown-button").dropdown();
+	window.setInterval(function() {
+		sSelect();
+	}, 500);
 	if(localStorage.charaName == "undefined"){
 		if(location.search != ""){
 			location.search = "";
