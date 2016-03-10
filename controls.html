@@ -13,7 +13,7 @@
         </style>
         <template is="dom-if" if="{{show1}}">
             <div class="fixed-action-btn" id="ctrl">
-                <a class="btn-floating btn-large waves-effect waves-blue blue accent">
+                <a class="btn-floating btn-large waves-effect accent">
                     <template is="dom-if" if="{{show2}}"><i class="large material-icons accent" class="plpa" onclick="$Aud.musics[$Aud.audio].pause(); $Aud.playing=2">pause</i></template>
                     <template is="dom-if" if="{{show3}}"><i class="large material-icons accent" class="plpa" onclick="$Aud.musics[$Aud.audio].play(); $Aud.playing=1">play_arrow</i></template>
                 </a>
@@ -21,7 +21,6 @@
                   <li><a class="btn-floating red waves-effect" onclick="$Aud.mute='true'"><i class="material-icons">volume_off</i></a></li>
                 </ul>
             </div>
-        </template>
         </template>
     </template>
     <script>
@@ -50,6 +49,10 @@
                 show2: Boolean,
                 show3: Boolean,
                 musics: {
+                    type: Object,
+                    value: {}
+                },
+                sf: {
                     type: Object,
                     value: {}
                 }
@@ -95,6 +98,16 @@
                     }
                 }
             },
+            loadSFX: function(ab, type){
+                for(var i in ab){
+                    if(typeof this.sf[ab[i]] != "object"){
+                        this.sf[ab[i]] = new Howl({
+                            src: ["/sfx/" + ab[i] + type],
+                            loop: false
+                        });
+                    }
+                }
+            },
             pause: function(){
                 this.musics[this.audio].pause();
                 this.playing = 2;
@@ -112,6 +125,9 @@
                     this.audio = ab;
                     this.playing = 1;
                 }
+            },
+            sfx: function(ab){
+                this.sf[ab].play();
             },
             stop: function(ab){
                 this.musics[ab].stop();
@@ -131,6 +147,7 @@
                 }
             },
             xfade: function(ab2, d, x, d2){
+                if(!this.mute){
                 var mno = this.audio;
                 if(x){
                     this.musics[ab2].play();
@@ -159,6 +176,7 @@
                 }
                 this.playing = 1;
                 this.audio=ab2;
+                }
             }
         });
     </script>
