@@ -1,12 +1,71 @@
-/* global $Aud */
+/* global $Aud $Story Howl */
 var nam;
+var images = new Array();
+function preload() {
+	var i;
+	for (i = 0; i < preload.arguments.length; i++) {
+		images[i] = new Image();
+		images[i].src = preload.arguments[i];
+	}
+}
+preload(
+	"/az.gif",
+	"/evil2.gif",
+	"/grin.gif",
+	"/rise.gif",
+	"/sassy.gif",
+	"/side.gif",
+	"/sidesass.gif"
+);
 var ybf = new Howl({
 	src: "/music/Your Best Friend.mp3",
 	loop: true,
 });
-var z, j, inte, call;
-var write = function(text, title, grunt, callback){
+var z, j, inte, call, writeoptions;
+var write = function(text, title, grunt, callback, options){
+	text = text.replace("\\y", "ŷ");
+	text = text.replace("\\n", "β");
+	writeoptions = options;
 zToCont.unregister_combo("z");
+zToCont.simple_combo("x", function(){
+	window.clearInterval(inte);
+	inte = window.setInterval(function(){
+	 if(j[0] != null && j != undefined && j != "undefined"){
+	  var k = j.shift();
+	  if(k == "ŷ"){
+	  	k = "<span class='y'>";
+	  }
+	  if(k == "ƨ"){
+	  	k = "</span>";
+	  }
+	  if(k == "β"){
+	  	k = "<br>";
+	  }
+	  if(k == "κ"){
+	  	k = "<a href='//undertale.com'>";
+	  }
+	  if(k == "ρ"){
+	  	k = "</a>";
+	  }
+	  z += k;
+	  $("." + title)[0].innerHTML = z;
+	 }
+	 else {
+	 	$(".flower").last().click(function(){
+	 		tour.next();
+	 	});
+	  	zToCont.simple_combo("z", function() {
+	  	    $(".flower").last().click();
+	  	});
+	  	if(call != undefined && call != "undefined" && call != null){
+	  		console.log("Trying to run...");
+	  		call();
+	  	}
+	 	window.clearInterval(inte);
+	 	zToCont.unregister_combo("x");
+	 }
+	}, 0);
+});
 $(".flower").off("click");
 j = text.split("");
 z = "";
@@ -47,6 +106,7 @@ inte = window.setInterval(function(){
   		call();
   	}
  	window.clearInterval(inte);
+ 	zToCont.unregister_combo("x");
  }
 }, 60);
 };
@@ -61,16 +121,15 @@ var tour = new Shepherd.Tour({
 	  text: function(){
 	  	window.setTimeout(function(){
 	  		$(".flower").attr("src", "http://vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124");
-	  	}, 40);
-		$Aud.loadSFX(["01t", "02t", "az", "talk"], ".wav");
+	  	}, 400);
 	  	$(".nxt").on("click", ohShitFlowey);
 		$(".blur").show();
 		$Aud.mute = true;
 		$Aud.show1 = true;
 		ybf.play();
 		setTimeout(function(){
-			write("* Howdy! I'm ŷFLOWEYƨ!   β* ŷFLOWEYƨ the ŷFLOWERƨ!   β* Press me or press 'z’ to continue.", "intro", "01t");
-		}, 100)
+			write("* Howdy! I'm \\yFLOWEYƨ!   \\n* ŷFLOWEYƨ the ŷFLOWERƨ!   β* Press me or press 'z’ to continue.", "intro", "01t");
+		}, 100);
 	  	return("<img style='width:50px; float:left' class='flower' src='/rise.gif'><span class='mon intro' style='width: 300px; float:right;'></span>");
 	  },
 	});
@@ -98,18 +157,37 @@ var tour = new Shepherd.Tour({
 	tour.addStep('num25', {
 	  title: 'Next & Previous',
 	  text: function(){
-	  	write("* Well, little old me will have to show you around!", "num25", "01t");
+	  	write("* Well, little old me will have to show you around!", "num25", "01t", function(){
+	  		console.log("I've been run!");
+	  		$(".flower").last().off("click");
+	  		$(".flower").last().click(function(){
+	  			$(".flower").last().attr("src", "/unrise.gif");
+		  		window.setTimeout(function(){
+		  			tour.next();
+		  		}, 450);
+	  		});
+		  	zToCont.unregister_combo("z");
+		  	zToCont.simple_combo("z", function() {
+		  		$(".flower").last().attr("src", "/unrise.gif");
+		  		window.setTimeout(function(){
+		  			tour.next();
+		  		}, 450);
+		  	});
+	  	});
 	  	return("<img style='width:50px; float:left' class='flower' src='http://vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124'><span class='mon num25' style='width: 300px; float:right;'></span>");
 	  },
 	});
 	tour.addStep('num3', {
 	  title: 'Next & Previous',
 	  text: function(){
+	  	window.setTimeout(function(){
+	  		$(".flower").attr("src", "http://vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124");
+	  	}, 400);
 	  	$(".action-strip").addClass("raisedImportance");
 	  	$(".nxt").off("click", ohShitFlowey);
 	  	$(".nxt").on("click", nopeyFlowey);
 	  	write("* This is the navigation bar.   β* The next button goes to the next page.", "num3", "01t");
-	  	return("<img style='width:50px; float:left' class='flower' src='http://vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124'><span class='mon num3' style='width: 300px; float:right;'></span>");
+	  	return("<img style='width:50px; float:left' class='flower' src='/rise.gif'><span class='mon num3' style='width: 300px; float:right;'></span>");
 	  	},
 	  attachTo: '.action-strip top',
 	});
@@ -140,7 +218,23 @@ var tour = new Shepherd.Tour({
 	tour.addStep('num66', {
 	  title: 'Next & Previous',
 	  text: function(){
-	  	write("* Cool, right?", "num66", "01t");
+	  	write("* Cool, right?", "num66", "01t", function(){
+	  		console.log("I've been run!");
+	  		$(".flower").last().off("click");
+	  		$(".flower").last().click(function(){
+	  			$(".flower").last().attr("src", "/unrise.gif");
+		  		window.setTimeout(function(){
+		  			tour.next();
+		  		}, 400);
+	  		});
+		  	zToCont.unregister_combo("z");
+		  	zToCont.simple_combo("z", function() {
+		  		$(".flower").last().attr("src", "/unrise.gif");
+		  		window.setTimeout(function(){
+		  			tour.next();
+		  		}, 400);
+		  	});
+	  	});
 	  	return( "<img style='width:50px; float:left' class='flower' src='http://vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124'><span class='mon num66' style='width:300px; float:right;'></span>" );
 	  	},
 	  attachTo: '.action-strip top',
@@ -149,6 +243,9 @@ var tour = new Shepherd.Tour({
 	  title: 'Audio Controls',
 	  classes: "trans100",
 	  text: function(){
+	  	window.setTimeout(function(){
+	  		$(".flower").attr("src", "/side.gif");
+	  	}, 400);
 	  	$(".action-strip").removeClass("raisedImportance");
 	  	$("audio-controls").addClass("raisedImportance");
 	  	$("audio-controls")[0].show2 = true;
@@ -163,7 +260,7 @@ var tour = new Shepherd.Tour({
 		  	ybf.play();
 	  	}, 4500);
 	  	write("* This little circle controls the music.   β* Tap or click it to pause the music.", "sound", "01t");
-	  	return( "<img style='width:50px; float:left' class='flower' src='/side.gif'><span class='mon sound' style='width:300px; float:right;'></span>" );
+	  	return( "<img style='width:50px; float:left' class='flower' src='/rise.gif'><span class='mon sound' style='width:300px; float:right;'></span>" );
 	  },
 	  attachTo: '#ctrl left',
 	});
@@ -198,7 +295,22 @@ var tour = new Shepherd.Tour({
 	  title: 'Audio Controls',
 	  classes: "trans100",
 	  text: function(){
-	  	write("* But, hey, it looks like YOU won't be running into THAT problem! Hee hee hee!", "sound3", "01t");
+	  	write("* But, hey, it looks like YOU won't be running into THAT problem! Hee hee hee!", "sound3", "01t", function(){
+	  		$(".flower").last().off("click");
+	  		$(".flower").last().click(function(){
+	  			$(".flower").last().attr("src", "/unrise.gif");
+		  		window.setTimeout(function(){
+		  			tour.next();
+		  		}, 400);
+	  		});
+		  	zToCont.unregister_combo("z");
+		  	zToCont.simple_combo("z", function() {
+		  		$(".flower").last().attr("src", "/unrise.gif");
+		  		window.setTimeout(function(){
+		  			tour.next();
+		  		}, 400);
+		  	});
+	  	});
 	  	return( "<img style='width:50px; float:left' class='flower' src='http://vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124'><span class='mon sound3' style='width:300px; float:right;'></span>" );
 	  },
 	  attachTo: '#ctrl left',
@@ -212,8 +324,11 @@ var tour = new Shepherd.Tour({
 	tour.addStep('end05', {
 	  title: '',
 	  text: function(){
-	  	write("* Well, this is the end of my little tour, and you could start reading the story!", "end05", "01t");
-	  	return( "<img style='width:50px; float:left' class='flower' src='http://vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124'><span class='mon end05' style='width:300px; float:right;'></span>" );
+	  	window.setTimeout(function(){
+	  		$(".flower").attr("src", "//vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124");
+	  		write("* Well, this is the end of my little tour, and you could start reading the story!", "end05", "01t");
+	  	}, 400);
+	  	return( "<img style='width:50px; float:left' class='flower' src='/rise.gif'><span class='mon end05' style='width:300px; float:right;'></span>" );
 	  },
 	});
 	tour.addStep('end1', {
@@ -229,16 +344,16 @@ var tour = new Shepherd.Tour({
 		  	zToCont.simple_combo("x", function() {
 		  	    tour.next();
 		  	});
-	  	});
-	  	return( "<img style='width:50px; float:left' src='/evil2.gif'><span class='mon end1 shake-constant shake-little shake-small' style='width:300px; float:right;'></span><i class='material-icons' id='kill-flowey' style='position: absolute; right: 2px; top: 2px;'>highlight_off</i>" );
+	  	}, {shake: true});
+	  	return( "<img style='width:50px; float:left' src='/evil2.gif'><span class='mon end1 shake shake-small shake-little shake-constant' style='width:300px; float:right;'></span><i class='material-icons' id='kill-flowey' style='position: absolute; right: 2px; top: 2px;'>highlight_off</i>" );
 	  },
 	});
 	tour.addStep('end2', {
 	  title: '',
 	  text: function(){
 	  	zToCont.unregister_combo("x");
-	  	write("* Did you think that you could just press the little 'x' and all your worries would be gone?   β* Wow. You really ARE an-", "end2", "02t");
-	  	return( "<img style='width:50px; float:left' class='flower' src='/grin.gif'><span class='mon end2' style='width:300px; float:right;'></span>" );
+	  	write("* Did you think that you could just press the little 'x' and all your worries would be gone?   β* Wow. You really ARE an-", "end2", "02t", null, {shake: true});
+	  	return( "<img style='width:50px; float:left' class='flower' src='/grin.gif'><span class='mon end2 shake shake-small shake-little shake-constant' style='width:300px; float:right;'></span>" );
 	  },
 	});
 	tour.addStep('end3', {
@@ -258,7 +373,7 @@ var tour = new Shepherd.Tour({
 		  		tour.next();
 		  	});
 	  	});
-	  	return("<img style='width:50px; float:left' class='asriel' src='/az.gif'><span class='mon end3' style='width:250px; float:right;'></span>");
+	  	return("<img class='asriel' src='/az.gif'><span class='mon end3' style='width:290px; float:right;'></span>");
 	  },
 	});
 	tour.addStep('end4', {
@@ -290,7 +405,7 @@ var tour = new Shepherd.Tour({
 		  		tour.next();
 		  	});
 	  	});
-	  	return("<img style='width:50px; float:left' class='flower' src='/az.gif'><span class='mon end5' style='width:250px; float:right;'></span>");
+	  	return("<img class='asriel' src='/az.gif'><span class='mon end5' style='width:290px; float:right;'></span>");
 	  },
 	});
 	tour.addStep('end6', {
@@ -361,6 +476,7 @@ function canc() {
 	namecnt = false;
 }
 var st = function() {
+	$Aud.loadSFX(["01t", "02t", "az", "talk"], ".wav");
 	document.querySelector("#story").name = nam;
 	localStorage.charaName = nam;
 	$("#nameConf").hide();
@@ -371,7 +487,9 @@ var st = function() {
 		window.setTimeout(function() {
 			$(".white").fadeOut(40, function() {
 				$Aud.play("Memory");
-				tour.start();
+				window.setTimeout(function(){
+					tour.start();
+				}, 1000);
 			});
 			window.scrollTo(0, 0);
 		}, 600);
@@ -439,6 +557,9 @@ function showS() {
 	if (nam.toLowerCase() == "mercy") {
 		$("#nameStatus").html("That's a little on-the-nose, isn't it..?");
 	}
+	if (nam.toLowerCase() == "murder") {
+		$("#nameStatus").html("That's a little on-the-nose, isn't it..?");
+	}
 	if (nam.toLowerCase() == "gerson") {
 		$("#nameStatus").html("Wah ha ha! Why not?");
 	}
@@ -462,7 +583,7 @@ $(document).ready(function() {
 	zToCont.simple_combo("z", function() {
 		tour.next();
 	});
-	if(localStorage.charaName == "undefined"){
+	if(localStorage.charaName == "undefined" || localStorage.charaName == undefined || localStorage.charaName == null){
 		if(location.search != ""){
 			location.search = "";
 		}
@@ -504,7 +625,6 @@ $(document).ready(function() {
 	mcJagger.on("swipeleft swiperight", function(ev) {
 		chS[0].yup();
 	});
-	
 	document.oncopy=function(){Materialize.toast("Please don't just copy and paste my work! It's publised under the CC-BY-SA license, but please get the Word Document from my OneDrive or HTML from GitHub instead.", 5000); return false};
 });
 var chS = [{

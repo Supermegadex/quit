@@ -4,10 +4,10 @@
 <head>
 	<title>[[REDACTED]]</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 	<link rel="stylesheet" href="/css/fonts/8bit/stylesheet.css">
-	<link rel="stylesheet" href="http://csshake.surge.sh/csshake.min.css">
+	<link rel="stylesheet" href="//csshake.surge.sh/csshake.min.css">
 	<script src="/webcomponentsjs/webcomponents.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 	<script src="//browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"></script>
@@ -18,7 +18,7 @@
 	<base target="_blank">
 	<script src="/howler/howler.min.js"></script>
 	<script src="/js/keypress.js"></script>
-	<!-- When debugging in mobile !script src="http://jsconsole.com/remote.js?supermegadex"></script!-->
+	<!-- When debugging in mobile --script src="http://jsconsole.com/remote.js?supermegadex"></script-->
 	<script>
 		var readyMusic = [
 			"Memory",
@@ -43,7 +43,7 @@
 			font-family: "Papyrus";
 		}
 		.sans {
-			font-family: "Comic Sans MS";
+			font-family: "Comic Sans MS", Chalkboard;
 		}
 		.mon {
 			font-family: "8bitoperator";
@@ -87,9 +87,23 @@
 		.raisedImportance {
 			z-index: 9900;
 		}
-		.trans100 {
-			transform: translateX(-70px);
-			color: white;
+		@media (max-width: 455px){
+			.trans100 > div {
+				position: fixed;
+				transform: translate(0px, 0px) !important;
+				bottom: 145px;
+				right: 2px;
+				color: white;
+			}
+		}
+		@media (min-width: 455px){
+			.trans100 > div{
+				position: fixed;
+				transform: translate(0px, 0px) !important;
+				bottom: 10px;
+				right: 55px;
+				color: white;
+			}
 		}
 		.centered {
 			position: fixed;
@@ -124,11 +138,18 @@
             right: 2px;
             bottom: 90px !important;
 		}
+		.asriel {
+			width: 35px;
+		    left: 25px;
+		    top: 25px;
+		    position: absolute;
+		    float: left;
+		    height: auto;
+		}
 	</style>
 </head>
 
 <body class="blue-grey darken-1" onselect="sSelect()">
-
 	<div class="white"></div>
 	<div class="blur"></div>
 	<div class="navbar-fixed">
@@ -201,8 +222,8 @@
 	<script src="/shep/js/shepherd.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.1/angular.min.js"></script>
-	<script src="/index.js"></script>
 	<script src="/js/smartquotes.min.js"></script>
+	<script src="/index.js"></script>
 </body>
 
 </html>
