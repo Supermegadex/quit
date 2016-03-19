@@ -357,7 +357,7 @@ var tour = new Shepherd.Tour({
 	  title: 'Audio Controls',
 	  classes: "trans100",
 	  text: function(){
-	  	write(function(){if(isUserAgentChrome()){return("* But, hey, it looks like YOU won't be running into THAT problem!    \\nHee hee hee!")}else{return("* Whatever.")}}(), "sound3", "01t", function(){
+	  	write(function(){if(isUserAgentChrome()){return("* But, hey, it looks like YOU won't be running into THAT problem!    \\n* Hee hee hee!")}else{return("* Whatever.")}}(), "sound3", "01t", function(){
 	  		$(".flower").last().off("click");
 	  		$(".flower").last().click(function(){
 	  			$(".flower").last().attr("src", "/unrise.gif");
