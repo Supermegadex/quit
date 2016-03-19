@@ -21,16 +21,21 @@ var ybf = new Howl({
 	src: "/music/Your Best Friend.mp3",
 	loop: true,
 });
-var z, j, inte, call, writeoptions;
+var z, j, inte, call, writeoptions, writetemp;
 var write = function(text, title, grunt, callback, options){
-	text = text.replace("\\y", "ŷ");
-	text = text.replace("\\n", "β");
+	if(grunt == null || grunt == undefined || grunt == "undefined"){
+		grunt = "talk";
+	}
+	text = text.replace(/(\\y)/g, "ŷ");
+	text = text.replace(/(\\n)/g, "β");
+	text = text.replace(/(\\func:)/g, "Σ");
+	text = text.replace(/(\\span:)/g, "Ξ");
+	text = text.replace(/(\\\/\/)/g, "ι");
 	writeoptions = options;
 zToCont.unregister_combo("z");
 zToCont.simple_combo("x", function(){
 	window.clearInterval(inte);
-	inte = window.setInterval(function(){
-	 if(j[0] != null && j != undefined && j != "undefined"){
+	while(j[0] != null && j != undefined && j != "undefined"){
 	  var k = j.shift();
 	  if(k == "ŷ"){
 	  	k = "<span class='y'>";
@@ -47,10 +52,39 @@ zToCont.simple_combo("x", function(){
 	  if(k == "ρ"){
 	  	k = "</a>";
 	  }
+	  if(k == "Σ"){
+	  	var tmp = "";
+	  	var tmp2 = "";
+	  	while(tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined"){
+	  		tmp = j.shift();
+	  		tmp2 += tmp;
+	  	}
+	  	Function(tmp2);
+	  	k = j.shift();
+	  }
+	  if(k == "Ξ"){
+	  	var tmp = "";
+	  	var tmp2 = "";
+	  	while(tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined"){
+	  		tmp = j.shift();
+	  		if(tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined"){
+	  			tmp2 += tmp;
+	  		}
+	  	}
+	  	k = "<span class='" + tmp2 + "'>";
+	  }
+	  if(k == "ι"){
+	  	var tmp = "";
+	  	var tmp2 = "";
+	  	while(tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined"){
+	  		tmp = j.shift();
+	  		tmp2 += tmp;
+	  	}
+	  	k = "</" + tmp2 + ">";
+	  }
 	  z += k;
 	  $("." + title)[0].innerHTML = z;
 	 }
-	 else {
 	 	$(".flower").last().click(function(){
 	 		tour.next();
 	 	});
@@ -63,9 +97,7 @@ zToCont.simple_combo("x", function(){
 	  	}
 	 	window.clearInterval(inte);
 	 	zToCont.unregister_combo("x");
-	 }
-	}, 0);
-});
+	});
 $(".flower").off("click");
 j = text.split("");
 z = "";
@@ -90,6 +122,36 @@ inte = window.setInterval(function(){
   }
   if(k != " "){
 	  $Aud.sfx(grunt);
+  }
+  if(k == "Σ"){
+  	var tmp = "";
+  	var tmp2 = "";
+  	while(tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined"){
+  		tmp = j.shift();
+  		tmp2 += tmp;
+  	}
+  	Function(tmp2)();
+  	k = j.shift();
+  }
+  if(k == "Ξ"){
+  	var tmp = "";
+  	var tmp2 = "";
+  	while(tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined"){
+  		tmp = j.shift();
+  		if(tmp != ";"){
+  			tmp2 += tmp;
+  		}
+  	}
+  	k = "<span class='" + tmp2 + "'>";
+  }
+  if(k == "ι"){
+  	var tmp = "";
+  	var tmp2 = "";
+  	while(tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined"){
+  		tmp = j.shift();
+  		tmp2 += tmp;
+  	}
+  	k = "</" + tmp2 + ">";
   }
   z += k;
   $("." + title)[0].innerHTML = z;
@@ -278,7 +340,7 @@ var tour = new Shepherd.Tour({
 	  title: 'Audio Controls',
 	  classes: "trans100",
 	  text: function(){
-	  	write("* Actually, the mute button is SUPPOSED to show up on ALL browsers.   β* Whatever.", "sound2", "01t", function(){
+	  	write("* Actually, the mute button is SUPPOSED to show up on ALL browsers.", "sound2", "01t", function(){
 		  	$("audio-controls").removeClass("raisedImportance");
 	  	});
 	  	return( "<img style='width:50px; float:left' class='flower' src='/sidesass.gif'><span class='mon sound2' style='width:300px; float:right;'></span>" );
@@ -295,7 +357,7 @@ var tour = new Shepherd.Tour({
 	  title: 'Audio Controls',
 	  classes: "trans100",
 	  text: function(){
-	  	write("* But, hey, it looks like YOU won't be running into THAT problem! Hee hee hee!", "sound3", "01t", function(){
+	  	write(function(){if(isUserAgentChrome()){return("* But, hey, it looks like YOU won't be running into THAT problem!    \\nHee hee hee!")}else{return("* Whatever.")}}(), "sound3", "01t", function(){
 	  		$(".flower").last().off("click");
 	  		$(".flower").last().click(function(){
 	  			$(".flower").last().attr("src", "/unrise.gif");
@@ -326,7 +388,7 @@ var tour = new Shepherd.Tour({
 	  text: function(){
 	  	window.setTimeout(function(){
 	  		$(".flower").attr("src", "//vignette1.wikia.nocookie.net/undertale/images/3/3b/Flowey_Talk_normal.gif/revision/latest/scale-to-width-down/100?cb=20151202211124");
-	  		write("* Well, this is the end of my little tour, and you could start reading the story!", "end05", "01t");
+	  		write("* Well, I guess this is the end of my little tour, and you could start reading the story!", "end05", "01t");
 	  	}, 400);
 	  	return( "<img style='width:50px; float:left' class='flower' src='/rise.gif'><span class='mon end05' style='width:300px; float:right;'></span>" );
 	  },
