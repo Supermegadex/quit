@@ -21,7 +21,7 @@ var ybf = new Howl({
 	src: "/music/Your Best Friend.mp3",
 	loop: true,
 });
-var z, j, inte, call, writeoptions, writetemp;
+var z, j, inte, call, writeoptions;
 var write = function(text, title, grunt, callback, options){
 	if(grunt == null || grunt == undefined || grunt == "undefined"){
 		grunt = "talk";
@@ -321,7 +321,7 @@ var tour = new Shepherd.Tour({
 		  	$("audio-controls")[0].show2 = true;
 		  	ybf.play();
 	  	}, 4500);
-	  	write("* This little circle controls the music.   β* Tap or click it to pause the music.", "sound", "01t");
+	  	write("* This little circle controls the music.   \\n* Tap or click it to pause the music, then do it again to resume.", "sound", "01t");
 	  	return( "<img style='width:50px; float:left' class='flower' src='/rise.gif'><span class='mon sound' style='width:300px; float:right;'></span>" );
 	  },
 	  attachTo: '#ctrl left',
