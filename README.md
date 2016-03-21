@@ -35,10 +35,11 @@ These methods are very useful for simple-seeming tasks.
 * `_chara()`: changes all elements w/`.chara` to `$Story.name`
 
 ### Setup
-Your file tree should look like this
-`chapters`
-|--`1.html` (your first chapter)
-|--`2.html` (second chapter)
-|--`n.html` (where n = chapter)
-`polymer`
-|--`polymer.html` the html file bundled with polymer
+Your file tree should look like this: <br>
+`chapters` <br>
+|--`1.html` (your first chapter) <br>
+|--`2.html` (second chapter) <br>
+|--`n.html` (where n = chapter) <br>
+`polymer` <br>
+|--`polymer.html` the html file bundled with polymer <br>
+`index.html`
