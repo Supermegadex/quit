@@ -108,6 +108,26 @@
                     }
                 }
             },
+            loadRand: function(ab, ft, hm){
+                for(var i in ab){
+                    this.sf[ab[i]] = {
+                        num: hm,
+                        play: function(){
+                            this.s[Math.floor(Math.random()*this.num)].play();
+                        },
+                        s: [],
+                    }
+                    var j = 0;
+                    while (j < hm) {
+                        this.sf[ab[i]].s[j] = new Howl({
+                            src: "/voices/" + ab[i] + "/" + String(j+1) + "." + ft,
+                            loop: false
+                        });
+                        j++
+                        console.log(j);
+                    }
+                }
+            },
             pause: function(){
                 this.musics[this.audio].pause();
                 this.playing = 2;

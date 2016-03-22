@@ -79,7 +79,9 @@ var write = function (text, title, grunt, callback, options) {
                 var tmp2 = "";
                 while (tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined") {
                     tmp = j.shift();
-                    tmp2 += tmp;
+                    if (tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined") {
+                        tmp2 += tmp;
+                    }
                 }
                 k = "</" + tmp2 + ">";
             }
@@ -87,10 +89,10 @@ var write = function (text, title, grunt, callback, options) {
             $("." + title)[0].innerHTML = z;
         }
         $(".flower").last().click(function () {
-            tour.next();
+            Shepherd.activeTour.next();
         });
         zToCont.simple_combo("z", function () {
-            $(".flower").last().click();
+            Shepherd.activeTour.next();
         });
         if (call != undefined && call != "undefined" && call != null) {
             console.log("Trying to run...");
@@ -150,7 +152,9 @@ var write = function (text, title, grunt, callback, options) {
                 var tmp2 = "";
                 while (tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined") {
                     tmp = j.shift();
-                    tmp2 += tmp;
+                    if (tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined") {
+                        tmp2 += tmp;
+                    }
                 }
                 k = "</" + tmp2 + ">";
             }
@@ -158,10 +162,10 @@ var write = function (text, title, grunt, callback, options) {
             $("." + title)[0].innerHTML = z;
         } else {
             $(".flower").last().click(function () {
-                tour.next();
+                Shepherd.activeTour.next();
             });
             zToCont.simple_combo("z", function () {
-                $(".flower").last().click();
+                Shepherd.activeTour.next();
             });
             if (call != undefined && call != "undefined" && call != null) {
                 console.log("Trying to run...");
@@ -170,7 +174,18 @@ var write = function (text, title, grunt, callback, options) {
             window.clearInterval(inte);
             zToCont.unregister_combo("x");
         }
-    }, 60);
+    }, (function() { if (options != undefined && options != "undefined" && options != null){
+            if (options.delay != undefined && options.delay != "undefined" && options.delay != null) {
+                return (options.delay);
+            }
+            else {
+                return (40);
+            }
+        }
+        else {
+            return (40);
+        }
+    })());
 };
 var tour = new Shepherd.Tour({
     defaults: {
