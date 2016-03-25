@@ -598,7 +598,6 @@ function canc() {
   namecnt = false;
 }
 var st = function() {
-  $Aud.loadSFX( [ "01t", "02t", "az", "talk" ], ".wav" );
   document.querySelector( "#story" ).name = nam;
   localStorage.charaName = nam;
   $( "#nameConf" ).hide();

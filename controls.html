@@ -25,9 +25,9 @@
     </template>
     <script>
     /* global Polymer Howl */
-    
+
     var $Aud;
-    
+
         Polymer({
             is: "audio-controls",
             properties: {
@@ -55,6 +55,10 @@
                 sf: {
                     type: Object,
                     value: {}
+                },
+                init: {
+                  type: Object,
+                  value: false,
                 }
             },
             _mute: function(){
@@ -87,6 +91,22 @@
                 if(typeof readyMusic == "object"){
                     this.load(readyMusic);
                 }
+            },
+            ready: function(){
+              if(this.init != false){
+                if(typeof this.init.music == "object"){
+                  var ft = this.init.music.pop();
+                  this.load(this.init.music, ft);
+                }
+                if(typeof this.init.sfx == "object"){
+                  if(typeof this.init.sfx.sounds == "object"){
+                    this.loadSFX(this.init.sfx.sounds, this.init.sfx.ft);
+                  }
+                  if(typeof this.init.sfx.rand == "string"){
+                    this.loadRand([this.init.sfx.rand], this.init.sfx.ft, this.init.sfx.num);
+                  }
+                }
+              }
             },
             load: function(ab){
                 for(var i in ab){

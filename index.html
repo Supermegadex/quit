@@ -206,7 +206,7 @@
 			<h1 class="mon"><span class="chara"></span></h1>
 		</div>
 		<div class="modal-footer">
-			<a href="" target="_self" class="modal-action waves-effect btn-flat mon" id="nameCanc" style="position: absolute !important; color: white; left: 7px;" onclick="$('#modal2').closeModal(); $Aud.loadSFX(['az', '01t', '02t', 'talk'], 'wav'); $Aud.loadRand(['WD'], 'wav', 7)">Continue</a><a href="" target="_self" id="nameConf" class="modal-action waves-effect btn-flat mon" style="color:white;" onclick="reset()">Reset</a>
+			<a href="" target="_self" class="modal-action waves-effect btn-flat mon" id="nameCanc" style="position: absolute !important; color: white; left: 7px;" onclick="$('#modal2').closeModal();">Continue</a><a href="" target="_self" id="nameConf" class="modal-action waves-effect btn-flat mon" style="color:white;" onclick="reset()">Reset</a>
 		</div>
 	</div>
 
@@ -214,7 +214,7 @@
 	<story-box chapters="9" id="story"></story-box>
 
 	<!-- Audio Controls -->
-	<audio-controls id="audio-controls"></audio-controls>
+	<audio-controls id="audio-controls" init='{"sfx":{"sounds": ["az", "01t", "02t", "talk"], "ft": "wav", "rand": "WD", "num": 7}}'></audio-controls>
 
 	<!-- [[REDACTED]] -->
 	<!--audio src="/music/Memory.mp3" id="music" loop></audio-->

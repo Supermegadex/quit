@@ -239,6 +239,11 @@ and in the body, use an `audio-controls` element.
 The attributes are:
 * `playing`: *Number.* __Don't touch this.__ Changes what state the audio is in. `0` = stopped, `1` = playing, `2` = paused. Default = `0`
 * `mute`: *Boolean.* If true, it mutes all current and future music (music playing when attribute is changed fades). Default: `false`
+* `init`: *JSON Object.* Sounds and music to load when everything is ready. This must be a well-formed JSON object (with DOUBLE quotes arround the attributes) defined in the declaration of the element. The object attributes:
+  * `sfx`: *Object.* container for sound-effects related stuff.
+    * `sounds`: *Array.* Array of sound names. Same as `sounds` argument in the `loadSFX` method. refer to that for more details.
+    * `ft`: *String.* File type of ALL of the sounds defined here. Yes, they all have to be the same file type, like `ogg`, `wav`, or `mp3`.
+  * `music`: *Array.* Array of music names to be loaded; same as the `music` argument in the `load` method, except the last value is the file type, for example: `["spooky", "scary", "rainbows", "mp3"]` would load "spooky.mp3," "scary.mp3," and "rainbows.mp3."
 * `audio`: *String.* __Don't change this, but do use it to your advantage!__ Keeps track of the currently-playing music track.
 * `musics`: *Object.* __Don't touch this unless you want to add music that I have not included a way to use yet.__ An object that contains music that is loaded and ready to play. If you need to edit this object, it's structure is like this:
 ```
