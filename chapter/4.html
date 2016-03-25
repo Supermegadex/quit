@@ -22,10 +22,12 @@
 <script src="/scripts/2.js"></script>
 <script>
 /* global $Aud Materialize musics Howl */
+$(function(){
     $Aud.loadRand(["WD"], "wav", 7);
     $Aud.load(["Undertale"]);
     $Aud.load(["Fallen Down", "True Hero", "Alphys"]);
     $Aud.unload("You Idiot");
     $Aud.xfade("Undertale", 300, false, 1500);
     script2.start();
+});
 </script>
