@@ -223,12 +223,14 @@ server.listen(process.env.PORT || 8080, process.env.IP || "localhost", function(
 });
 ```
 Feel free to correct me if something isn't quite right here.
+
 ## Audio
 #### Dependencies
 Again, I need to minify all of this stuff together, but for now, here are the things you need:
 * [Polymer](//polymer-project.org)
 * [Howler.js](https://github.com/goldfire/howler.js/)
 * [Materialize](//materializecss.com)
+
 #### Use
 Cool, so there are considerably fewer dependencies needed for this framework. The setup is similar in this one.
 In the head of the document, after including everything else, add
@@ -255,8 +257,10 @@ musics: {
 }
 ```
 * `sf`: *Object.* __Don't touch this unless you want to add sfx that I have not included a way to use yet.__ Same as musics but is used for Sound Effects and the only method ever fired is `play()`;
+
 #### $Aud
 Like `$Story`,  `$Aud` is the framework's variable for calling any method or accessing any attribute.
+
 #### Methods
 Some methods:
 * `_mute()`: __Only used by the framework__
