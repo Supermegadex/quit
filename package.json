@@ -4,8 +4,8 @@
   "description": "Something special.",
   "main": "lib/game.js",
   "scripts": {
-    "start": "node ./server.js",
-    "dev": "nodemon ./server.js",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
     "lint": "standard --verbose | snazzy"
   },
   "author": "Daniel Noon",
