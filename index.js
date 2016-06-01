@@ -22,6 +22,73 @@ var ybf = new Howl( {
   src: "/music/Your Best Friend.mp3",
   loop: true,
 } );
+var skip = function(){
+  window.clearInterval( inte );
+  while ( j[ 0 ] != null && j != undefined && j != "undefined" ) {
+    var k = j.shift();
+    if ( k == "ŷ" ) {
+      k = "<span class='y'>";
+    }
+    if ( k == "ƨ" ) {
+      k = "</span>";
+    }
+    if ( k == "β" ) {
+      k = "<br>";
+    }
+    if ( k == "κ" ) {
+      k = "<a href='//undertale.com'>";
+    }
+    if ( k == "ρ" ) {
+      k = "</a>";
+    }
+    if ( k == "Σ" ) {
+      var tmp = "";
+      var tmp2 = "";
+      while ( tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined" ) {
+        tmp = j.shift();
+        tmp2 += tmp;
+      }
+      Function( tmp2 );
+      k = j.shift();
+    }
+    if ( k == "Ξ" ) {
+      var tmp = "";
+      var tmp2 = "";
+      while ( tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined" ) {
+        tmp = j.shift();
+        if ( tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined" ) {
+          tmp2 += tmp;
+        }
+      }
+      k = "<span class='" + tmp2 + "'>";
+    }
+    if ( k == "ι" ) {
+      var tmp = "";
+      var tmp2 = "";
+      while ( tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined" ) {
+        tmp = j.shift();
+        if ( tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined" ) {
+          tmp2 += tmp;
+        }
+      }
+      k = "</" + tmp2 + ">";
+    }
+    z += k;
+    $( "." + title )[ 0 ].innerHTML = z;
+  }
+  $( ".flower" ).last().click( function() {
+    Shepherd.activeTour.next();
+  } );
+  zToCont.simple_combo( "z", function() {
+    Shepherd.activeTour.next();
+  } );
+  if ( call != undefined && call != "undefined" && call != null ) {
+    console.log( "Trying to run..." );
+    call();
+  }
+  window.clearInterval( inte );
+  zToCont.unregister_combo( "x" );
+}
 var z, j, inte, call, writeoptions;
 var write = function( text, title, grunt, callback, options ) {
   if ( grunt == null || grunt == undefined || grunt == "undefined" ) {
@@ -35,71 +102,7 @@ var write = function( text, title, grunt, callback, options ) {
   writeoptions = options;
   zToCont.unregister_combo( "z" );
   zToCont.simple_combo( "x", function() {
-    window.clearInterval( inte );
-    while ( j[ 0 ] != null && j != undefined && j != "undefined" ) {
-      var k = j.shift();
-      if ( k == "ŷ" ) {
-        k = "<span class='y'>";
-      }
-      if ( k == "ƨ" ) {
-        k = "</span>";
-      }
-      if ( k == "β" ) {
-        k = "<br>";
-      }
-      if ( k == "κ" ) {
-        k = "<a href='//undertale.com'>";
-      }
-      if ( k == "ρ" ) {
-        k = "</a>";
-      }
-      if ( k == "Σ" ) {
-        var tmp = "";
-        var tmp2 = "";
-        while ( tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined" ) {
-          tmp = j.shift();
-          tmp2 += tmp;
-        }
-        Function( tmp2 );
-        k = j.shift();
-      }
-      if ( k == "Ξ" ) {
-        var tmp = "";
-        var tmp2 = "";
-        while ( tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined" ) {
-          tmp = j.shift();
-          if ( tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined" ) {
-            tmp2 += tmp;
-          }
-        }
-        k = "<span class='" + tmp2 + "'>";
-      }
-      if ( k == "ι" ) {
-        var tmp = "";
-        var tmp2 = "";
-        while ( tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined" ) {
-          tmp = j.shift();
-          if ( tmp != ";" && tmp != null && tmp != undefined && tmp != "undefined" ) {
-            tmp2 += tmp;
-          }
-        }
-        k = "</" + tmp2 + ">";
-      }
-      z += k;
-      $( "." + title )[ 0 ].innerHTML = z;
-    }
-    $( ".flower" ).last().click( function() {
-      Shepherd.activeTour.next();
-    } );
-    zToCont.simple_combo( "z", function() {
-      Shepherd.activeTour.next();
-    } );
-    if ( call != undefined && call != "undefined" && call != null ) {
-      console.log( "Trying to run..." );
-      call();
-    }
-    window.clearInterval( inte );
-    zToCont.unregister_combo( "x" );
+    skip();
   } );
   $( ".flower" ).off( "click" );
   j = text.split( "" );
