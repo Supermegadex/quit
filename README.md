@@ -222,6 +222,8 @@ app.all("/page/*", function(req, res){
 app.listen(port);
 ```
 
+And yes, this is the absolute entirety of my "compiled" `server.js` file (maybe). It is the only file that I will publish _only_ in "compiled" form.
+
 ## Audio
 #### Dependencies
 Again, I need to minify all of this stuff together, but for now, here are the things you need:
