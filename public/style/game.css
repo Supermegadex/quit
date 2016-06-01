@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+canvas {
+  display: block;
+  margin: auto;
+}
+
+b {
+  font-weight: 700 !important;
+}
+
+#createModal {
+  background-color: #000;
+}
+
+#createModal .modal-body {
+  padding-left: 20px;
+  padding-bottom: 10px;
+  line-height: 1.4 !important;
+}
+
+#myModal .modal-body {
+  padding-left: 20px;
+  padding-bottom: 10px;
+  line-height: 1.4 !important;
+}
+
+html {
+  font-family: Verdana, Geneva, sans-serif
+}
+
+h1 {
+  font-size: 22px;
+}

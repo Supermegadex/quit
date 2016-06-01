@@ -1,0 +1,58 @@
+<dom-module id="dialog-box">
+  <style>
+  @media (min-width: 400px){
+      :host {
+        display: block;
+        position: fixed;
+        background-color: black;
+        height: 100px;
+        width: 400px;
+        left: 0;
+        top: 0;
+        border: 3px solid white;
+        z-index: 100000;
+      }
+      #face {
+        max-width: 50px;
+        max-height: 50px;
+      }
+      #speechc {
+        width: 275px;
+        float: right;
+        margin-right: 25px;
+      }
+    }
+    @media (max-width: 400px){
+        :host {
+          display: block;
+          position: fixed;
+          background-color: black;
+          height: 25vw;
+          width: 100vw;
+          left: 0;
+          top: 0;
+          border: 3px solid white;
+          z-index: 100000;
+        }
+        #face {
+          max-width: 50px;
+          max-height: 50px;
+        }
+        #speechc {
+          width: 275px;
+          float: right;
+          margin-right: 25px;
+        }
+      }
+      #speechc{
+        color: white;
+        right: 0;
+      }
+  </style>
+  <template>
+    <template is="dom-if" if="{{face}}">
+      <img src="" id="{{sprite}}" /><span id="speechc" class='mon'>* TESTING</span>
+    </template>
+  </template>
+  <script src="newRPGText.js"></script>
+</dom-module>

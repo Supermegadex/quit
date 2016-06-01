@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
+    <title>Projector View</title>
+    <link type='text/css' rel='stylesheet' href='/style/reset.css' />
+    <link type='text/css' rel='stylesheet' href='/style/game.css' />
+    <script src='/js/vendor/phaser.min.js'></script>
+    <script src='/socket.io/socket.io.js'></script>
+  </head>
+  <body>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <h1 class="modal-title" id="myModalLabel">The Bastille was destroyed!</h1>
+          </div>
+          <div class="modal-body">
+            <ul style="list-style: disc !important; padding-left: 20px; padding-bottom: 20px;">
+              <li>The storming of the Bastille ignited the French Revolution</li>
+              <li>Inspired feelings of popular sovereignty</li>
+              <li>The people wrote a constitution in 1791</li>
+              <li>A republic was later established after the execution of Louis XVI</li>
+              <li>The United States was heavily affected
+                <ul style="list-style: circle !important; padding-left: 30px; padding-bottom: 20px;">
+                  <li>Thomas Jefferson favored France</li>
+                  <li>Washington wanted to remain neutral</li>
+                  <li>Adams declared a "Quasi-War"</li>
+                  <li>First party system created, the two main, competing political party system in use today</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title" id="createTitle">Some background on the Bastille:</h1>
+          </div>
+          <div class="modal-body">
+            <ul style="list-style: disc !important; padding-left: 20px; padding-bottom: 20px;">
+              <li>The American Revolution caused France to go into debt</li>
+              <li>The French <b>Third Estate</b> was dissatisfied and their representatives in the government formed the <b>National Guard</b></li>
+              <li>The commoners, in protest, stormed the Bastille, which sparked the <b>French Revolution</b></li>
+              <br>
+              <li>Now's the time to log on with your devices! Go to <b style="color: #2196f3">historygame.herokuapp.com</b> to join.</li>
+              <br>
+              <table class="table"><tr><td>Stormers: <span class="st">0</span></td><td>Guards: <span class="en">0</span></td></tr></table>
+            </ul>
+            <button class="btn btn-large btn-lg btn-success" onclick="start();">Start!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src='/js/RemotePlayer.js'></script>
+    <script src='/js/projector.js'></script>
+    <progress id="damage" class="progress progress-danger" value="0" max="50000" style="z-index: 10000; position: fixed; bottom: 0; right: 0; left: 0; margin: 0; width: 100%;"></progress>
+  </body>
+</html>
