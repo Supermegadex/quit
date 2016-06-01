@@ -20,6 +20,7 @@
         width: 275px;
         float: right;
         margin-right: 25px;
+        font-size: 20px;
       }
     }
     @media (max-width: 400px){
@@ -47,12 +48,14 @@
       #speechc{
         color: white;
         right: 0;
+        word-wrap: break-word;
       }
   </style>
   <template>
     <template is="dom-if" if="{{face}}">
-      <img src="" id="{{sprite}}" /><span id="speechc" class='mon'>* TESTING</span>
+      <img src="{{sprite}}" />
     </template>
+    <span id="speechc" class='mon'></span>
   </template>
   <script src="newRPGText.js"></script>
 </dom-module>

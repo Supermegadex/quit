@@ -16,17 +16,54 @@ Polymer({
       type: String,
       observer: "_update",
       value: null
+    },
+    visible: {
+      type: Boolean,
+      value: false,
+      observer: "_update"
     }
   },
   ready: function(){
     dialogue = this;
+    this._update();
   },
   _move: function(){
     switch(this.position){
       case "top":
+        this.style.top = "5px";
+        if(window.innerWidth >= 400){
+          this.style.left = String(window.innerWidth / 2 - 200) + "px";
+        }
+        else{
+          this.style.left = "initial";
+        }
+        this.style.bottom = "initial";
         break;
+      case "bottom":
+        this.style.top = "initial";
+        this.style.bottom = "5px";
+        if(window.innerWidth >= 400){
+          this.style.left = String(window.innerWidth / 2 - 200) + "px";
+        }
+        else{
+          this.style.left = "initial";
+        }
       default:
         break;
+    }
+  },
+  _update: function(){
+    if(this.face){
+      speechc.style.width = "275px";
+    }
+    else{
+      speechc.style.width = "350px";
+    }
+    if(this.visible){
+      $(dialogue).show();
+    }
+    else{
+      $(dialogue).hide();
     }
   },
   html: "",
@@ -48,10 +85,21 @@ Polymer({
     }
     return([get("\\", string, false), get(";", string, false)])
   },
-  write: function(string, ele){
+  changeSprite: function(spr){
+    dialogue.sprite = spr;
+    return(this);
+  },
+  enableFace: function(){
+    dialogue.face = true;
+    return(this);
+  },
+  disableFace: function(){
+    dialogue.face = false;
+    return(this);
+  },
+  write: function(string){
     var locations = this.find(string);
-    this.element = document.createElement("span");
-    document.querySelector(ele).appendChild(this.element);
+    this.element = document.querySelector("#speechc");
     this.loc = {};
     var i = 0;
     while (i < locations[0].length){
@@ -86,17 +134,12 @@ Polymer({
   },
 
   start: function(options){
-    if (this.element != null){
-      options = Object.assign(this.defaults, options);
-      console.log(options);
-      this.options = options;
-      this.runner(this.options.delay);
-      console.log(this.arr);
-      return(this);
-    }
-    else{
-      console.error("Uh oh! You need to initialize the framework first!\nBest method: dialogue.write(dialogue, element).start(options)\nOtherwise, you can run dialogue.write() first.")
-    }
+    dialogue.visible = true;
+    options = Object.assign(this.defaults, options);
+    console.log(options);
+    this.options = options;
+    this.runner(this.options.delay);
+    return(this);
   },
 
   options: {},
@@ -105,6 +148,7 @@ Polymer({
 
   done: function(callback){
     this.callback = callback;
+    return(this);
   },
 
   runner: function(ms){
@@ -134,8 +178,14 @@ Polymer({
     "c": function(color){
       switch (color){
         case "y":
-          return("<span class='yellow'>")
+          return("<span class='yellow'>");
+          break;
+        default:
+          return(false);
       }
+    },
+    "b": function(){
+      return("<br>");
     }
   },
 

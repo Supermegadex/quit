@@ -82,7 +82,7 @@ Your project should look similar to this: <br>
         |-- webcomponents.min.js
 ```
 Here's a quick boilerplate:
-```
+```html
 <!doctype html>
 <html lang="en" ng-app>
 
@@ -179,7 +179,7 @@ Here's a quick boilerplate:
 
 ##### Chapter files
 Inside of the chapter HTML files, absolutely anything goes that would go in the body of a regular HTML file. I suggest wrapping paragraphs in `<p>` tags, because that's actually what belongs in there. You can also include scripts, CSS, anything! If you want to make a Polymer element, simply create the element, then define it afterward. Example:
-```
+```html
 <dom-module id="my-chapter4-element">
 <template>
 ...
@@ -202,27 +202,25 @@ This is important: until I add an option to turn it off, this framework REQUIRES
 * `http://delpinothedragon.com/stories/az/page/*` serves `http://delpinothedragon.com/stories/az/index.html`
 * `https://example.com/page/*` serves  `https://example.com/index.html`
 
-In Node, you can basically (I think) copy-and-pase this after installing Express and replacing [URL] with the desired URL:
-```
-var http = require('http');
-var path = require('path');
-
+SUPER-DUPER SIMPLE NODE SOLUTION:
+```javascript
 var express = require('express');
+var app = express();
 
+var port = process.env.PORT || 8080;
 
-var router = express();
-var server = http.createServer(router);
-router.use(express.static(path.resolve(__dirname, '[URL]')));
-router.all('[URL]/page/*', function(req, res){
-  res.type(".html");
-  res.sendFile(__dirname + '[URL]/index.html');
+app.use(express.static('./public'));
+
+app.all("/", function(req, res){
+  res.sendFile(__dirname + "/public/index.html");
 });
-server.listen(process.env.PORT || 8080, process.env.IP || "localhost", function(){
-  var addr = server.address();
-  console.log("Server listening at", addr.address + ":" + addr.port);
+
+app.all("/page/*", function(req, res){
+  res.sendFile(__dirname + "/public/index.html");
 });
+
+app.listen(port);
 ```
-Feel free to correct me if something isn't quite right here.
 
 ## Audio
 #### Dependencies
