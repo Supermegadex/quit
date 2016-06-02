@@ -1,6 +1,6 @@
 {
   "name": "quit",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Something special.",
   "main": "lib/game.js",
   "scripts": {
