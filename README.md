@@ -1,4 +1,4 @@
-# Az
+# Don't Quit
 Woot! UT fanfic as well as a framework for online story experiences.
 
 All code except for that in the "chapters" directory is published under the GNU Public License 3.0.<br /><br />
@@ -302,7 +302,7 @@ Some methods:
 Because I have published this under the GNU GPL, feel free to use and edit any part of this code (this does __NOT__ include the story portion) you wish as long as I get credit and you use some kind of copyleft license to publish the remixed code. For your reference, I will include documentation for other useful parts of my code.
 
 #### Write function
-I needed a way to print text JRPG style for the "live" part of the story. Therefore, I wrote this handy function to achieve this. It can be found in the index.js file. It currently requires my Audio Framework.
+~~I needed a way to print text JRPG style for the "live" part of the story. Therefore, I wrote this handy function to achieve this. It can be found in the index.js file. It currently requires my Audio Framework.
 * `write(text, selector, voice, callback, options)`
   * `text`: *String.* A string to write character-by-character into a specified element. There are some in-line commands that translate into HTML elements to that tags can be created instantly.
     * `\\y`: makes the color of the text yellow should you define (`.y{color:yellow}`). It changes into `<span class="y">` when written. At the end of any yellow text, you should include `\\//span;`
@@ -312,7 +312,45 @@ I needed a way to print text JRPG style for the "live" part of the story. Theref
   * `selector`: *String.* Class of the element you want to write to. To write to this element: `<span class="example"></span>` you would use `"example"` in this argument. Full CSS selectors may come l8r.
   * `voice`: *String.* Name of sound effect loaded into Audio Framework to play every time a non-space character is written.
   * `callback`: *Optional Function.* callback for when the entire string is written into the defined element. Unlike the `\\func:` command, this can have as many lines of code as you'd like.
-  * `options`: *Optional Object.* The only attribute that this can have for now is `delay`. It changes the delay to whatever you want, in milliseconds. Don't ask me why I did it like this, just request that I change it if you really need me to. Again, though, you can just change it. It's free software.
+  * `options`: *Optional Object.* The only attribute that this can have for now is `delay`. It changes the delay to whatever you want, in milliseconds. Don't ask me why I did it like this, just request that I change it if you really need me to. Again, though, you can just change it. It's free software.~~
 
-<br>
-Well, that kind of wraps this up. Cewl.
+Yeah, I totally beefed this thing up. Forget all that stuff.
+
+## RPG Text Framework
+This is a text box modeled after __UNDERTALE__'s dialogue boxes. It allows letter-by-letter printing of dialogue as well as inline HTML, JavaScript, and custom shortcodes. The box is fully customizable by editing the HTML and CSS in `speech.html`.
+
+The element to include is `<dialog-box [attributes]></dialog-box>`
+
+#### Dependencies
+
+* Polymer
+* JQuery
+* (If using voices) my audio framework
+
+#### Attributes
+
+attribute | type | description
+--- | --- | ---
+`position` | **String** | For now, the two options here are `"top"` or `"bottom"`. <br>Changing this value will move the entire dialog box to either the top-center of the screen or the bottom-center. I may add other options later. Default: `bottom`.
+`face` | **Boolean** | Whether or not the face sprite can be seen.<br>`true` means that the sprite will take up ⅓ of the box's space and the dialogue will take up ⅔.<br>`false` means that the dialogue will take up the entire box. Default: `false`.
+`sprite` | **String** | Path to sprite if face sprite is being used. Default: `null`.
+`visible` | **Boolean** | Toggles visibility of the entire dialog box. *Note:* running `dialogue.start()` WILL enable visibility.
+
+#### dialogue
+Just like my other libraries, there is a set variable for ease of use. Call `dialogue` for the HTML element and its methods.
+
+#### Methods
+
+All of these methods return `this` so they can be chained!
+
+Method | Arguments | Description
+--- | --- | ---
+`write(dialogue, func)` |  | Sets up the framework with the specified dialogue string.<br>Ex: `dialogue.write("* Howdy!")`
+. | `dialogue` | This string is added to the queue be printed in the dialog box letter-by-letter. It can also contain HTML, JavaScript, or custom commands set off by `\\` and ended with `;`. An example string would be:<br>`"* Howdy!\\<br>* I'm \\c:y;FLOWEY!\\</span>;\\b:;* \\c:y;FLOWEY\\</span> the \\c:y;FLOWER\\</span>!"`
+. | `func` | This function will be executed when the string defined at the same time is removed from queue and printed. `func` is optional and can be left alone.
+`start(options)` | | Removes the oldest dialogue and begins the process of printing it into the dialog box
+. | `options` | Object that contains options for how the dialogue will be printed.<br>The currently-available options are: `delay, voice, next,` and `skip.`<br><hr>`delay` is the time (in milliseconds) that separates when each character is printed.<br>The default is `50`<br><br>`voice` will be the sfx name registered with my audio framework that is played every time a character is printed.<br>The default is `"none"`<br><br>`next` is the key that can be pressed to continue the dialogue (for example, this key would be `"z"` in Undertale).<br>The default is `"z"`<br><br>`skip` is the key used to skip through dialogue.<br>The default is `"x"`<hr>Some other notes about `options:`<br>The first time `start()` is called, `options` must be defined. However, all attributes are optional and will be filled with their defaults, so an empty object is fine. i.e. `dialogue.start({})` <br>However, after the first call, `options` can be left as `undefined`
+`changeSprite(sprite)` | | Changes the sprite by simply updating `dialogue.sprite;` however, it returns `this` so the methods can be chained (really useful).
+. | `sprite` | String that is the path to the sprite image.
+`(enable/disable)Face()` | | Simply enables or disables the face sprite. Like `changeSprite,` though, it returns `this`
+**VERY** | **IMPORTANT** | *(or at least reccommended)*: The other methods should not be called in normal circumstances. Many are helpers for me and can be used in custom commands.

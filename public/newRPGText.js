@@ -85,19 +85,25 @@ Polymer({
     }
     return([get("\\", string, false), get(";", string, false)])
   },
+
   changeSprite: function(spr){
     dialogue.sprite = spr;
     return(this);
   },
+
   enableFace: function(){
     dialogue.face = true;
     return(this);
   },
+
   disableFace: function(){
     dialogue.face = false;
     return(this);
   },
-  write: function(string){
+
+  funcs: [],
+
+  write: function(string, func){
     var locations = this.find(string);
     this.element = document.querySelector("#speechc");
     this.loc = {};
@@ -105,6 +111,7 @@ Polymer({
     while (i < locations[0].length){
       this.loc[locations[0][0]] = string.slice(locations[0].shift(), Number(locations[1].shift())+1);
     }
+    this.funcs.push(func);
     var subt = 0;
     var first = true;
     for (var i in this.loc){
@@ -121,30 +128,57 @@ Polymer({
         delete this.loc[i];
       }
     }
-    this.arr = string.split("");
+    var tarr = string.split("");
     for (var i in this.loc){
-      this.arr.splice(i, 0, this.loc[i]);
+      tarr.splice(i, 0, this.loc[i]);
     }
+    this.waiting.push(tarr);
+    return(this);
+  },
+
+  resetDefaults: function(){
+    this.options = undefined;
     return(this);
   },
 
   defaults: {
-    delay: 100,
+    delay: 50,
     voice: "none",
+    next: "z",
+    skip: "x",
   },
 
+  keys: new window.keypress.Listener(),
+
   start: function(options){
+    this.arr = this.waiting.shift();
     dialogue.visible = true;
-    options = Object.assign(this.defaults, options);
-    console.log(options);
+    this.element.innerHTML = "";
+    if(typeof options == "object"){
+      options = Object.assign(this.defaults, options);
+    }
+    else if(typeof this.options == "undefined"){
+      options = this.defaults;
+    }
+    var func = this.funcs.shift();
+    if(typeof func == "function"){
+      func();
+    }
     this.options = options;
     this.runner(this.options.delay);
     return(this);
   },
 
-  options: {},
+  options: undefined,
 
   callback: null,
+
+  waiting: [],
+
+  editOptions: function(o){
+    this.options.assign(o);
+    return(this);
+  },
 
   done: function(callback){
     this.callback = callback;
@@ -156,19 +190,26 @@ Polymer({
       if(ms != null && ms != undefined && ms != "undefined"){
         this.print(ms);
       }
-      else{
+      else if(!this.skip){
         this.print(this.options.delay);
+      }
+      else{
+        this.go();
       }
     }
     else{
       dialogue.html = "";
+      this.skip = false;
       this.callback();
     }
   },
 
   print: function(ms){
     window.setTimeout(this.go, ms);
+    return(this);
   },
+
+  skip: false,
 
   commands: {
     "w": function(ms){
@@ -178,7 +219,7 @@ Polymer({
     "c": function(color){
       switch (color){
         case "y":
-          return("<span class='yellow'>");
+          return("<span class='y'>");
           break;
         default:
           return(false);
@@ -210,23 +251,19 @@ Polymer({
         console.log(imp, imp[0]);
         if(imp[0] == "<"){
           r = imp;
+          console.log("Returning an HTML element: " + r);
         }
         else{
           r = Function(imp)();
           if(r == undefined || r == "undefined"){
             r = false;
-            dialogue.runner();
           }
+          console.log("Returning a JavaScript function: " + r);
         }
       }
       else{
-        var undyne = this.commands[run[0]](run[1]);
-        if(undyne){
-          r = "";
-        }
-        else{
-          r = false;
-        }
+        var r /* This code must have been written by Alphys. */ = this.commands[run[0]](run[1]);
+        console.log("Returning a custom command: " + r);
       }
     }
     return(r);
