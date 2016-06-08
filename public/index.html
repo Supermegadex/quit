@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="/css/fonts/8bit/stylesheet.css">
 	<link rel="stylesheet" href="//csshake.surge.sh/csshake.min.css">
 	<script src="/webcomponentsjs/webcomponents.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="/js/jquery.js"></script>
 	<script src="http://browserstate.github.io/history.js/scripts/bundled/html4+html5/jquery.history.js"></script>
 	<script src="/js/jquery.scrollfire.js"></script>
 	<script src="/js/hammer.min.js"></script>
@@ -66,16 +66,19 @@
 		#name {
 			margin: auto;
 		}
+		.smol {
+			font-size: 15px;
+		}
 		.white {
 			background-color: #ffffff;
 			position: fixed;
 			width: 100%;
 			height: 100%;
 			display: block;
-			z-index: 5000000000;
+			z-index: 2147400000;
 		}
 		.blur {
-			background-color: rgba(0, 0, 0, .95);
+			background-color: rgba(0, 0, 0, .99);
 			position: fixed;
 			width: 100%;
 			height: 100%;
@@ -87,7 +90,7 @@
 			font-size: 18px;
 		}
 		.raisedImportance {
-			z-index: 10000;
+			z-index: 999999999999;
 		}
 		 .trans100 {
 			color: white
@@ -191,7 +194,7 @@
 		</nav>
 	</div>
 	<input type="hidden" class="modal-trigger" data-target="modal2" href="modal2">
-	<div id="modal1" class="modal">
+	<div id="modal1" class="modal raisedImportance">
 		<div class="modal-content">
 			<form action="javascript:showS()">
 				<span class="mon"><label for="name" id='namelabel'>Name the fallen human.</label>
@@ -208,17 +211,17 @@
 			<h1 class="mon"><span class="chara"></span></h1>
 		</div>
 		<div class="modal-footer">
-			<a href="" target="_self" class="modal-action waves-effect btn-flat mon" id="nameCanc" style="position: absolute !important; color: white; left: 7px;" onclick="$('#modal2').closeModal();">Continue</a><a href="" target="_self" id="nameConf" class="modal-action waves-effect btn-flat mon" style="color:white;" onclick="reset()">Reset</a>
+			<a href="" target="_self" class="modal-action waves-effect btn-flat mon" id="nameCanc" style="position: absolute !important; color: white; left: 7px;" onclick="$('#modal2').closeModal();if(typeof ld == 'function'){ld()};nopey=false;">Continue</a><a href="" target="_self" id="nameConf" class="modal-action waves-effect btn-flat mon" style="color:white;" onclick="reset()">Reset</a>
 		</div>
 	</div>
 
 	<!-- Story-viewing pane-->
-	<story-box chapters="9" id="story"></story-box>
+	<story-box chapters="3" chapter="0" id="story"></story-box>
 
-	<dialog-box chapters="9" id="dialog"></dialog-box>
+	<dialog-box id="dialog"></dialog-box>
 
 	<!-- Audio Controls -->
-	<audio-controls id="audio-controls" init='{"sfx":{"sounds": ["az", "01t", "02t", "talk"], "ft": "wav", "rand": "WD", "num": 7}}'></audio-controls>
+	<audio-controls id="audio-controls" class="raisedImportance" init='{"sfx":{"sounds": ["az", "01t", "02t", "talk"], "ft": "wav", "rand": "WD", "num": 7}}'></audio-controls>
 
 	<!-- [[REDACTED]] -->
 	<!--audio src="/music/Memory.mp3" id="music" loop></audio-->

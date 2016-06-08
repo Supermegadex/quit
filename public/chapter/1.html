@@ -1,14 +1,147 @@
-<p><span class="mon">“Don't you have anything better to do?"</span> Frisk heard for the twentieth time.</p>
-<p>Frisk thought for a moment. <span class="mon"><i>Do I?</i></span> They never really thought about it; they always just believed they needed to do this, to save the one being without hope. Frisk finally pondered over it and came to the conclusion that yes, this was what they needed to do. They had nothing better to do than what they were doing right now. Asriel, after all, was the one who had the power to release the whole of the monsters, so he deserved to live a long, happy life. Frisk reached out their hand and called Asriel's name.</p>
-<p><span class="mon">“What are you doing, Frisk?"</span> asked the monster, confused.</p>
-<p><span class="mon">“I truly have nothing better to do,"</span> replied Frisk. <span class="mon">“And, by the look of things, I think you need something better to do."</span></p>
-<p>With that, the fluffy goat boy took Frisk's hand. Together, they walked to Toriel’s house. Asriel's head bowed as he remembered his life with his parents. They headed to the room where Frisk stayed their first night in the ruins and sat on the bed. Frisk looked at the wall, unsure of what to say.</p>
-<p><span class="mon">“You know, Frisk--"</span></p>
-<p><span class="mon">“Yes, I know. You'll turn back into Flowey soon. You've told me that before. But, I believe that won't happen; not when you have the DETERMINATION you do and I am here to support you."</span> They turned to Asriel and looked at him straight in the eyes. <span class="mon">“You are a good person, Asriel. You may not be able to feel it in a little while, but you have to know it's true. Just hold on to yourself and hold onto me and we'll figure this out."</span></p>
-<p><span class="mon">“Okay."</span> He took a deep breath. <span class="mon">“I need to rest. Can we wait to head up for a few minutes?"</span></p>
-<p><span class="mon">“Sure. Anything for you, brother."</span></p>
-<p>At the word "brother," Asriel attacked Frisk, almost strangling them with a tight hug. He cried for a few moments before they both passed out.</p>
+<style>
+.ih {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    vertical-align: middle;
+    transform: translate(0px, 140px);
+    font-size: 25px;
+    color: white;
+    text-align: center;
+}
+</style>
+
+<p><span class="sans">we're not done, yet, flower.</span></p>
+
 <script>
-/* global $Aud */
-    $Aud.load(["Reunited", "Don't Give Up"]);
-</script>
+var jjj = new window.keypress.Listener();
+var kkk = document.createElement("div");
+kkk.style.position = "fixed";
+kkk.style.width = "100%";
+kkk.style["z-index"] = 2147430000
+kkk.innerHTML = "<span class='ih mon'>Press “z” or tap in the box to continue.</span>";
+var lll;
+var mmm = true;
+
+function inst(){
+  document.body.appendChild(kkk);
+  lll = window.setInterval(function(){
+    if(mmm){
+      mmm = false;
+      $(kkk).hide();
+    }
+    else{
+      mmm = true;
+      $(kkk).show();
+    }
+  }, 1000);
+  jjj.simple_combo("z", function(){
+    window.clearInterval(lll);
+    $(kkk).hide();
+  })
+}
+
+var events = {
+  evilFlowey: function(){
+    dialogue.editOptions({noskip: true, nonext: true});
+    dialogue.go();
+    return("");
+  },
+  noEvilFlowey: function(){
+    dialogue.editOptions({noskip: false, nonext: false});
+  }
+}
+
+function bs(r){
+  $(".blur").show();
+  return(r);
+}
+
+function hOI(){
+  dialogue.write("* Howdy!   \\b:;* I'm \\c:y;FLOWEY\\</span>;.    \\b:;* \\c:y;FLOWEY\\</span>; the \\c:y;FLOWER\\</span>;!", function(){
+    bs();
+    inst();
+  })
+    .enableFace()
+    .changeSprite("/floe.gif")
+    .write("Hmmm...")
+    .write("* Have you played \\<a href='//undertale.com'>;UNDERTALE\\</a>; yet?   \\b:;* I hope so!")
+    .write("* After all, this whole thing is a spoiler.")
+    .write("* And I'd like to have some fun with you before it's no fun...   \\b:;* So go play it!")
+    .write("* Anyway, you're new here, right?   \\b:;* Little old me will have to show you around!")
+    .write("* This is a navigation bar.   \\b:;* It's pretty self-explanatory.", function(){
+      dialogue.position = "bottom";
+    })
+    .write("* However, you can also press the left and right arrow keys or swipe left and right to change pages.")
+    .write("* Cool, huh?")
+    .write("* That's really all I wanted to share.   \\b:;* You'll figure the rest out.", function(){
+      dialogue.position = "center";
+    })
+    .write("* With that, you could start reading the story!")
+    .write("\\shake:300;\\w:100;\\events.evilFlowey();* But I'm not going to let you!", function(){
+      dialogue.changeSprite("/grin.gif");
+    })
+    .write("* Hee hee hee!   \\b:;* You think software can kill me?", function(){
+      events.noEvilFlowey();
+      dialogue.changeSprite("/evil2.gif");
+    })
+    .write("* Well.   \\b:;* It doesn't matter.   \\b:;* I'm done!")
+    .write("* See you, pal!")
+    .start({voice: "flowey"})
+    .done(function(){
+      localStorage.hasPlayed = true;
+      intro();
+      return ("lol");
+    })
+    .position = "center";
+}
+
+function intro(){
+  dialogue.write("* .\\bs(' ');\\ :2;.\\ :3;. \\w:1000;\\b:;* .\\ :3;.\\ :3;.")
+    .disableFace()
+    .write("\\w:1000;* Hello?\\w:4000;\\b:;* Where am I?\\w:500;")
+    .write("\\w:2000;* .\\ :3;.\\ :3;.")
+    .write("\\w:1000;* Oh!\\w:1000;\\b:;* You, there!\\w:1000;\\b:;* Hello!")
+    .write("\\w:2000;* Not much of a talker, huh?\\w:500;\\b:;* I wasn't, either, when I fell down.")
+    .write("\\w:2000;* You can hear me, though, right?")
+    .write("\\w:1000;* Okay, good.\\w:1000;\\b:;* Hi, I'm " + $Story.name + ".\\w:500;\\b:;* Do you have a name?")
+    .write("\\w:1500;* .\\ :3;.\\ :3;.\\w:500;\\b:;* No? Alright.")
+    .write("\\w:1000;* \\<span class='smol'>;(F-Frisk...)\\</span>;")
+    .write("* Frisk! \\w:500;\\b:;* That's a nice name.\\w:1000;\\b:;* Here, Frisk, let me help you up.")
+    .write("* \\'SHIT!';\\w:1000;\\b:;* Uh, are you a ghost?\\w:1000;\\b:;* No?")
+    .write("* Oh.\\w:1000;\\b:;* It's all coming back now.")
+    .write("\\w:2000;* \\shake:50;\\\"I'm\";\\w:150; \\shake:50;\\'dead.';")
+    .write("* C'mon, Frisk.\\w:1000;\\b:;* You want to get out of here I suppose.")
+    .write("* Although, there are lots of nice people here.\\w:1000;\\b:;* Are you sure you want to go?")
+    .write("\\w:2000;* Okay, then.", function(){
+      dialogue.editOptions({noskip: false});
+    })
+    .write("[Chara and Frisk journeyed across the underworld.]")
+    .write("[They met many friends and even Chara’s old family.]")
+    .write("[Yeah, Chara had a breakdown when they realized they couldn’t talk to anyone but the mostly mute child.]")
+    .write("[They were but the imprint of someone from the past.]")
+    .write("[Yet Chara pushed to help Frisk in any way they could.]")
+    .write("[As time passed, though, they had the weirdest feeling…]")
+    .write("\\w:2500;[…that they didn’t feel anything at all.]")
+    .write("[No compassion, no joy, no will to live.]")
+    .write("[Even though they were already dead.]")
+    .write("[At the end of it all, Chara felt nothing even for Asgore, when Flowey pummeled him with his deadly pellets.]")
+    .write("[Frisk was determined.\\w:1500;\\b:;And Chara was bored.]")
+    .write("[And so went Frisk’s first run.\\w:3000;\\b:;But it was only the first.]")
+    .start({noskip: true, voice: "chara"})
+    .done(function(){
+      $Story._next();
+    })
+    .position = "center";
+}
+
+function ld(){
+  if(dialogue.waiting.length == 0){
+    if(localStorage.hasPlayed){
+      intro();
+    }
+    else{
+      hOI();
+    }
+  }
+}

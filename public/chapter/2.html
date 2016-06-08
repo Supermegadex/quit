@@ -1,19 +1,33 @@
-<p>When Frisk awoke, Asriel was nowhere to be found. They spent several minutes wandering about the house before they spotted, in a small ceramic pot, a yellow, grinning flower. <span class="mon"><i>No.</i></span></p>
-<p><span class="mon">“You IDIOT! You thought little weenie Asriel could stop ME from coming back? It hardly took any effort to put him back in his place.</span> He looked down sorrowfully. <span class="mon">But, I still have to wonder: why, exactly did you let me go? Now that I know you're not mute, ANSWER ME! I-I just need to understand!"</span></p>
-<p><span class="mon">“For one, I don't like hurting anyone, not even a psychopathic murderer. I prefer to take a peaceful approach. By now, you know that it works, as even YOU couldn't stop my method. The reason I spared you is that I knew that it would be the only way to really win."</span> Frisk smiled. <span class="mon">“I get satisfaction from the way people react to me. Their smiles, their laughs, their happiness; it makes me feel like I've done something, you know? You never gave me satisfaction, but Asriel made me happy. All I want now is a happy ending!"</span></p>
-<p><span class="mon">“Why should I give you satisfaction when I am searching for it as well?"</span></p>
-<p id="ch2fire1"><span class="mon">“You'll never get ANY satisfaction if you don't have a SOUL! And, you don't have a choice, anyway. Come on!"</span></p>
-<p>With that, Frisk picked up the pot that Flowey was in and made the trek up to where their friends were waiting.</p>
+<p class="sans" class="anchor">we're not done, yet.</p>
 <script>
-    /* global $Aud Materialize */
 
-    $Aud.load(["Undertale"]);
-    $Aud.xfade("You Idiot", 5000, false, 5000);
-    
-      var options = [
-        {selector: '#ch2fire1', offset: 200, callback: '$Au.fade("You Idiot", 1, 0, 2000, true)' },
-      ];
-      
-      Materialize.scrollFire(options);
-    
+function ld(){
+  $(".blur").show();
+  $(".white").fadeIn(4000);
+  setTimeout(vvv, 2000);
+}
+
+function vvv(){
+  dialogue.write("* Wow.\\w:2500;\\b:;* I haven't seen the sun in such a long time, Frisk.")
+    .write("* It's ah\\w:250;—\\w:2000;beautiful, I suppose.\\w:1500;\\b:;*\\ :3;.\\ :2;.\\ :2;.\\w:1500;\\b:;* What's wrong?")
+    .write("\\w:1000;* \\<span class='smol'>;(F-\\w:100;f-\\w:200;fr-\\w:400;friends)")
+    .write("* Oh.\\w:2000;\\b:;* I see.")
+    .write("* You know, you could reset; see them all over again.")
+    .write("* It's not hard.\\b:;\\w:1000;* Just...\\w:1000; give up completely.")
+    .write("* Promise yourself that you’ll see your friends again.")
+    .write("[Frisk reset the timeline.]", function(){
+      $(".white").fadeOut(4000);
+    })
+    .write("[They did it all again]")
+    .write("[Frisk tried to save his friends and the whole of the monsters.]")
+    .write("[Flowey killed Asgore again and Frisk reset, unknowing of the call waiting for them.]")
+    .write("[This time, though, Chara was so despondent that they decided something else would have to give them something to “live” for.]")
+    .write("[They had an idea:]\\b:;\\w:2500;[manipulate Frisk.]")
+    .done(function(){
+      $Story._next();
+    })
+    .start({voice: "chara", noskip: true})
+    .position = "center";
+}
+
 </script>

@@ -30,17 +30,12 @@ Polymer({
   _move: function(){
     switch(this.position){
       case "top":
-        this.style.top = "5px";
-        if(window.innerWidth >= 400){
-          this.style.left = String(window.innerWidth / 2 - 200) + "px";
-        }
-        else{
-          this.style.left = "initial";
-        }
-        this.style.bottom = "initial";
+        this.style.top = "top: 10px; left: 0, right: 0; margin: auto; bottom: initial;"
         break;
       case "bottom":
+        this.style.margin = "0";
         this.style.top = "initial";
+        this.style.right = "initial";
         this.style.bottom = "5px";
         if(window.innerWidth >= 400){
           this.style.left = String(window.innerWidth / 2 - 200) + "px";
@@ -48,7 +43,15 @@ Polymer({
         else{
           this.style.left = "initial";
         }
+        break;
+      case "center":
+        this.style.top = "0";
+        this.style.bottom = "0";
+        this.style.right = "0";
+        this.style.left = "0";
+        this.style.margin = "auto";
       default:
+
         break;
     }
   },
@@ -146,6 +149,8 @@ Polymer({
     voice: "none",
     next: "z",
     skip: "x",
+    noskip: false,
+    nonext: false,
   },
 
   keys: new window.keypress.Listener(),
@@ -155,17 +160,21 @@ Polymer({
     dialogue.visible = true;
     this.element.innerHTML = "";
     if(typeof options == "object"){
-      options = Object.assign(this.defaults, options);
+      this.options = Object.assign(this.defaults, options);
     }
     else if(typeof this.options == "undefined"){
-      options = this.defaults;
+      this.options = this.defaults;
     }
     var func = this.funcs.shift();
     if(typeof func == "function"){
       func();
     }
-    this.options = options;
     this.runner(this.options.delay);
+    if(!this.options.noskip){
+      this.keys.simple_combo(this.options.skip, function(){
+        dialogue.skip = true;
+      });
+    }
     return(this);
   },
 
@@ -176,7 +185,7 @@ Polymer({
   waiting: [],
 
   editOptions: function(o){
-    this.options.assign(o);
+    this.options = Object.assign(this.options, o);
     return(this);
   },
 
@@ -200,7 +209,30 @@ Polymer({
     else{
       dialogue.html = "";
       this.skip = false;
-      this.callback();
+      dialogue.keys.unregister_combo(this.options.skip);
+      if(dialogue.waiting.length > 0){
+        if(!this.options.nonext){
+          this.keys.simple_combo(this.options.next, function(){
+            dialogue.start();
+            dialogue.keys.unregister_combo(dialogue.options.next);
+          });
+        }
+      }
+      else{
+        dialogue.keys.unregister_combo(this.options.next);
+        if(!this.options.nonext){
+          this.keys.simple_combo(this.options.next, function(){
+            dialogue.keys.unregister_combo(dialogue.options.next);
+            dialogue.visible = false;
+            dialogue.callback();
+            dialogue.callback = function(){};
+          });
+        }
+        else{
+          dialogue.callback();
+          dialogue.callback = function(){};
+        }
+      }
     }
   },
 
@@ -227,6 +259,25 @@ Polymer({
     },
     "b": function(){
       return("<br>");
+    },
+    "shake": function(time){
+      $(dialogue).addClass("shake");
+      $(dialogue).addClass("shake-constant");
+      window.setTimeout(function(){
+        $(dialogue).removeClass("shake");
+        $(dialogue).removeClass("shake-constant");
+      }, time);
+      dialogue.go();
+      return(false);
+    },
+    " ": function(num){
+      var i = 0;
+      var r = "";
+      while (i < num){
+        r += "&nbsp;"
+        i++;
+      }
+      return(r);
     }
   },
 
@@ -254,15 +305,12 @@ Polymer({
           console.log("Returning an HTML element: " + r);
         }
         else{
-          r = Function(imp)();
-          if(r == undefined || r == "undefined"){
-            r = false;
-          }
+          r = Function("return(" + imp + ")")();
           console.log("Returning a JavaScript function: " + r);
         }
       }
       else{
-        var r /* This code must have been written by Alphys. */ = this.commands[run[0]](run[1]);
+        var r = this.commands[run[0]](run[1]);
         console.log("Returning a custom command: " + r);
       }
     }
