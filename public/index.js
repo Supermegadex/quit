@@ -131,6 +131,7 @@ var hrefVar = function( item ) {
 $( document ).ready( function() {
   $( ".white" ).hide();
   $( ".blur" ).hide();
+  $( ".red" ).hide();
   $( ".dropdown-button" ).dropdown();
   window.setInterval( function() {
     sSelect();
