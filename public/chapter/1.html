@@ -9,6 +9,11 @@
     color: white;
     text-align: center;
 }
+#kill-flowey {
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
 </style>
 
 <p><span class="sans">we're not done, yet, flower.</span></p>
@@ -43,8 +48,9 @@ function inst(){
 
 var events = {
   evilFlowey: function(){
-    dialogue.editOptions({noskip: true, nonext: true});
+    dialogue.editOptions({noskip: true, nonext: true, voice: "fe"});
     dialogue.go();
+    $("#kill-flowey").click(function(){dialogue.start();})
     return("");
   },
   noEvilFlowey: function(){
@@ -78,20 +84,25 @@ function hOI(){
       dialogue.position = "center";
     })
     .write("* With that, you could start reading the story!")
-    .write("\\shake:300;\\w:100;\\events.evilFlowey();* But I'm not going to let you!", function(){
+    .write("\\<i class='material-icons' id='kill-flowey'>highlight_off</i>;\\shake:300;\\w:100;\\events.evilFlowey();* But I'm not going to let you!", function(){
       dialogue.changeSprite("/grin.gif");
     })
-    .write("* Hee hee hee!   \\b:;* You think software can kill me?", function(){
+    .write("* Hee hee hee!   \\b:;* You think software can get rid of me?", function(){
       events.noEvilFlowey();
       dialogue.changeSprite("/evil2.gif");
     })
     .write("* Well.   \\b:;* It doesn't matter.   \\b:;* I'm done!")
-    .write("* See you, pal!")
+    .write("* See you, pal!\\b:;\\b:;* Enjoy your story.")
     .start({voice: "flowey"})
     .done(function(){
       localStorage.hasPlayed = true;
-      intro();
-      return ("lol");
+      dialogue.visible = true;
+      $(dialogue).fadeOut(1500, function(){
+        window.setTimeout(function(){
+          intro();
+          $(dialogue).fadeIn(2000);
+        }, 1500)
+      })
     })
     .position = "center";
 }
@@ -110,7 +121,7 @@ function intro(){
     .write("* Frisk! \\w:500;\\b:;* That's a nice name.\\w:1000;\\b:;* Here, Frisk, let me help you up.")
     .write("* \\'SHIT!';\\w:1000;\\b:;* Uh, are you a ghost?\\w:1000;\\b:;* No?")
     .write("* Oh.\\w:1000;\\b:;* It's all coming back now.")
-    .write("\\w:2000;* \\shake:50;\\\"I'm\";\\w:150; \\shake:50;\\'dead.';")
+    .write("\\w:2000;* \\shake:100;\\\"I'm\";\\w:150; \\shake:100;\\'dead.';")
     .write("* C'mon, Frisk.\\w:1000;\\b:;* You want to get out of here I suppose.")
     .write("* Although, there are lots of nice people here.\\w:1000;\\b:;* Are you sure you want to go?")
     .write("\\w:2000;* Okay, then.", function(){
@@ -128,7 +139,7 @@ function intro(){
     .write("[At the end of it all, Chara felt nothing even for Asgore, when Flowey pummeled him with his deadly pellets.]")
     .write("[Frisk was determined.\\w:1500;\\b:;And Chara was bored.]")
     .write("[And so went Frisk’s first run.\\w:3000;\\b:;But it was only the first.]")
-    .start({noskip: true, voice: "chara"})
+    .start({noskip: true, voice: "talk"})
     .done(function(){
       $Story._next();
     })
@@ -145,3 +156,5 @@ function ld(){
     }
   }
 }
+
+dialogue.voice.add(["flowey", "fe", "talk"], "wav");

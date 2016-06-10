@@ -37,17 +37,20 @@ function oo(){
     .write("* oh?")
     .write("* \\<span class='smol'>;(S-\\w:100;sans!)\\</span>;", function(){
       $("#speechc").addClass("mon").removeClass("sans");
+      dialogue.editOptions({voice: "talk"});
     })
     .write("* Wh-what?")
     .write("* What?\\w:2500;\\b:;*\\ :2;.\\ :2;.\\ :2;.")
     .write("* All alone again.")
     .write("* whoa, buddo.", function(){
       $("#speechc").addClass("sans").removeClass("mon");
+      dialogue.editOptions({voice: "sans"});
     })
     .write("* uhhhhh\\w:2000;\\b:;* what the fuck?")
     .write("* why are you hugging me?")
     .write("* \\<span class='smol'>;(Y-\\w:100;you're)\\w:2000;\\b:;my friend.\\</span>;", function(){
       $("#speechc").addClass("mon").removeClass("sans");
+      dialogue.editOptions({voice: "talk"})
     })
     .write("\\w:3000;[That was the last thing Frisk said before human blood was spilt.]", function(){
       $(".red").animate({opacity: 1}, 250, function(){
@@ -57,18 +60,13 @@ function oo(){
         });
       })
     })
-    .start({delay: 75, noskip: true, voice: "norm"})
+    .start({delay: 75, noskip: true, voice: "talk"})
     .done(function(){
       $Story._next();
     })
     .position = "center";
 }
-/*
-[Frisk woke up in the flowers once more.]
-[With no more LOVE to corrupt them, Frisk went on their mission to save everyone—every whimsun and every vulkin; every madgick and every froggit.]
-[But three people became the focus of the child’s determination.]
-[And even when everything seemed impossible, Frisk would never quit.]
-[For their friends, everything is possible.]
-*/
+
+dialogue.voice.add(["sans","talk"], "wav")
 
 </script>

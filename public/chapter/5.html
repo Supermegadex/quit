@@ -1,14 +1,51 @@
+<style>
+.dq {
+  color: white;
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  text-align: center;
+  font-size: 150px;
+  -webkit-transition: -webkit-transform 5s cubic-bezier(0.59, 0.04, 0.46, 0.9);
+  -moz-transition: -moz-transform 5s cubic-bezier(0.59, 0.04, 0.46, 0.9);
+  -ms-transition: -ms-transform 5s cubic-bezier(0.59, 0.04, 0.46, 0.9);
+  transition: transform 5s cubic-bezier(0.59, 0.04, 0.46, 0.9);
+}
+.blur {
+  display: table;
+}
+.up {
+  -webkit-transform: translate(0, -30%);
+  -moz-transform: translate(0, -30%);
+  -ms-transform: translate(0, -30%);
+  transform: translate(0, -30%);
+}
+</style>
+<!-- cubic-bezier(0.18, 0.43, 0.69, 0.46); -->
 <script>
 
 function ld(){
-
+  $(".blur").show();
   dialogue
     .write("[Frisk woke up in the flowers once more.]")
     .write("[With no more LOVE to corrupt them, Frisk went on their mission to save everyone—")
     .write("every whimsun and every vulkin; every madgick and every froggit.]")
-    .write("[But three people became the focus of the child’s determination over time.]")
+    .write("[But, over time, three people became the focus of the child’s determination.]")
     .write("[And even when everything seemed impossible, Frisk would never quit.]")
     .write("[For their friends, everything is possible.]")
+    .start({voice: "talk"})
+    .done(dq)
+    .position = "center";
 }
+
+function dq(){
+  $(".blur").append("<span class='mon dq'><span class='shake shake-little shake-constant'>Don't Quit</span></span>");
+  window.setTimeout(function(){
+    $(".dq").addClass("up");
+    $(".white").fadeIn(5000, $Story._next);
+  }, 1500);
+}
+
+dialogue.voice.add(["talk"], "wav")
 
 </script>

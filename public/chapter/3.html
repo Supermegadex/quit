@@ -41,12 +41,14 @@ function ld(){
     .write("[That is, until their judgement.]", function(){
       $(".red").animate({opacity: .19}, 1650);
     })
-    .start({voice: "chara", noskip: true})
+    .start({voice: "talk", noskip: true})
     .done(function(){
       window.sanzDun = true;
       $Story._next();
     })
     .position = "center";
 }
+
+dialogue.voice.add(["talk"], "wav")
 
 </script>

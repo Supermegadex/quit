@@ -106,6 +106,40 @@ Polymer({
 
   funcs: [],
 
+  voice: {
+    add: function(ab, ft){
+        for(var i in ab){
+            if(typeof this.s[ab[i]] != "object"){
+                this.s[ab[i]] = new Howl({
+                    src: ["/voices/" + ab[i] + "." + ft],
+                    loop: false
+                });
+            }
+        }
+    },
+    s: {},
+    addRand: function(ab, ft, hm){
+        for(var i in ab){
+            this.s[ab] = {
+                num: hm,
+                play: function(){
+                    this.s[Math.floor(Math.random()*this.num)].play();
+                },
+                s: [],
+            }
+            var j = 0;
+            while (j < hm) {
+                this.s[ab].s[j] = new Howl({
+                    src: "/voices/" + ab + "/" + String(j+1) + "." + ft,
+                    loop: false
+                });
+                j++;
+                console.log(j);
+            }
+        }
+    },
+  },
+
   write: function(string, func){
     var locations = this.find(string);
     this.element = document.querySelector("#speechc");
@@ -169,6 +203,7 @@ Polymer({
     if(typeof func == "function"){
       func();
     }
+    console.log(this.arr, this.waiting);
     this.runner(this.options.delay);
     if(!this.options.noskip){
       this.keys.simple_combo(this.options.skip, function(){
@@ -286,6 +321,9 @@ Polymer({
     if(!r){
     }
     else{
+      if(dialogue.options.voice != "none" && typeof dialogue.voice.s[dialogue.options.voice] == "object" && r != " " && !this.skip){
+        dialogue.voice.s[dialogue.options.voice].play();
+      }
       dialogue.html += r;
       dialogue.element.innerHTML = dialogue.html;
       dialogue.runner();

@@ -19,15 +19,17 @@ function vvv(){
       $(".white").fadeOut(4000);
     })
     .write("[They did it all again]")
-    .write("[Frisk tried to save his friends and the whole of the monsters.]")
+    .write("[Frisk tried to save their friends and the whole of the monsters.]")
     .write("[Flowey killed Asgore again and Frisk reset, unknowing of the call waiting for them.]")
     .write("[This time, though, Chara was so despondent that they decided something else would have to give them something to “live” for.]")
     .write("[They had an idea:]\\b:;\\w:2500;[manipulate Frisk.]")
     .done(function(){
       $Story._next();
     })
-    .start({voice: "chara", noskip: true})
+    .start({voice: "talk", noskip: true})
     .position = "center";
 }
+
+dialogue.voice.add(["talk"], "wav")
 
 </script>
