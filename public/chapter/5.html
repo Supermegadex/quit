@@ -33,16 +33,18 @@ function ld(){
     .write("[But, over time, three people became the focus of the child’s determination.]")
     .write("[And even when everything seemed impossible, Frisk would never quit.]")
     .write("[For their friends, everything is possible.]")
-    .start({voice: "talk"})
+    .start({voice: "talk", noskip: false})
     .done(dq)
     .position = "center";
 }
 
 function dq(){
+  $(".blur").css({display: "table"});
   $(".blur").append("<span class='mon dq'><span class='shake shake-little shake-constant'>Don't Quit</span></span>");
   window.setTimeout(function(){
     $(".dq").addClass("up");
-    $(".white").fadeIn(5000, $Story._next);
+    $(".white").fadeIn(5000);
+    window.setTimeout(function(){$Story._next()}, 5000);
   }, 1500);
 }
 

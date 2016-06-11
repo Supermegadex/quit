@@ -307,8 +307,9 @@ function sSelect() {
   }, 5 );
 }
 
-function reset() {
-  localStorage.charaName = undefined;
+function reset(tru) {
+  delete localStorage.charaName;
+  delete localStorage.hasPlayed;
   $( ".white" ).fadeIn( 6000, function() {
     location.href = "/";
   } );

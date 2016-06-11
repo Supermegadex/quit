@@ -43,6 +43,12 @@ function inst(){
   jjj.simple_combo("z", function(){
     window.clearInterval(lll);
     $(kkk).hide();
+    $(dialogue).off("click");
+  });
+  $(dialogue).click(function(){
+    window.clearInterval(lll);
+    $(kkk).hide();
+    $(dialogue).off("click");
   })
 }
 
@@ -66,6 +72,7 @@ function bs(r){
 function hOI(){
   dialogue.write("* Howdy!   \\b:;* I'm \\c:y;FLOWEY\\</span>;.    \\b:;* \\c:y;FLOWEY\\</span>; the \\c:y;FLOWER\\</span>;!", function(){
     bs();
+    ybf.play();
     inst();
   })
     .enableFace()
@@ -85,6 +92,7 @@ function hOI(){
     })
     .write("* With that, you could start reading the story!")
     .write("\\<i class='material-icons' id='kill-flowey'>highlight_off</i>;\\shake:300;\\w:100;\\events.evilFlowey();* But I'm not going to let you!", function(){
+      ybf.stop();
       dialogue.changeSprite("/grin.gif");
     })
     .write("* Hee hee hee!   \\b:;* You think software can get rid of me?", function(){
@@ -116,10 +124,10 @@ function intro(){
     .write("\\w:2000;* Not much of a talker, huh?\\w:500;\\b:;* I wasn't, either, when I fell down.")
     .write("\\w:2000;* You can hear me, though, right?")
     .write("\\w:1000;* Okay, good.\\w:1000;\\b:;* Hi, I'm " + $Story.name + ".\\w:500;\\b:;* Do you have a name?")
-    .write("\\w:1500;* .\\ :3;.\\ :3;.\\w:500;\\b:;* No? Alright.")
-    .write("\\w:1000;* \\<span class='smol'>;(F-Frisk...)\\</span>;")
-    .write("* Frisk! \\w:500;\\b:;* That's a nice name.\\w:1000;\\b:;* Here, Frisk, let me help you up.")
-    .write("* \\'SHIT!';\\w:1000;\\b:;* Uh, are you a ghost?\\w:1000;\\b:;* No?")
+    .write("\\w:1500;* .\\ :3;.\\ :3;.\\w:500;\\b:;* No?\\w:1000;\\b:;* Alright.")
+    .write("\\voice:fr;\\w:1000;* \\<span class='smol'>;(F-\\w:1000;Frisk...)\\</span>;")
+    .write("\\voice:talk;* Frisk! \\w:500;\\b:;* That's a nice name.\\w:1000;\\b:;* Here, Frisk, let me help you up.")
+    .write("* \\'SHIT!';\\w:1000;\\b:;* Uh, are you a ghost?\\w:1000;\\b:;* My hand phased through yours.")
     .write("* Oh.\\w:1000;\\b:;* It's all coming back now.")
     .write("\\w:2000;* \\shake:100;\\\"I'm\";\\w:150; \\shake:100;\\'dead.';")
     .write("* C'mon, Frisk.\\w:1000;\\b:;* You want to get out of here I suppose.")
@@ -155,6 +163,9 @@ function ld(){
       hOI();
     }
   }
+  else{
+    history.back();
+  }
 }
 
-dialogue.voice.add(["flowey", "fe", "talk"], "wav");
+dialogue.voice.add(["flowey", "fe", "talk", "fr"], "wav");

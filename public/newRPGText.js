@@ -250,7 +250,13 @@ Polymer({
           this.keys.simple_combo(this.options.next, function(){
             dialogue.start();
             dialogue.keys.unregister_combo(dialogue.options.next);
+            $(dialogue).off("click");
           });
+          $(dialogue).click(function(){
+            dialogue.start();
+            $(dialogue).off("click");
+            dialogue.keys.unregister_combo(dialogue.options.next);
+          })
         }
       }
       else{
@@ -313,6 +319,11 @@ Polymer({
         i++;
       }
       return(r);
+    },
+    voice: function(v){
+      dialogue.editOptions({voice: v});
+      dialogue.go();
+      return(false);
     }
   },
 
