@@ -18,7 +18,10 @@ preload(
   "/rise.gif",
   "/sassy.gif",
   "/side.gif",
-  "/sidesass.gif"
+  "/sidesass.gif",
+  "/sanschuckle.png",
+  "/sans.png",
+  "/sansblink.png"
 );
 var ybf = new Howl( {
   src: "/music/Your Best Friend.mp3",
@@ -32,6 +35,7 @@ function canc() {
   $( "#nameConf" ).off( "click", st );
   namecnt = false;
 }
+
 var st = function() {
   document.querySelector( "#story" ).name = nam;
   localStorage.charaName = nam;

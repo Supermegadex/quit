@@ -1,8 +1,18 @@
 <script>
 
 function ld(){
-  $(".blur").show();
-  $(".red").show().css({opacity: 0});
+  if(dialogue.waiting.length == 0){
+    $(".blur").show();
+    $(".red").show().css({opacity: 0});
+    window.setTimeout(ii, 500);
+    Materialize.toast("Part 3", 4000, "mon");
+  }
+  else{
+    history.back();
+  }
+}
+
+function ii(){
   dialogue
     .write("* Hey, Frisk!")
     .write("* Why try to make friends with that Froggit?")
@@ -12,34 +22,46 @@ function ld(){
     .write("*\\ :2;.\\ :2;.\\ :2;.\\w:1000;\\b:;* No?\\w:2000;\\b:;* Well, think about it.")
     .write("[After a while in the Ruins, Frisk changed their mind.]")
     .write("[Soon, every monster Frisk encountered turned to dust.]", function(){
+      $Aud.musics.zzz.volume(.01);
+      $Aud.play("zzz");
+      $Aud.fade("zzz", .01, .05, 2750);
       $(".red").animate({opacity: .04}, 2750);
     })
     .write("[Near Toriel’s house, it was decided—the duo would go back and kill every monster in the Ruins.]", function(){
       $(".red").animate({opacity: .06}, 4800);
+      $Aud.fade("zzz", .05, .1, 4800);
     })
     .write("[More and more Chara became infatuated with LOVE.]", function(){
       $(".red").animate({opacity: .08}, 2500);
+      $Aud.fade("zzz", .1, .125, 2500);
     })
     .write("[And Frisk felt it, too.]", function(){
       $(".red").animate({opacity: .09}, 1250);
+      $Aud.fade("zzz", .125, .13, 1250);
     })
     .write("[And as much as Chara would hate to admit it, they didn’t care when their mother was slaughtered, either.]", function(){
       $(".red").animate({opacity: .12}, 5300);
+      $Aud.fade("zzz", .13, .15, 5300);
     })
     .write("[Throughout the underground, Frisk became known as a horrible murderer with dust covering their body.]", function(){
       $(".red").animate({opacity: .14}, 5100);
+      $Aud.fade("zzz", .15, .18, 5100);
     })
     .write("[The LOVE was shared between Frisk and Chara, and it was addicting.]", function(){
       $(".red").animate({opacity: .16}, 3400);
+      $Aud.fade("zzz", .18, .2, 3400);
     })
     .write("[And Chara smiled for the first time in a long time.]", function(){
       $(".red").animate({opacity: .17}, 2650);
+      $Aud.fade("zzz", .2, .23, 2650);
     })
     .write("[And they were “happy.”]", function(){
       $(".red").animate({opacity: .18}, 1200);
+      $Aud.fade("zzz", .23, .265, 1200);
     })
     .write("[That is, until their judgement.]", function(){
       $(".red").animate({opacity: .19}, 1650);
+      $Aud.fade("zzz", .265, .3, 1650);
     })
     .start({voice: "talk", noskip: true})
     .done(function(){
@@ -50,5 +72,6 @@ function ld(){
 }
 
 dialogue.voice.add(["talk"], "wav")
+$Aud.load(["zzz"]);
 
 </script>

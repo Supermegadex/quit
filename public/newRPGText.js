@@ -50,8 +50,9 @@ Polymer({
         this.style.right = "0";
         this.style.left = "0";
         this.style.margin = "auto";
+        break;
       default:
-
+        $(dialogue).css(JSON.parse(this.position));
         break;
     }
   },
@@ -264,7 +265,15 @@ Polymer({
         if(!this.options.nonext){
           this.keys.simple_combo(this.options.next, function(){
             dialogue.keys.unregister_combo(dialogue.options.next);
+            $(dialogue).off("click");
             dialogue.visible = false;
+            dialogue.callback();
+            dialogue.callback = function(){};
+          });
+          $(dialogue).click(function(){
+            $(dialogue).off("click");
+            dialogue.visible = false;
+            dialogue.keys.unregister_combo(dialogue.options.next);
             dialogue.callback();
             dialogue.callback = function(){};
           });
@@ -322,6 +331,12 @@ Polymer({
     },
     voice: function(v){
       dialogue.editOptions({voice: v});
+      dialogue.go();
+      return(false);
+    },
+    face: function(f){
+      dialogue.enableFace();
+      dialogue.changeSprite(f);
       dialogue.go();
       return(false);
     }

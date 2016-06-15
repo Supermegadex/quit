@@ -6,53 +6,63 @@ function bt(){
 }
 
 function ld(){
-  if(window.sanzDun != true){
-    $(".red").show().css({opacity: 0});
+  if(dialogue.waiting.length == 0){
+    if(window.sanzDun != true){
+      $(".red").show().css({opacity: 0});
+    }
+    $(".blur").show();
+    $(".red").animate({opacity: .3}, 3500, oo);
+    Materialize.toast("Part 4", 4000, "mon");
   }
-  $(".blur").show();
-  $(".red").animate({opacity: .3}, 3500, oo);
+  else{
+    history.back();
+  }
 }
 
 function oo(){
   dialogue
     .write("[Sans stood in the corridor beyond them.]")
-    .write("\\w:3000;* heya.", function(){
+    .write("\\face:/sans.png;\\w:3000;* heya.", function(){
       $("#speechc").addClass("sans").removeClass("mon");
       dialogue.editOptions({voice: "sans"});
     })
-    .write("* you’ve been busy, huh?")
+    .write("\\face:/sanschuckle.png;* you’ve been busy\\w:100;, huh?")
     .write("*\\ :2;.\\ :2;.\\ :2;.")
-    .write("* so, i’ve got a question for ya.")
-    .write("\\w:1000;* do you think even the worst person can change…?")
-    .write("\\w:1000;* that everybody can be a good person, if they just try?")
-    .write("\\w:1000;* heh heh heh heh…")
-    .write("\\w:1000;* all right.")
-    .write("\\w:1500;* well, here’s a better question.")
-    .write("\\w:2500;* do you wanna have a bad time?")
-    .write("* ‘cause if you take another step forward…")
-    .write("\\w:500;* you are REALLY not going to like what happens next.")
-    .write("\\w:2000;* welp.")
-    .write("\\w:500;* sorry, old lady.")
-    .write("* this is why i never make promises.")
-    .write("* oh?")
+    .write("\\face:/sans.png;* so\\w:100;, i’ve got a question for \\b:;\\ :3;ya.")
+    .write("\\face:/sansblink.png;\\w:1000;* do you think even the worst \\ :3;person can change...?")
+    .write("* that everybody can be a \\ :3;good person\\w:100;, if they just \\ :3;try?")
+    .write("\\w:1000;* heh heh heh heh...")
+    .write("\\face:/sanschuckle.png;\\w:1000;* all right.")
+    .write("\\face:/sansblink.png;\\w:1500;* well\\w:100;, here’s a better \\b:;\\ :3;question.")
+    .write("\\face:/sansdeath.png;\\w:2500;* do you wanna have a bad \\b:;\\ :3;time?")
+    .write("\\face:/sansblink.png;* ‘cause if you take another \\ :3;step forward...")
+    .write("\\face:/sansdeath.png;\\w:500;* you are REALLY not going \\b:;\\ :3;to like what happens next.")
+    .write("\\face:/sansblink.png;\\w:2000;* welp.")
+    .write("\\w:500;* sorry\\w:100;, old lady.")
+    .write("* this is why i never make \\b:;\\ :3;promises.")
+    .write("\\face:/sans.png;* oh?\\b:;\\w:2000;\\face:/sanschuckle.png;* (theyhaventstoppedmoving)")
     .write("* \\<span class='smol'>;(S-\\w:100;sans!)\\</span>;", function(){
       $("#speechc").addClass("mon").removeClass("sans");
-      dialogue.editOptions({voice: "talk"});
+      dialogue.disableFace().editOptions({voice: "fr"});
     })
-    .write("* Wh-what?")
+    .write("\\w:1500;\\voice:talk;* Wh-what?", function(){
+      $(".white").fadeIn(500)
+    })
     .write("* What?\\w:2500;\\b:;*\\ :2;.\\ :2;.\\ :2;.")
     .write("* All alone again.")
-    .write("* whoa, buddo.", function(){
+    .write("\\w:1500;* whoa, buddo.", function(){
+      $(".white").fadeOut(1500);
       $("#speechc").addClass("sans").removeClass("mon");
       dialogue.editOptions({voice: "sans"});
     })
     .write("* uhhhhh\\w:2000;\\b:;* what the fuck?")
     .write("* why are you hugging me?")
-    .write("* \\<span class='smol'>;(Y-\\w:100;you're)\\w:2000;\\b:;my friend.\\</span>;", function(){
+    .write("* \\<span class='smol'>;(Y-\\w:100;you're)\\</span>;\\w:2000;\\b:;my friend.", function(){
       $("#speechc").addClass("mon").removeClass("sans");
-      dialogue.editOptions({voice: "talk"})
+      dialogue.editOptions({voice: "fr"})
     })
-    .write("\\w:3000;[That was the last thing Frisk said before human blood was spilt.]", function(){
+    .write("\\w:3000;\\voice:talk;[That was the last thing Frisk said before human blood was spilt.]", function(){
+      $Aud.sfx("damage");
       $(".red").animate({opacity: 1}, 250, function(){
         dialogue.visible = false;
         $(".red").animate({opacity: 0}, 2750, function(){
@@ -67,6 +77,8 @@ function oo(){
     .position = "center";
 }
 
-dialogue.voice.add(["sans","talk"], "wav")
+dialogue.voice.add(["sans","talk", "fr"], "wav");
+$Aud.load(["The Choice"]);
+$Aud.loadSFX(["damage"], ".mp3");
 
 </script>

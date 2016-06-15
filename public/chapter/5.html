@@ -25,6 +25,16 @@
 <script>
 
 function ld(){
+  if(dialogue.waiting.length == 0){
+    window.setTimeout(ii, 500);
+    Materialize.toast("Part 5", 4000, "mon");
+  }
+  else{
+    history.back();
+  }
+}
+
+function ii(){
   $(".blur").show();
   dialogue
     .write("[Frisk woke up in the flowers once more.]")
@@ -40,7 +50,7 @@ function ld(){
 
 function dq(){
   $(".blur").css({display: "table"});
-  $(".blur").append("<span class='mon dq'><span class='shake shake-little shake-constant'>Don't Quit</span></span>");
+  $(".blur").append("<span class='mon dq'><span class='shake shake-constant'>Don't Quit</span></span>");
   window.setTimeout(function(){
     $(".dq").addClass("up");
     $(".white").fadeIn(5000);

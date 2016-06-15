@@ -80,18 +80,20 @@ function hOI(){
     .write("Hmmm...")
     .write("* Have you played \\<a href='//undertale.com'>;UNDERTALE\\</a>; yet?   \\b:;* I hope so!")
     .write("* After all, this whole thing is a spoiler.")
-    .write("* And I'd like to have some fun with you before it's no fun...   \\b:;* So go play it!")
+    .write("* And I'd like to have some fun with you before it's too late...   \\b:;* So go play it!")
     .write("* Anyway, you're new here, right?   \\b:;* Little old me will have to show you around!")
     .write("* This is a navigation bar.   \\b:;* It's pretty self-explanatory.", function(){
       dialogue.position = "bottom";
     })
     .write("* However, you can also press the left and right arrow keys or swipe left and right to change pages.")
-    .write("* Cool, huh?")
-    .write("* That's really all I wanted to share.   \\b:;* You'll figure the rest out.", function(){
+    .write("* At least, once you get to a page.\\w:300;\\b:;* There's a big, long intro first.")
+    .write("* Also, to skip dialogue, you can press “x.”", function(){
       dialogue.position = "center";
     })
+    .write("* Just remember, you often won't be able to skip.")
     .write("* With that, you could start reading the story!")
-    .write("\\<i class='material-icons' id='kill-flowey'>highlight_off</i>;\\shake:300;\\w:100;\\events.evilFlowey();* But I'm not going to let you!", function(){
+    .write("\\<a class='material-icons' id='kill-flowey' onclick='dialogue.start()'>highlight_off</a>;\\shake:300;\\w:100;* But I'm not going to let you!", function(){
+      events.evilFlowey();
       ybf.stop();
       dialogue.changeSprite("/grin.gif");
     })
@@ -99,7 +101,7 @@ function hOI(){
       events.noEvilFlowey();
       dialogue.changeSprite("/evil2.gif");
     })
-    .write("* Well.   \\b:;* It doesn't matter.   \\b:;* I'm done!")
+    .write("* What an idiot!   \\b:;* It doesn't matter, though.   \\b:;* I'm done!")
     .write("* See you, pal!\\b:;\\b:;* Enjoy your story.")
     .start({voice: "flowey"})
     .done(function(){
@@ -135,9 +137,9 @@ function intro(){
     .write("\\w:2000;* Okay, then.", function(){
       dialogue.editOptions({noskip: false});
     })
-    .write("[Chara and Frisk journeyed across the underworld.]")
+    .write("[Chara and Frisk journeyed across the underground.]")
     .write("[They met many friends and even Chara’s old family.]")
-    .write("[Yeah, Chara had a breakdown when they realized they couldn’t talk to anyone but the mostly mute child.]")
+    .write("[Yeah, Chara had a breakdown when they realized they couldn’t talk to anyone but Frisk.]")
     .write("[They were but the imprint of someone from the past.]")
     .write("[Yet Chara pushed to help Frisk in any way they could.]")
     .write("[As time passed, though, they had the weirdest feeling…]")
@@ -162,6 +164,7 @@ function ld(){
     else{
       hOI();
     }
+    Materialize.toast("Part 1", 4000, "mon");
   }
   else{
     history.back();

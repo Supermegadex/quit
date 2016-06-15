@@ -1,15 +1,32 @@
+<script src="/js/jquery.shuffleLetters.js"></script>
 <script>
 
 function ld(){
-  window.setTimeout(w, 4000);
-  $(".blur").show();
-  $(".white").hide();
+  if(dialogue.waiting.length == 0){
+    window.setTimeout(w, 4000);
+    $(".blur").show();
+    $(".white").hide();
+    Materialize.toast("Part 6", 3700, "mon lolololol");
+    $(".lolololol").shuffleLetters({
+      step: 50,
+      fps: 15
+    })
+  }
+  else{
+    history.back();
+  }
 }
 
 function juan(){
   dialogue
-    .write("\\w:500;* Someone has to take care of these flowers.")
-    .start({delay: 70, voice: "az"})
+    .write("\\w:500;* Someone has to take care of these flowers.", function(){
+      dialogue
+        .enableFace()
+        .changeSprite("/az.gif");
+      $(".sprite").hide();
+      $(".sprite").fadeIn(1500);
+    })
+    .start({delay: 80, voice: "az"})
     .done(function(){
       window.setTimeout(function(){$Story._next()}, 2500);
     })

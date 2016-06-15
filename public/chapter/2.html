@@ -2,16 +2,22 @@
 <script>
 
 function ld(){
-  $(".blur").show();
-  $(".white").fadeIn(4000);
-  setTimeout(vvv, 2000);
+  if(dialogue.waiting.length == 0){
+    $(".blur").show();
+    $(".white").fadeIn(4000);
+    setTimeout(vvv, 2000);
+    Materialize.toast("Part 2", 4000, "mon");
+  }
+  else{
+    history.back();
+  }
 }
 
 function vvv(){
   dialogue.write("* Wow.\\w:2500;\\b:;* I haven't seen the sun in such a long time, Frisk.")
     .write("* It's ah\\w:250;—\\w:2000;beautiful, I suppose.\\w:1500;\\b:;*\\ :3;.\\ :2;.\\ :2;.\\w:1500;\\b:;* What's wrong?")
-    .write("\\w:1000;* \\<span class='smol'>;(F-\\w:100;f-\\w:200;fr-\\w:400;friends)")
-    .write("* Oh.\\w:2000;\\b:;* I see.")
+    .write("\\voice:fr;\\w:1000;* \\<span class='smol'>;(F-\\w:100;f-\\w:200;fr-\\w:400;friends)")
+    .write("\\voice:talk;* Oh.\\w:2000;\\b:;* I see.")
     .write("* You know, you could reset; see them all over again.")
     .write("* It's not hard.\\b:;\\w:1000;* Just...\\w:1000; give up completely.")
     .write("* Promise yourself that you’ll see your friends again.")
@@ -30,6 +36,6 @@ function vvv(){
     .position = "center";
 }
 
-dialogue.voice.add(["talk"], "wav")
+dialogue.voice.add(["talk", "fr"], "wav")
 
 </script>
