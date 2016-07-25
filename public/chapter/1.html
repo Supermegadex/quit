@@ -70,6 +70,7 @@ function bs(r){
 }
 
 function hOI(){
+  dialogue.id = "intro";
   dialogue.write("* Howdy!   \\b:;* I'm \\c:y;FLOWEY\\</span>;.    \\b:;* \\c:y;FLOWEY\\</span>; the \\c:y;FLOWER\\</span>;!", function(){
     bs();
     ybf.play();
@@ -77,32 +78,36 @@ function hOI(){
   })
     .enableFace()
     .changeSprite("/floe.gif")
-    .write("Hmmm...")
+    .write("* Hmmm...")
     .write("* Have you played \\<a href='//undertale.com'>;UNDERTALE\\</a>; yet?   \\b:;* I hope so!")
-    .write("* After all, this whole thing is a spoiler.")
-    .write("* And I'd like to have some fun with you before it's too late...   \\b:;* So go play it!")
-    .write("* Anyway, you're new here, right?   \\b:;* Little old me will have to show you around!")
+    .write("* After all, this whole thing is a \\b:;\\ :4;spoiler.")
+    .write("* And I'd like to have some fun with \\b:;\\ :4;you before it's too late...   \\b:;* So go play it!")
+    .write("* Anyway, you're new here, right?   \\b:;* Little old me will have to show \\b:;\\ :4;you around!")
     .write("* This is a navigation bar.   \\b:;* It's pretty self-explanatory.", function(){
       dialogue.position = "bottom";
+      $(".action-strip").addClass("raisedImportance");
+      $(dialogue).addClass("raisedImportance");
     })
-    .write("* However, you can also press the left and right arrow keys or swipe left and right to change pages.")
+    .write("* However, you can also press the \\b:;\\ :4;left and right arrow keys or \\b:;\\ :4;swipe to change pages.")
     .write("* At least, once you get to a page.\\w:300;\\b:;* There's a big, long intro first.")
-    .write("* Also, to skip dialogue, you can press “x.”", function(){
+    .write("* Also, to skip dialogue, you can \\b:;\\ :4;press “x.”", function(){
       dialogue.position = "center";
+      $(".action-strip").removeClass("raisedImportance");
+      $(dialogue).removeClass("raisedImportance");
     })
-    .write("* Just remember, you often won't be able to skip.")
-    .write("* With that, you could start reading the story!")
+    .write("* Just remember, you often won't be \\b:;\\ :4;able to skip.")
+    .write("* With that, you could start \\b:;\\ :4;reading the story!")
     .write("\\<a class='material-icons' id='kill-flowey' onclick='dialogue.start()'>highlight_off</a>;\\shake:300;\\w:100;* But I'm not going to let you!", function(){
       events.evilFlowey();
       ybf.stop();
       dialogue.changeSprite("/grin.gif");
     })
-    .write("* Hee hee hee!   \\b:;* You think software can get rid of me?", function(){
+    .write("* Hee hee hee!   \\b:;* You think software can get rid of \\b:;\\ :4;me?", function(){
       events.noEvilFlowey();
       dialogue.changeSprite("/evil2.gif");
     })
     .write("* What an idiot!   \\b:;* It doesn't matter, though.   \\b:;* I'm done!")
-    .write("* See you, pal!\\b:;\\b:;* Enjoy your story.")
+    .write("* See you, pal!\\b:;* Enjoy your story.")
     .start({voice: "flowey"})
     .done(function(){
       localStorage.hasPlayed = true;
@@ -118,37 +123,38 @@ function hOI(){
 }
 
 function intro(){
+  dialogue.id = "1";
   dialogue.write("* .\\bs(' ');\\ :2;.\\ :3;. \\w:1000;\\b:;* .\\ :3;.\\ :3;.")
     .disableFace()
     .write("\\w:1000;* Hello?\\w:4000;\\b:;* Where am I?\\w:500;")
     .write("\\w:2000;* .\\ :3;.\\ :3;.")
-    .write("\\w:1000;* Oh!\\w:1000;\\b:;* You, there!\\w:1000;\\b:;* Hello!")
+    .write("\\w:1000;* Oh!\\w:1000;\\playMusic:Memory;\\b:;* You, there, in the flowers!\\w:1000;\\b:;* Hello!")
     .write("\\w:2000;* Not much of a talker, huh?\\w:500;\\b:;* I wasn't, either, when I fell down.")
     .write("\\w:2000;* You can hear me, though, right?")
     .write("\\w:1000;* Okay, good.\\w:1000;\\b:;* Hi, I'm " + $Story.name + ".\\w:500;\\b:;* Do you have a name?")
     .write("\\w:1500;* .\\ :3;.\\ :3;.\\w:500;\\b:;* No?\\w:1000;\\b:;* Alright.")
     .write("\\voice:fr;\\w:1000;* \\<span class='smol'>;(F-\\w:1000;Frisk...)\\</span>;")
     .write("\\voice:talk;* Frisk! \\w:500;\\b:;* That's a nice name.\\w:1000;\\b:;* Here, Frisk, let me help you up.")
-    .write("* \\'SHIT!';\\w:1000;\\b:;* Uh, are you a ghost?\\w:1000;\\b:;* My hand phased through yours.")
+    .write("* \\pauseMusic:Memory;SHIT!\\w:1000;\\playMusic:Memory;\\b:;* Uh, are you a ghost?\\w:1000;\\b:;* My hand phased through yours.")
     .write("* Oh.\\w:1000;\\b:;* It's all coming back now.")
-    .write("\\w:2000;* \\shake:100;\\\"I'm\";\\w:150; \\shake:100;\\'dead.';")
-    .write("* C'mon, Frisk.\\w:1000;\\b:;* You want to get out of here I suppose.")
-    .write("* Although, there are lots of nice people here.\\w:1000;\\b:;* Are you sure you want to go?")
+    .write("\\w:2000;* \\stopMusic:Memory;\\shake:100;\\\"I'm\";\\w:150; \\shake:100;\\'dead.';")
+    .write("* Well, it's not painful.\\b:;* C'mon, Frisk.\\w:1000;\\b:;* You want to get out of here I suppose.")
+    .write("* Although, there are lots of nice people \\b:;\\ :4;here.\\w:1000;\\b:;* Are you sure you want to go?")
     .write("\\w:2000;* Okay, then.", function(){
       dialogue.editOptions({noskip: false});
     })
-    .write("[Chara and Frisk journeyed across the underground.]")
-    .write("[They met many friends and even Chara’s old family.]")
-    .write("[Yeah, Chara had a breakdown when they realized they couldn’t talk to anyone but Frisk.]")
+    .write("[" + $Story.name + " and Frisk journeyed across the underground.]")
+    .write("[They met many friends and even " + $Story.name + "’s adoptive family.]")
+    .write("[" + $Story.name + " was devastated to learn that Frisk would be their only companion.]")
     .write("[They were but the imprint of someone from the past.]")
-    .write("[Yet Chara pushed to help Frisk in any way they could.]")
+    .write("[Yet " + $Story.name + " pushed to help Frisk in any way they could.]")
     .write("[As time passed, though, they had the weirdest feeling…]")
-    .write("\\w:2500;[…that they didn’t feel anything at all.]")
+    .write("\\w:2000;[…that they didn’t feel anything at all.]")
     .write("[No compassion, no joy, no will to live.]")
     .write("[Even though they were already dead.]")
-    .write("[At the end of it all, Chara felt nothing even for Asgore, when Flowey pummeled him with his deadly pellets.]")
-    .write("[Frisk was determined.\\w:1500;\\b:;And Chara was bored.]")
-    .write("[And so went Frisk’s first run.\\w:3000;\\b:;But it was only the first.]")
+    .write("[At the end of it all, " + $Story.name + " felt nothing but regret even for Asgore, when Flowey pummeled him with his deadly pellets.]")
+    .write("[Frisk was determined.\\w:1500;\\b:;And " + $Story.name + " was bored.]")
+    .write("[And so went Frisk’s first run.\\w:2500;\\b:;But it was only the first.]")
     .start({noskip: true, voice: "talk"})
     .done(function(){
       $Story._next();
@@ -156,8 +162,10 @@ function intro(){
     .position = "center";
 }
 
+$Aud.load(["Memory"]);
+
 function ld(){
-  if(dialogue.waiting.length == 0){
+  if(dialogue.id == undefined){
     if(localStorage.hasPlayed){
       intro();
     }
@@ -165,6 +173,9 @@ function ld(){
       hOI();
     }
     Materialize.toast("Part 1", 4000, "mon");
+  }
+  else if (dialogue.id == "intro" || dialogue.id == "1"){
+    console.log("You're back!");
   }
   else{
     history.back();

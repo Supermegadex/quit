@@ -25,9 +25,12 @@
 <script>
 
 function ld(){
-  if(dialogue.waiting.length == 0){
+  if(dialogue.id == undefined){
     window.setTimeout(ii, 500);
     Materialize.toast("Part 5", 4000, "mon");
+  }
+  else if (dialogue.id == "5"){
+    console.log("You're back!");
   }
   else{
     history.back();
@@ -35,6 +38,7 @@ function ld(){
 }
 
 function ii(){
+  dialogue.id = "5";
   $(".blur").show();
   dialogue
     .write("[Frisk woke up in the flowers once more.]")
@@ -49,15 +53,18 @@ function ii(){
 }
 
 function dq(){
+  introSound.play();
   $(".blur").css({display: "table"});
-  $(".blur").append("<span class='mon dq'><span class='shake shake-constant'>Don't Quit</span></span>");
+  $(".blur").append("<span class='mon dq'><span class='shkshk'>Don't Quit</span></span>");
   window.setTimeout(function(){
+    $(".shkshk").addClass("shake shake-constant shake-little");
     $(".dq").addClass("up");
     $(".white").fadeIn(5000);
     window.setTimeout(function(){$Story._next()}, 5000);
-  }, 1500);
+  }, 2000);
 }
 
-dialogue.voice.add(["talk"], "wav")
+dialogue.voice.add(["talk"], "wav");
+var introSound = new Howl({src: "/sfx/intro.wav"})
 
 </script>

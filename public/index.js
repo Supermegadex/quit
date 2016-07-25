@@ -47,9 +47,7 @@ var st = function() {
     window.setTimeout( function() {
       $( ".white" ).fadeOut( 40, function() {
         /* $Aud.play( "Memory" ); */
-        window.setTimeout( function() {
-          $Story._next();
-        }, 1000 );
+        ld();
       } );
       window.scrollTo( 0, 0 );
     }, 600 );
@@ -67,7 +65,7 @@ function showS() {
   }
   namecnt = true;
   if ( nam.toLowerCase() == "frisk" ) {
-    $( "#nameStatus" ).html( "WARNING: This name will make your life hell (Especially in Part 4). Read anyway?" );
+    $( "#nameStatus" ).html( "WARNING: This name will make your life hell. Read anyway?" );
   }
   if ( nam.toLowerCase() == "chara" ) {
     $( "#nameStatus" ).html( "The true name." );
@@ -137,9 +135,6 @@ $( document ).ready( function() {
   $( ".blur" ).hide();
   $( ".red" ).hide();
   $( ".dropdown-button" ).dropdown();
-  window.setInterval( function() {
-    sSelect();
-  }, 500 );
   if ( localStorage.charaName == "undefined" || localStorage.charaName == undefined || localStorage.charaName == null ) {
     if ( location.search != "" ) {
       location.search = "";
@@ -175,6 +170,9 @@ $( document ).ready( function() {
     } );
     $( "#nameCanc" ).hide();
     $Story.name = localStorage.charaName;
+    window.setInterval( function() {
+      sSelect();
+    }, 500 );
   }
   var mcJagger = new Hammer( document.getElementById( 'title' ) );
   document.getElementById( 'title' ).oncontextmenu = chS[ 0 ].yup;
@@ -317,6 +315,9 @@ function reset(tru) {
   $( ".white" ).fadeIn( 6000, function() {
     location.href = "/";
   } );
+  if(tru){
+    delete localStorage.times;
+  }
 }
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

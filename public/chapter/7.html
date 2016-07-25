@@ -8,7 +8,7 @@
         content: "* ";
     }
 </style>
-<div class="mon">
+<div>
     <p>THAT LAST PART WAS A TEASER! Not a prank. There will be more of that to come, but I'm not done, yet!</p>
     <p>wOA! You...you read the first part of the story! Thanks! It's not even close to being finished, though (actually, I plan on continually writing this until I get bored of it, whereapon I will tie it up neatly).</p>
     <p>Here's the free-to-use version I promised: <a href="/story"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -70,13 +70,13 @@
                 </ul>
                 <br> Click above to show your responsibility, then shoot me an email! Or... I guess I have a tumblr too if you want that...
                 <iframe frameborder="0" border="0" scrolling="no" allowtransparency="true" height="20" width="200" src="https://platform.tumblr.com/v2/follow_button.html?type=follow-blog&amp;tumblelog=supermegadexter&amp;color=blue"></iframe>
-                <br> I literally never use it for posting or reblogging, so it's completely empty. So, another question: should I start posting updates to tumblr?
-                <br> Well, I also WILL BE REPLACING the regular, easy-to-read JS with obfuscated stuff so that secrets will be easier to hide >;) HOWEVER! This is still open source! To see the readable javascript, just visit my GitHub and look at the files that do not end with .ob.js!
+                <br>I literally never use it for posting or reblogging, so it's completely empty. So, another question: should I start posting updates to tumblr?
+                <br>Well, I also WILL BE REPLACING the regular, easy-to-read JS with obfuscated stuff so that secrets will be easier to hide >;) HOWEVER! This is still open source! To see the readable javascript, just visit my GitHub and look at the files that do not end with .ob.js!
                 <br>Phew, these are a lot of words, are they not?
                 <br>
                 <hr>
-                <br> One more thing...(maybe): There is a OC, OP, and Story Arc document containing my personal thoughts and tons of ideas that I may or may not release. Or have already released...
-                <br><br><span style="opacity: .03; font-size: 15px;">It may also be worth noting that I really like Homestuck.</span>
+                <br> One more thing...(maybe): There's another document that is part of this project that I might release with enough
+                <br><br><span style="opacity: .06; font-size: 15px;">It may also be worth noting that I really like Homestuck.</span>
 </div>
 <h1><a href="javascript:reset(true)" target="_self" class="mon">TRUE RESET</a></h1>
 <script>
@@ -90,6 +90,9 @@
         chS[0].fire();
     }
     /* global $Aud chS */
+    if(!chS){
+      var chS = [];
+    }
     chS[0] = {
         fire: function () {
             $Aud.fade("Dogsong", 1, 0, 100, true);

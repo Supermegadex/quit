@@ -6,7 +6,7 @@ function bt(){
 }
 
 function ld(){
-  if(dialogue.waiting.length == 0){
+  if(dialogue.id == undefined){
     if(window.sanzDun != true){
       $(".red").show().css({opacity: 0});
     }
@@ -14,12 +14,16 @@ function ld(){
     $(".red").animate({opacity: .3}, 3500, oo);
     Materialize.toast("Part 4", 4000, "mon");
   }
+  else if (dialogue.id == "4"){
+    console.log("You're back!");
+  }
   else{
     history.back();
   }
 }
 
 function oo(){
+  dialogue.id = "4";
   dialogue
     .write("[Sans stood in the corridor beyond them.]")
     .write("\\face:/sans.png;\\w:3000;* heya.", function(){
@@ -30,7 +34,7 @@ function oo(){
     .write("*\\ :2;.\\ :2;.\\ :2;.")
     .write("\\face:/sans.png;* so\\w:100;, i’ve got a question for \\b:;\\ :3;ya.")
     .write("\\face:/sansblink.png;\\w:1000;* do you think even the worst \\ :3;person can change...?")
-    .write("* that everybody can be a \\ :3;good person\\w:100;, if they just \\ :3;try?")
+    .write("* that everybody can be a \\b:;\\ :3;good person\\w:100;, if they just \\b:;\\ :3;try?")
     .write("\\w:1000;* heh heh heh heh...")
     .write("\\face:/sanschuckle.png;\\w:1000;* all right.")
     .write("\\face:/sansblink.png;\\w:1500;* well\\w:100;, here’s a better \\b:;\\ :3;question.")
@@ -40,7 +44,7 @@ function oo(){
     .write("\\face:/sansblink.png;\\w:2000;* welp.")
     .write("\\w:500;* sorry\\w:100;, old lady.")
     .write("* this is why i never make \\b:;\\ :3;promises.")
-    .write("\\face:/sans.png;* oh?\\b:;\\w:2000;\\face:/sanschuckle.png;* (theyhaventstoppedmoving)")
+    .write("\\face:/sans.png;* oh?\\b:;\\w:2000;\\face:/sanschuckle.png;* would ya stop moving for \\b:;\\ :3;just a minute?")
     .write("* \\<span class='smol'>;(S-\\w:100;sans!)\\</span>;", function(){
       $("#speechc").addClass("mon").removeClass("sans");
       dialogue.disableFace().editOptions({voice: "fr"});
@@ -48,9 +52,10 @@ function oo(){
     .write("\\w:1500;\\voice:talk;* Wh-what?", function(){
       $(".white").fadeIn(500)
     })
-    .write("* What?\\w:2500;\\b:;*\\ :2;.\\ :2;.\\ :2;.")
-    .write("* All alone again.")
-    .write("\\w:1500;* whoa, buddo.", function(){
+    .write("* What?\\w:2500;\\b:;*\\ :2;.\\ :2;.\\ :2;.\\w:500;\\b:;* Frisk?")
+    .write("* Oh my God.\\w:500;\\b:;* What have I done?")
+    .write("* Frisk\\w:100;, Sans\\w:100;, everyone\\ :2;.\\ :2;.\\ :2;.\\b:;\\w:1500;* I'm sorry.")
+    .write("\\face:/sans.png;\\w:1500;* whoa, buddo.", function(){
       $(".white").fadeOut(1500);
       $("#speechc").addClass("sans").removeClass("mon");
       dialogue.editOptions({voice: "sans"});
@@ -59,6 +64,7 @@ function oo(){
     .write("* why are you hugging me?")
     .write("* \\<span class='smol'>;(Y-\\w:100;you're)\\</span>;\\w:2000;\\b:;my friend.", function(){
       $("#speechc").addClass("mon").removeClass("sans");
+      dialogue.disableFace();
       dialogue.editOptions({voice: "fr"})
     })
     .write("\\w:3000;\\voice:talk;[That was the last thing Frisk said before human blood was spilt.]", function(){

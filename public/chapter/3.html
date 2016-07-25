@@ -1,11 +1,14 @@
 <script>
 
 function ld(){
-  if(dialogue.waiting.length == 0){
+  if(dialogue.id == undefined){
     $(".blur").show();
     $(".red").show().css({opacity: 0});
     window.setTimeout(ii, 500);
     Materialize.toast("Part 3", 4000, "mon");
+  }
+  else if (dialogue.id == "3"){
+    console.log("You're back!");
   }
   else{
     history.back();
@@ -13,55 +16,57 @@ function ld(){
 }
 
 function ii(){
+  dialogue.id = "3";
   dialogue
     .write("* Hey, Frisk!")
-    .write("* Why try to make friends with that Froggit?")
+    .write("* Why try to make friends with that \\b:;\\ :4;Froggit?")
     .write("* If you just kill it, the run will go faster.\\w:500;\\b:;* We'll find the solution quicker.")
-    .write("* I mean, we're trying to save everyone, but violence could help.")
+    .write("* I mean, we're trying to save everyone, but \\b:;\\ :4;violence could help.")
     .write("* No one will know what happened.\\w:2000;\\b:;* No one will remember.")
     .write("*\\ :2;.\\ :2;.\\ :2;.\\w:1000;\\b:;* No?\\w:2000;\\b:;* Well, think about it.")
-    .write("[After a while in the Ruins, Frisk changed their mind.]")
+    .write("[However, Frisk changed their mind.]")
+    .write("[With the gentle pestering of " + $Story.name + " and the strong force of something greater, Frisk couldn't help themselves.]")
     .write("[Soon, every monster Frisk encountered turned to dust.]", function(){
       $Aud.musics.zzz.volume(.01);
       $Aud.play("zzz");
-      $Aud.fade("zzz", .01, .05, 2750);
+      $Aud.fade("zzz", .01, .09, 2750);
       $(".red").animate({opacity: .04}, 2750);
     })
-    .write("[Near Toriel’s house, it was decided—the duo would go back and kill every monster in the Ruins.]", function(){
+    .write("[Near Toriel’s house, it was decided\\w:100;—the duo would go back and kill every monster in the Ruins.]", function(){
       $(".red").animate({opacity: .06}, 4800);
-      $Aud.fade("zzz", .05, .1, 4800);
+      $Aud.fade("zzz", .09, .2, 4800);
     })
-    .write("[More and more Chara became infatuated with LOVE.]", function(){
+    .write("[More and more Frisk became infatuated with LOVE.]", function(){
       $(".red").animate({opacity: .08}, 2500);
-      $Aud.fade("zzz", .1, .125, 2500);
+      $Aud.fade("zzz", .2, .29, 2500);
     })
-    .write("[And Frisk felt it, too.]", function(){
+    .write("[And " + $Story.name + " felt it even more.]", function(){
       $(".red").animate({opacity: .09}, 1250);
-      $Aud.fade("zzz", .125, .13, 1250);
+      $Aud.fade("zzz", .29, .37, 1250);
     })
-    .write("[And as much as Chara would hate to admit it, they didn’t care when their mother was slaughtered, either.]", function(){
+    .write("[And as much as " + $Story.name + " would hate to admit it, they didn’t care when their mother was slaughtered.]", function(){
       $(".red").animate({opacity: .12}, 5300);
-      $Aud.fade("zzz", .13, .15, 5300);
+      $Aud.fade("zzz", .38, .49, 5300);
     })
     .write("[Throughout the underground, Frisk became known as a horrible murderer with dust covering their body.]", function(){
       $(".red").animate({opacity: .14}, 5100);
-      $Aud.fade("zzz", .15, .18, 5100);
+      $Aud.fade("zzz", .49, .51, 5100);
     })
-    .write("[The LOVE was shared between Frisk and Chara, and it was addicting.]", function(){
+    .write("[The LOVE was shared between Frisk and " + $Story.name + ", and it was addicting.]", function(){
       $(".red").animate({opacity: .16}, 3400);
-      $Aud.fade("zzz", .18, .2, 3400);
+      $Aud.fade("zzz", .51, .70, 3400);
     })
-    .write("[And Chara smiled for the first time in a long time.]", function(){
+    .write("[" + $Story.name + " smiled for the first time in a long time.]", function(){
       $(".red").animate({opacity: .17}, 2650);
-      $Aud.fade("zzz", .2, .23, 2650);
+      $Aud.fade("zzz", .7, .78, 2650);
     })
     .write("[And they were “happy.”]", function(){
       $(".red").animate({opacity: .18}, 1200);
-      $Aud.fade("zzz", .23, .265, 1200);
+      $Aud.fade("zzz", .78, .85, 1200);
     })
     .write("[That is, until their judgement.]", function(){
       $(".red").animate({opacity: .19}, 1650);
-      $Aud.fade("zzz", .265, .3, 1650);
+      $Aud.fade("zzz", .85, 1, 1050, true);
     })
     .start({voice: "talk", noskip: true})
     .done(function(){

@@ -100,6 +100,15 @@ Polymer({
     return(this);
   },
 
+  skipSlides: function(j){
+    var i;
+    for (i = 0; i++; i < j){
+      this.waiting.pop();
+      this.funcs.pop();
+    }
+    this.start();
+  },
+
   disableFace: function(){
     dialogue.face = false;
     return(this);
@@ -118,7 +127,9 @@ Polymer({
             }
         }
     },
+
     s: {},
+
     addRand: function(ab, ft, hm){
         for(var i in ab){
             this.s[ab] = {
@@ -135,7 +146,6 @@ Polymer({
                     loop: false
                 });
                 j++;
-                console.log(j);
             }
         }
     },
@@ -204,7 +214,6 @@ Polymer({
     if(typeof func == "function"){
       func();
     }
-    console.log(this.arr, this.waiting);
     this.runner(this.options.delay);
     if(!this.options.noskip){
       this.keys.simple_combo(this.options.skip, function(){
@@ -282,6 +291,7 @@ Polymer({
           dialogue.callback();
           dialogue.callback = function(){};
         }
+        dialogue.id = undefined;
       }
     }
   },
@@ -298,6 +308,7 @@ Polymer({
       dialogue.runner(ms);
       return(false);
     },
+
     "c": function(color){
       switch (color){
         case "y":
@@ -307,9 +318,11 @@ Polymer({
           return(false);
       }
     },
+
     "b": function(){
       return("<br>");
     },
+
     "shake": function(time){
       $(dialogue).addClass("shake");
       $(dialogue).addClass("shake-constant");
@@ -320,6 +333,7 @@ Polymer({
       dialogue.go();
       return(false);
     },
+
     " ": function(num){
       var i = 0;
       var r = "";
@@ -329,18 +343,40 @@ Polymer({
       }
       return(r);
     },
+
     voice: function(v){
       dialogue.editOptions({voice: v});
       dialogue.go();
       return(false);
     },
+
     face: function(f){
       dialogue.enableFace();
       dialogue.changeSprite(f);
       dialogue.go();
       return(false);
+    },
+
+    playMusic: function(m){
+      $Aud.play(m);
+      dialogue.go();
+      return(false);
+    },
+
+    stopMusic: function(m){
+      $Aud.stop(m);
+      dialogue.go();
+      return(false);
+    },
+
+    pauseMusic: function(m){
+      $Aud.pause(m);
+      dialogue.go();
+      return(false);
     }
   },
+
+  id: undefined,
 
   go: function(){
     var r = dialogue.checker();
@@ -363,19 +399,15 @@ Polymer({
       imp = imp.replace(";", "");
       var run = imp.split(":");
       if(run[1] == undefined || run[1] == "undefined" || run[1] == null){
-        console.log(imp, imp[0]);
         if(imp[0] == "<"){
           r = imp;
-          console.log("Returning an HTML element: " + r);
         }
         else{
           r = Function("return(" + imp + ")")();
-          console.log("Returning a JavaScript function: " + r);
         }
       }
       else{
         var r = this.commands[run[0]](run[1]);
-        console.log("Returning a custom command: " + r);
       }
     }
     return(r);

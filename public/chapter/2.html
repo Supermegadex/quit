@@ -2,11 +2,14 @@
 <script>
 
 function ld(){
-  if(dialogue.waiting.length == 0){
+  if(dialogue.id == undefined){
     $(".blur").show();
     $(".white").fadeIn(4000);
     setTimeout(vvv, 2000);
     Materialize.toast("Part 2", 4000, "mon");
+  }
+  else if (dialogue.id == "2"){
+    console.log("You're back!");
   }
   else{
     history.back();
@@ -14,20 +17,22 @@ function ld(){
 }
 
 function vvv(){
-  dialogue.write("* Wow.\\w:2500;\\b:;* I haven't seen the sun in such a long time, Frisk.")
+  dialogue.id = "2";
+  dialogue.write("\\playMusic:Respite;* Wow.\\w:2500;\\b:;* I haven't seen the sun in such a long time, \\b:;\\ :4;Frisk.")
     .write("* It's ah\\w:250;—\\w:2000;beautiful, I suppose.\\w:1500;\\b:;*\\ :3;.\\ :2;.\\ :2;.\\w:1500;\\b:;* What's wrong?")
     .write("\\voice:fr;\\w:1000;* \\<span class='smol'>;(F-\\w:100;f-\\w:200;fr-\\w:400;friends)")
     .write("\\voice:talk;* Oh.\\w:2000;\\b:;* I see.")
-    .write("* You know, you could reset; see them all over again.")
-    .write("* It's not hard.\\b:;\\w:1000;* Just...\\w:1000; give up completely.")
-    .write("* Promise yourself that you’ll see your friends again.")
+    .write("* You know, you could reset and see them all \\b:;\\ :4;over again.")
+    .write("* It's not hard.\\b:;\\w:1000;* Just...\\w:1000; be determined.")
+    .write("* Promise yourself that you’ll see your \\b:;\\ :4;friends again.")
     .write("[Frisk reset the timeline.]", function(){
+      $Aud.fade("Respite", 1, 0, 1350);
       $(".white").fadeOut(4000);
     })
     .write("[They did it all again]")
     .write("[Frisk tried to save their friends and the whole of the monsters.]")
     .write("[Flowey killed Asgore again and Frisk reset, unknowing of the call waiting for them.]")
-    .write("[This time, though, Chara was so despondent that they decided something else would have to give them something to “live” for.]")
+    .write("[This time, though, " + $Story.name + " was so despondent that they decided something else would have to keep them entertained.]")
     .write("[They had an idea:]\\b:;\\w:2500;[manipulate Frisk.]")
     .done(function(){
       $Story._next();
@@ -37,5 +42,6 @@ function vvv(){
 }
 
 dialogue.voice.add(["talk", "fr"], "wav")
+$Aud.load(["Respite"]);
 
 </script>

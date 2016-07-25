@@ -2,7 +2,7 @@
 <script>
 
 function ld(){
-  if(dialogue.waiting.length == 0){
+  if(dialogue.id == undefined){
     window.setTimeout(w, 4000);
     $(".blur").show();
     $(".white").hide();
@@ -12,6 +12,9 @@ function ld(){
       fps: 15
     })
   }
+  else if (dialogue.id == "az1" || dialogue.id == "az2"){
+    console.log("You're back!");
+  }
   else{
     history.back();
   }
@@ -19,10 +22,11 @@ function ld(){
 
 function juan(){
   dialogue
-    .write("\\w:500;* Someone has to take care of these flowers.", function(){
-      dialogue
-        .enableFace()
-        .changeSprite("/az.gif");
+    .enableFace()
+    .changeSprite("/az.gif")
+    .id = "az1";
+  dialogue
+    .write("\\w:500;* Someone has to take care of these \\b:;\\ :4;flowers.", function(){
       $(".sprite").hide();
       $(".sprite").fadeIn(1500);
     })
@@ -34,6 +38,7 @@ function juan(){
 }
 
 function w(){
+  dialogue.id = "az2";
   dialogue
     .write("\\w:750;* Don’t worry about me.")
     .start({delay: 70, voice: "az"})
