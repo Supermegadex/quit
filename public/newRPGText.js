@@ -198,6 +198,10 @@ Polymer({
     nonext: false,
   },
 
+  test: function(s, j){
+    return s < j ? "something" : "nope"
+  },
+
   keys: new window.keypress.Listener(),
 
   start: function(options){
