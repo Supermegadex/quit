@@ -113,6 +113,7 @@ function hOI(){
       localStorage.hasPlayed = true;
       dialogue.visible = true;
       $(dialogue).fadeOut(1500, function(){
+        location.reload()
         window.setTimeout(function(){
           intro();
           $(dialogue).fadeIn(2000);

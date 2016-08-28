@@ -305,7 +305,12 @@ Polymer({
 
   commands: {
     "w": function(ms){
-      dialogue.runner(ms);
+      if(dialogue.skip){
+        dialogue.runner(0);
+      }
+      else{
+        dialogue.runner(ms);
+      }
       return(false);
     },
 
