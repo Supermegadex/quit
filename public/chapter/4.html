@@ -23,12 +23,12 @@ function ld(){
 }
 
 function oo(){
-  dialogue.id = "4";
+  dialogue.id = undefined;
   dialogue
     .write("[Sans stood in the corridor beyond them.]")
     .write("\\face:/sans.png;\\w:3000;* heya.", function(){
       $("#speechc").addClass("sans").removeClass("mon");
-      dialogue.editOptions({voice: "sans"});
+      dialogue.editOptions({voice: "Sans"});
     })
     .write("\\face:/sanschuckle.png;* you’ve been busy\\w:100;, huh?")
     .write("*\\ :2;.\\ :2;.\\ :2;.")
@@ -58,7 +58,7 @@ function oo(){
     .write("\\face:/sans.png;\\w:1500;* whoa, buddo.", function(){
       $(".white").fadeOut(1500);
       $("#speechc").addClass("sans").removeClass("mon");
-      dialogue.editOptions({voice: "sans"});
+      dialogue.editOptions({voice: "Sans"});
     })
     .write("* uhhhhh\\w:2000;\\b:;* what the fuck?")
     .write("* why are you hugging me?")
@@ -67,7 +67,7 @@ function oo(){
       dialogue.disableFace();
       dialogue.editOptions({voice: "fr"})
     })
-    .write("\\w:3000;\\voice:talk;[That was the last thing Frisk said before human blood was spilt.]", function(){
+    .write("\\w:3000;\\voice:talk;[That was the last thing Frisk said before human blood was spilt.]\\w:1000;\\function(){location = '/page/5'}();", function(){
       $Aud.sfx("damage");
       $(".red").animate({opacity: 1}, 250, function(){
         dialogue.visible = false;
@@ -77,13 +77,10 @@ function oo(){
       })
     })
     .start({delay: 75, noskip: true, voice: "talk"})
-    .done(function(){
-      $Story._next();
-    })
     .position = "center";
 }
 
-dialogue.voice.add(["sans","talk", "fr"], "wav");
+dialogue.voice.add(["Sans","talk", "fr"], "wav");
 $Aud.load(["The Choice"]);
 $Aud.loadSFX(["damage"], ".mp3");
 
