@@ -4,6 +4,14 @@
 <dom-module id="story-box">
     <template>
         <style>
+        @font-face {
+          font-family: 'Scope One';
+          font-style: normal;
+          font-weight: 400;
+          src: local('Scope One'), local('ScopeOne-Regular'), url(/fonts/scopeone.woff2) format('woff2');
+          unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+        }
+
             .card-content {
                 width: 100%;
                 height: 100%;
@@ -35,6 +43,10 @@
             #content {
               font-family: "Scope One", Roboto, serif;
             }
+            p {
+              margin-top: 1em !important;
+              margin-bottom: 1em !important;
+            }
             a {
               color: #64FFDA
             }
@@ -42,7 +54,7 @@
         <div class="card blue-grey darken-1">
             <div class="card-content white-text">
                 <span class="card-title"><h3>Part {{chapter}}</h3></span>
-                <div class="flow-text" id="content" style="text-indent: 40px !important;">
+                <div class="flow-text" id="content" style="">
                     Hey, if you're seeing this, your browser is stupid!
                 </div>
             </div>

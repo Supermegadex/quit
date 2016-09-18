@@ -67,21 +67,43 @@
                 <br>Phew, these are a lot of words, are they not?
                 <br>
                 <hr-->
+                
+    <marked-element smartypants>
+      <div class="markdown-html"></div>
+      <div type="text/markdown">
+        wOA! You read my story! Thank you very much. Also, don't worry! That last part is not a prank, but rather a teaser of what's to come. Consider this a demo.
 
-    <marked-element>
-      <div class="markdown-html"></div>>
-      <script type="text/markdown">
-        wOA! You read my story! Thank you very much. Also, don't worry! That last part is not a prank, but rather a teaser of what's to come.
+        Anyway, my name's Daniel. I code for a living ([sort of](https://quoteya.com)), and I made this in my free time. I actually started this in February 2016, but I've hardly had any time to work on it. That, and I've not had the courage to tell anyone until now (whenever now is...).
 
-        Shout-out to Pate Mateus: super cool baby who you should follow: [His Tumblr](https://underchara.tumblr.com)
-      </script>
+        Shout-out to Pate Mateus: super cool baby you should follow: [His Tumblr](https://underchara.tumblr.com)
+
+        There is some important information that I should share:
+        1. This story is published under the [Creative Commons BY-SA 4.0 International License](http://creativecommons.org/licenses/by-sa/4.0/). This means that as long as you credit me, you may use my story for any purpose. Though, I would be incredibly disappointed to see someone sell the story **_itself_** somewhere. 😢
+        2. The code that I have written to display the website is published under the GNU General Public License. In other words, this is [free software](https://www.gnu.org/licenses/gpl.html) Use my code how you wish, as long as you make your software free, too. (Contact me if you want to make it closed-source. We'll figure something out. 😀)
+        3. All music, sprites, and sounds were created by and belong to Toby Fox, all rights reserved. I find this to be fair use because:
+          a) This is a transformational work; a fanfiction, if you will.
+          b) This work does not damage the value of Toby Fox's original work. I highly encourage all readers to have purchased [UNDERTALE](http://undertale.com). It may even *increase* the value if readers become interested in the game by discovering my work.
+
+        Some credits:
+        * [Materialize Library](http://materializecss.com/)
+        * [Polymer Project](https://www.polymer-project.org/1.0/)
+        * [Howler.js](https://github.com/goldfire/howler.js/tree/2.0)
+
+        I'd really love any comments, feedback, or questions!! I have a few guidelines, though:
+        1. No spam. Telling me something once is enough. I'll try to respond to everyone who emails me, but if I get more than one or two emails containing the same (or similar) content from the same person, I'll just ignore it.
+        2. No bullying. Even if it's not directed at me. I'll ignore your email if it contains hate of any kind.
+        3. See something I could do better? Constructive criticism is apprecated! Please keep it positive and friendly. I'll probably cry if you yell at me.
+        4. Respect my privacy. By clicking on the link that says "get email," you hereby agree that selling my email or using my email inappropriately makes you $100,000 in debt to me, effective immediately. 😏🤑
+      </div>
     </marked-element>
-    <br> One more thing...(maybe): There's another document that is part of this project that I might release with enough
-    <br><br><span style="opacity: .06; font-size: 15px;">It may also be worth noting that I really like Homestuck.</span>
-<h1><a href="javascript:reset(true)" target="_self" class="mon">TRUE RESET</a></h1>
+  <p><em>These conditions make sense.</em> <a onclick="contact(this);">get email</a> <a href="" id="mail"></a></p>
+  <p>One more thing...(maybe): There's another document that is part of this project that I might release with enough... nah, fuck it. You'll have to find it yourself. 😈</p>
+  <p><span style="opacity: .06; font-size: 15px;">It may be worth noting that I like Homestuck.</span></p>
+  <h1><a href="javascript:reset(true)" target="_self" class="mon">TRUE RESET</a></h1>
 <script>
 
-    function contact() {
+    function contact(t) {
+        console.log(t);
         var mail = document.querySelector("#mail");
         mail.innerHTML = "<br><br>delpino the dragon 1 at hotmail";
         mail.href = "mailto:delpino" + "thedragon1" + "@hotm" + "ail.com";
