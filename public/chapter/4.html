@@ -49,10 +49,10 @@ function oo(){
       $("#speechc").addClass("mon").removeClass("sans");
       dialogue.disableFace().editOptions({voice: "fr"});
     })
-    .write("\\w:1500;\\voice:talk;* Wh-what?", function(){
+    .write("\\w:1500;\\voice:talk;* F-Frisk?", function(){
       $(".white").fadeIn(500)
     })
-    .write("* What?\\w:2500;\\b:;*\\ :2;.\\ :2;.\\ :2;.\\w:500;\\b:;* Frisk?")
+    .write("* \\ :2;.\\ :2;.\\ :2;. What's happening?\b:;* Where am I?")
     .write("* Oh my God.\\w:500;\\b:;* What have I done?")
     .write("* Frisk\\w:100;, Sans\\w:100;, everyone\\ :2;.\\ :2;.\\ :2;.\\b:;\\w:1500;* I'm sorry.")
     .write("\\face:/sans.png;\\w:1500;* whoa, buddo.", function(){
@@ -60,7 +60,7 @@ function oo(){
       $("#speechc").addClass("sans").removeClass("mon");
       dialogue.editOptions({voice: "Sans"});
     })
-    .write("\\face:/sanschuckle.png;* uhhhhh\\w:2000;\\b:;\\face:/sanssweat.png;* what the fuck?") 
+    .write("\\face:/sanschuckle.png;* uhhhhh\\w:2000;\\b:;\\face:/sanssweat.png;* what the fuck?")
     .write("* why are you hugging me?")
     .write("* \\<span class='smol'>;(Y-\\w:100;you're)\\</span>;\\w:2000;\\b:;my friend.", function(){
       $("#speechc").addClass("mon").removeClass("sans");
