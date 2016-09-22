@@ -7,6 +7,8 @@
       body, div, canvas {
         margin: 0;
         padding: 0;
+        width: 520px;
+        height: 520px;
       }
     </style>
   </head>
@@ -15,6 +17,27 @@
     <script src="/js/jquery.js" charset="utf-8"></script>
     <script src="/game/crafty.js" charset="utf-8"></script>
     <script type="text/javascript">
+      function testTalk() {
+        if(g.facing == "left") {
+          if(frisk.x == 272 && frisk.y >= 216 && frisk.y <= 260) {
+            azs = "r"
+            zee(2)
+          }
+          else {
+            zee(1)
+          }
+        }
+        if(g.facing == "right") {
+          if(frisk.x == 200 && frisk.y >= 216 && frisk.y <= 260) {
+            azs = "l"
+            zee(2)
+          }
+          else {
+            zee(1)
+          }
+        }
+      }
+
       $(function() {
         var assetsObj = {
           "sprites": {
@@ -31,12 +54,30 @@
                 friskd: [0, 0],
                 frisku: [0, 1]
               }
+            },
+            "/game/lol.png": {
+              // This is the width of each image in pixels
+              tile: 64,
+              // The height of each image
+              tileh: 112,
+              // padding
+              // We give names to three individual images
+              map: {
+                az: [0, 3]
+              }
+            },
+            "/game/bg.png": {
+              tile: 1360,
+              tileh: 520,
+              map: {
+                bg: [0, 0]
+              }
             }
           }
         };
 
         Crafty.load(assetsObj, function(){ console.log("ready") })
-        Crafty.init(window.innerWidth, window.innerHeight, document.getElementById('game'));
+        Crafty.init(520, 520, document.getElementById('game'));
 
         window.g = {
           keys: {
@@ -50,78 +91,205 @@
             down: false,
             left: false,
             right: false
-          }
+          },
+          facing: "left"
         }
 
         $(document).on("keydown", function(e) {
+          az.DOM()._element.style.zIndex = 5
           switch (e.key) {
             case "ArrowUp":
               g.keys.up = true
+              g.facing = "up"
               break;
             case "ArrowDown":
               g.keys.down = true
+              g.facing = "down"
               break;
             case "ArrowLeft":
               g.keys.left = true
+              g.facing = "left"
               break;
             case "ArrowRight":
               g.keys.right = true
+              g.facing = "right"
+              break;
+            case "z":
+              testTalk()
               break;
             default:
               break;
           }
         })
+        window.checkMV = function(anim) {
+          if(!g.keys.right && !g.keys.left && !g.keys.up && !g.keys.down) {
+            frisk.animate(anim)
+          }
+        }
         $(document).on("keyup", function(e) {
           switch (e.key) {
             case "ArrowUp":
               g.keys.up = false
+              checkMV("ups")
               break;
             case "ArrowDown":
               g.keys.down = false
+              checkMV("downs")
               break;
             case "ArrowLeft":
               g.keys.left = false
+              checkMV("lefts")
               break;
             case "ArrowRight":
               g.keys.right = false
+              checkMV("rights")
               break;
             default:
-              g.keys.right = false
-              g.keys.left = false
-              g.keys.up = false
-              g.keys.down = false
               break;
           }
           if (g.keys.up) {
             frisk.animate("frisku", -1)
+            g.facing = "up"
           }
           if (g.keys.down) {
             frisk.animate("friskd", -1)
+            g.facing = "down"
           }
           if (g.keys.left) {
             frisk.animate("friskl", -1)
+            g.facing = "left"
           }
           if (g.keys.right) {
             frisk.animate("friskr", -1)
+            g.facing = "right"
           }
         })
 
-        var square = Crafty.e('2D, DOM, Color, Solid');
+        var square = Crafty.e('2D, DOM, Color, Collision, Solid');
           square.attr({
-            x: 100,
-            y: 10,
-            w: 100,
-            h: 100
+            x: 0,
+            y: 0,
+            w: 600,
+            h: 120
+          }).color('red');
+
+        var square2 = Crafty.e('2D, DOM, Color, Collision, Solid');
+          square2.attr({
+            x: -10,
+            y: 0,
+            w: 10,
+            h: window.innerHeight
+          }).color('red');
+
+        var square3 = Crafty.e('2D, DOM, Color, Collision, Solid');
+          square3.attr({
+            x: 0,
+            y: 480,
+            w: 600,
+            h: 120
+          }).color('red');
+
+        var square4 = Crafty.e('2D, DOM, Color, Collision, Solid');
+          square4.attr({
+            x: 0,
+            y: 400,
+            w: 20,
+            h: 60
+          }).color('red');
+
+        var square5 = Crafty.e('2D, DOM, Color, Collision, Solid');
+          square5.attr({
+            x: 0,
+            y: 445,
+            w: 50,
+            h: 60
+          }).color('red');
+
+        var square6 = Crafty.e('2D, DOM, Color, Collision, Solid');
+          square6.attr({
+            x: 0,
+            y: 120,
+            w: 18,
+            h: 40
+          }).color('red');
+
+        var square7 = Crafty.e('2D, DOM, Color, Collision, Solid');
+          square7.attr({
+            x: 380,
+            y: 120,
+            w: 300,
+            h: 40
+          }).color('red');
+
+        var square8 = Crafty.e('2D, DOM, Color, Collision, Solid');
+          square8.attr({
+            x: 465,
+            y: 120,
+            w: 200,
+            h: 195
+          }).color('red');
+
+        var square9 = Crafty.e('2D, DOM, Color, Collision, Solid');
+          square9.attr({
+            x: 385,
+            y: 400,
+            w: 300,
+            h: 195
+          }).color('red');
+
+        var square10 = Crafty.e('2D, DOM, Color, Collision, Solid');
+          square10.attr({
+            x: 345,
+            y: 445,
+            w: 300,
+            h: 195
           }).color('red');
 
         square.origin("center")
 
-        window.frisk = Crafty.e('2D, DOM, Color, Fourway, friskd, Keyboard, SpriteAnimation, Collision, Frisk')
-          .attr({x: 0, y: 0, w: 38, h: 58})
-          .fourway(200)
+        var bg = Crafty.e('2D, DOM, Color, bg')
+          .attr({x: -100, y: 0, w: 1360, h: 520});
+
+        window.az = Crafty.e('2D, DOM, Color, Solid, Collision, az, SpriteAnimation, Collision')
+          .attr({x: 240, y: 240, w: 32, h: 56})
+          .collision([0,28, 32,28, 32,56, 0,56])
+        az.reel("azd", 500, [
+          [0, 0]
+        ])
+        az.reel("azdt", 500, [
+          [0, 2]
+        ])
+        az.reel("azl", 500, [
+          [0, 3]
+        ])
+        az.reel("azlt", 500, [
+          [0, 6]
+        ])
+        az.reel("azu", 500, [
+          [0, 11]
+        ])
+        az.reel("azr", 500, [
+          [0, 9]
+        ])
+        az.reel("azrt", 500, [
+          [0, 10]
+        ])
+
+        window.frisk = Crafty.e('2D, DOM, Color, Multiway, friskd, Keyboard, SpriteAnimation, Collision, Frisk, Furry')
+          .attr({x: 460, y: 320, w: 38, h: 58})
           .bind("EnterFrame", function() {
-            g.keys_old = g.keys
+            if(frisk.y > 240) {
+              frisk.DOM()._element.style.zIndex = 10
+            }
+            else {
+              frisk.DOM()._element.style.zIndex = 0
+            }
           })
+          .multiway(200, {
+            UP_ARROW: -90, DOWN_ARROW: 90,
+            RIGHT_ARROW: 0, LEFT_ARROW: 180
+          })
+          .collision([0,29, 38,29, 38,58, 0,58])
           .bind('KeyDown', function(e) {
             if(e.key == Crafty.keys.LEFT_ARROW) {
               frisk.animate("friskl", -1)
@@ -137,7 +305,7 @@
           [1, 0], [2, 0]
         ])
         frisk.reel("downs", 500, [
-          [1, 0]
+          [0, 0]
         ])
         frisk.reel("friskl", 500, [
           [0, 3], [1, 3]
@@ -149,7 +317,7 @@
           [1, 1], [2, 1]
         ])
         frisk.reel("ups", 500, [
-          [1, 1]
+          [0, 1]
         ])
         frisk.reel("friskr", 500, [
           [0, 2], [1, 2]
@@ -158,9 +326,7 @@
           [0, 2]
         ])
         frisk.addComponent("Collision").bind('Moved', function(from) {
-          //console.log(from)
           if(this.hit('Solid')) {
-             console.log(from)
              frisk[from.axis] = from.oldValue
           }
         });

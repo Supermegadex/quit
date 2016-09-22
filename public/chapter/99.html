@@ -1,0 +1,53 @@
+<script src="/js/jquery.shuffleLetters.js"></script>
+<script>
+
+function ld(){
+  if(dialogue.id == undefined){
+    window.setTimeout(w, 4000);
+    $(".blur").show();
+    $(".white").hide();
+    Materialize.toast("Part 6", 3700, "mon lolololol");
+    $(".lolololol").shuffleLetters({
+      step: 50,
+      fps: 15
+    })
+  }
+  else if (dialogue.id == "az1" || dialogue.id == "az2"){
+    console.log("You're back!");
+  }
+  else{
+    history.back();
+  }
+}
+
+function juan(){
+  dialogue
+    .enableFace()
+    .changeSprite("/az.gif")
+    .id = "az1";
+  dialogue
+    .write("\\w:500;* Someone has to take care of these \\b:;\\ :4;flowers.", function(){
+      $(".sprite").hide();
+      $(".sprite").fadeIn(1500);
+    })
+    .start({delay: 80, voice: "az"})
+    .done(function(){
+      window.setTimeout(function(){$Story._next()}, 2500);
+    })
+    .position = "center";
+}
+
+function w(){
+  dialogue.id = "az2";
+  dialogue
+    .write("\\w:750;* Don’t worry about me.")
+    .start({delay: 70, voice: "az"})
+    .done(function(){
+      window.setTimeout(juan, 2500);
+    })
+    .position = "center";
+}
+
+dialogue.voice.add(["az"], "wav");
+
+</script>

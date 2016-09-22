@@ -1,0 +1,202 @@
+<script>
+
+function handleMessage(event) {
+  if (event.origin != "/game") { console.log("HI"); return; }
+  switch(event.data.message) {
+   case "talk":
+    alert("Hello, child.");
+    break;
+  }
+}
+
+function observable(value) {
+  var listeners = [];
+
+  function notify(newValue) {
+    listeners.forEach(function(listener){ listener(newValue); });
+  }
+
+  function accessor(newValue) {
+    if (arguments.length && newValue !== value) {
+      value = newValue;
+      notify(newValue);
+    }
+    return value;
+  }
+
+  accessor.subscribe = function(listener) { listeners.push(listener); };
+
+  return accessor;
+}
+
+function ld(){
+  window.addEventListener('message', handleMessage, false);
+  if(dialogue.id == undefined){
+    $(".blur").show();
+
+    Materialize.toast("Part 7", 10000, "mon");
+  }
+  else if (dialogue.id == "7"){
+    console.log("You're back!");
+  }
+  else{
+    history.back();
+  }
+}
+
+function oo(){
+  dialogue.id = 7;
+  dialogue
+    .write("* Frisk?\\b:;\\w:1000;* Where are you...?")
+    .write("\\w:1000;* Mom?\\b:;\\w:1500;* Dad?")
+    .write("\\w:1000;* . . . \\b:;\\w:1500;* Asriel?")
+    .write("* Oh\\w:500;, Asriel.\\b:;\\w:500;* I m-\\w:500;miss you s-\\w:500;so much.")
+    .done(function(){setTimeout(function () {
+      cc()
+    }, 1000);})
+    .start({noskip: true, voice: "talk"})
+    .position = "center";
+}
+
+function cc() {
+  $(".blur").html('<center><iframe src="/game" frameborder="0" width="520" height="520" class="raisedImportance"></iframe></center>')
+  window.zee = window.frames[0].zee = observable(0);
+  window.frames[0].zee.subscribe(z)
+  window.frisk = window.frames[0].frisk
+  window.az = window.frames[0].az
+  window.hello = setInterval(function () {
+    switch (window.frames[0].azs) {
+      case "l":
+        writing == true ? azanim("l") : frames[0].az.animate("azl")
+        break;
+      case "r":
+        writing == true ? azanim("r") : frames[0].az.animate("azr")
+        break;
+    }
+  }, 250);
+}
+
+function azanim(way) {
+  if(animst == 0) {
+    window.frames[0].az.animate("az" + way + "t")
+    animst++
+  }
+  else {
+    window.frames[0].az.animate("az" + way)
+    animst--
+  }
+}
+
+var animst = 0
+
+var zz = 0;
+
+window.seven = true
+
+var azaz = [
+  function() {
+    dialogue
+    .write("\\face:/az.gif;* Don't worry about me.")
+    .write("* Someone has to take care of these flowers.")
+    .start({voice: "az"})
+    .done(d)
+  },
+  function() {
+    dialogue
+    .write("\\face:/az.gif;* Frisk\\w:100;, please leave me alone.")
+    .write("* I can't come back\\w:100;.\\b:;* I just can't\\w:100;, OK?")
+    .write("* I don't want to break their hearts all over again.")
+    .write("* It's better if they never see me.")
+    .start({voice: "az"})
+    .done(d)
+  },
+  function() {
+    dialogue
+    .write("* ... why are you still here?")
+    .write("* Are you trying to keep me company?")
+    .start({voice: "az"})
+    .done(d)
+  },
+  function() {
+    dialogue
+    .write("* Frisk...")
+    .write("* Hey.")
+    .write("* Let me ask you a question.")
+    .write("* Frisk..\\w:100;.\\b:;* Why did you come here?")
+    .write("* Everyone knows the legend\\w:100;, right...?")
+    .write("* “Travelers who climb Mt. Ebott are said to disappear.”")
+    .write("* Frisk.")
+    .write("* Why would you ever climb a mountain like that?")
+    .write("* Was it foolishness?")
+    .write("* Was it fate?")
+    .write("* Or was it..\\w:100;.\\b:;* Because you...?")
+    .write("* Well.")
+    .write("* Only you know the answer, don't you...?")
+    .start({voice: "az"})
+    .done(d)
+  },
+  function() {
+    dialogue
+    .write("* I know why " + $Story.name + " climbed the mountain.")
+    .write("* It wasn't for a very happy reason.")
+    .write("* Frisk\\w:100;.\\b:;* I'll be honest with you.")
+    .write("* " + $Story.name + " hated humanity.")
+    .write("* Why they did\\w:100;, they never talked about it.")
+    .write("* But they felt very strongly about that.")
+    .start({voice: "az"})
+    .done(d)
+  },
+  function() {
+    dialogue
+    .write("* Frisk..\\w:100;.\\b:;* You really ARE different from " + $Story.name + ".")
+    .write("* In fact\\w:100;, though you have similar\\w:100;, uh\\w:100;, fashion choices...")
+    .write("* I don't know why I ever acted like you were the same person.")
+    .write("* Maybe..\\w:100;.\\b:;* The truth is...")
+    .write("* " + $Story.name + " wasn't really the greatest person.")
+    .write("* While\\w:100;, Frisk...")
+    .write("* You're the type of friend I wish I always had.")
+    .write("* So maybe I was kind of projecting a little bit.")
+    .write("* Let's be honest\\w:100;.\\b:;* I did some weird stuff as a flower.")
+    .start({voice: "az"})
+    .done(d)
+  },
+  function() {
+    dialogue
+    .write("* ... why are you still here?")
+    .write("* Are you trying to keep me company?")
+    .start({voice: "az"})
+    .done(d)
+  }
+]
+
+function d() {
+  setTimeout(function () {
+    writing = false
+    window.frames[0].azs = "l"
+    window.frames[0].az.animate("azl")
+  }, 100);
+}
+
+var writing = false
+
+var written = 0
+
+function z(val) {
+  dialogue.click()
+  if(writing) {
+    zee(0)
+    return
+  }
+  if(val == 2 ) {
+    azaz[written]()
+    written++
+    writing = true
+  }
+  zee(0)
+}
+
+dialogue.voice.add(["talk", "az"], "wav")
+dialogue.voice.addRand(["WD"], "wav", 7)
+$Aud.load(["MemoryFallen", "Reunited"])
+
+</script>

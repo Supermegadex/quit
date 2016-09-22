@@ -2,21 +2,29 @@ var dialogue;
 Polymer({
   is: "dialog-box",
   properties:{
+
+    // setting this sets the position of the dialog box
     position: {
       type: String,
       value: "bottom",
       observer: "_move"
     },
+
+    // sets the portrait of the speaking character as enabled or disabled
     face: {
       type: Boolean,
       value: false,
       observer: "_update"
     },
+
+    // sets the portrait image of the speaking character
     sprite: {
       type: String,
       observer: "_update",
       value: null
     },
+
+    // whether or not the dialog box is visible
     visible: {
       type: Boolean,
       value: false,
@@ -24,13 +32,24 @@ Polymer({
     }
   },
   ready: function(){
+
+    // sets window.dialogue as this object
     dialogue = this;
+
+    // prepares the visibility and size of the dialog box
     this._update();
   },
-  _move: function(){
+
+  // updates the position of the dialog box
+  _move: function(x){
+    x ? this.position = x : false
     switch(this.position){
       case "top":
-        this.style.top = "top: 10px; left: 0, right: 0; margin: auto; bottom: initial;"
+        this.style.top = "10px"
+        this.style.left = 0
+        this.style.right = 0;
+        this.style.margin = "auto";
+        this.style.bottom = "initial";
         break;
       case "bottom":
         this.style.margin = "0";
@@ -118,36 +137,36 @@ Polymer({
 
   voice: {
     add: function(ab, ft){
-        for(var i in ab){
-            if(typeof this.s[ab[i]] != "object"){
-                this.s[ab[i]] = new Howl({
-                    src: ["/voices/" + ab[i] + "." + ft],
-                    loop: false
-                });
-            }
+      for(var i in ab){
+        if(typeof this.s[ab[i]] != "object"){
+          this.s[ab[i]] = new Howl({
+            src: ["/voices/" + ab[i] + "." + ft],
+            loop: false
+          });
         }
+      }
     },
 
     s: {},
 
     addRand: function(ab, ft, hm){
-        for(var i in ab){
-            this.s[ab] = {
-                num: hm,
-                play: function(){
-                    this.s[Math.floor(Math.random()*this.num)].play();
-                },
-                s: [],
-            }
-            var j = 0;
-            while (j < hm) {
-                this.s[ab].s[j] = new Howl({
-                    src: "/voices/" + ab + "/" + String(j+1) + "." + ft,
-                    loop: false
-                });
-                j++;
-            }
+      for(var i in ab){
+        this.s[ab] = {
+          num: hm,
+          play: function(){
+            this.s[Math.floor(Math.random()*this.num)].play();
+          },
+          s: [],
         }
+        var j = 0;
+        while (j < hm) {
+          this.s[ab].s[j] = new Howl({
+            src: "/voices/" + ab + "/" + String(j+1) + "." + ft,
+            loop: false
+          });
+          j++;
+        }
+      }
     },
   },
 
@@ -205,22 +224,22 @@ Polymer({
   keys: new window.keypress.Listener(),
 
   start: function(options){
-    this.arr = this.waiting.shift();
+    dialogue.arr = dialogue.waiting.shift();
     dialogue.visible = true;
-    this.element.innerHTML = "";
+    dialogue.element.innerHTML = "";
     if(typeof options == "object"){
-      this.options = Object.assign(this.defaults, options);
+      dialogue.options = Object.assign(this.defaults, options);
     }
     else if(typeof this.options == "undefined"){
-      this.options = this.defaults;
+      dialogue.options = this.defaults;
     }
-    var func = this.funcs.shift();
+    var func = dialogue.funcs.shift();
     if(typeof func == "function"){
       func();
     }
-    this.runner(this.options.delay);
-    if(!this.options.noskip){
-      this.keys.simple_combo(this.options.skip, function(){
+    dialogue.runner(dialogue.options.delay);
+    if(!dialogue.options.noskip){
+      dialogue.keys.simple_combo(dialogue.options.skip, function(){
         dialogue.skip = true;
       });
     }
@@ -380,6 +399,17 @@ Polymer({
 
     pauseMusic: function(m){
       $Aud.pause(m);
+      dialogue.go();
+      return(false);
+    },
+
+    next: function(x) {
+      dialogue.html = ""
+      setTimeout(function(){ dialogue.start() }, x || 0);
+    },
+
+    speed: function(ms) {
+      dialogue.editOptions({delay: ms});
       dialogue.go();
       return(false);
     }

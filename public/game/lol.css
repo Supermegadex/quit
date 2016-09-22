@@ -1,0 +1,26 @@
+/* ----------------------------------------------------
+   created with http://www.codeandweb.com/texturepacker 
+   ----------------------------------------------------
+   $TexturePacker:SmartUpdate:3ff9911266e20ac471c9c2388e414c49:9f926546dbd5ce039edd61879f5de327:256f3587d95ab93d2cba309269bec79e$
+   ----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(lol.png);}
+
+.spr_asriel_d_0 {width:16px; height:28px; background-position: -0px -0px}
+.spr_asriel_dt_0 {width:16px; height:28px; background-position: -0px -28px}
+.spr_asriel_dt_1 {width:16px; height:28px; background-position: -0px -56px}
+.spr_asriel_l_0 {width:16px; height:28px; background-position: -0px -84px}
+.spr_asriel_l_1 {width:16px; height:28px; background-position: -0px -112px}
+.spr_asriel_lt_0 {width:16px; height:28px; background-position: -0px -140px}
+.spr_asriel_lt_1 {width:16px; height:28px; background-position: -0px -168px}
+.spr_asriel_r_0 {width:16px; height:28px; background-position: -0px -196px}
+.spr_asriel_r_1 {width:16px; height:28px; background-position: -0px -224px}
+.spr_asriel_rt_0 {width:16px; height:28px; background-position: -0px -252px}
+.spr_asriel_rt_1 {width:16px; height:28px; background-position: -0px -280px}
+.spr_asriel_ut_0 {width:16px; height:28px; background-position: -0px -308px}

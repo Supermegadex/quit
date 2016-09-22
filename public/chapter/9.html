@@ -1,0 +1,63 @@
+<p>t</p>
+<script>
+
+function bt(){
+
+}
+
+function ld(){
+  if(dialogue.id == undefined && window.seven == undefined){
+    if(!window.introComplete){
+      $(".white").show().css({opacity: 0});
+      $(".white").animate({opacity: 1}, 3500, oo);
+    }
+    else {
+      setTimeout(oo, 1000);
+    }
+    $(".blur").show();
+    Materialize.toast("Part 6", 4000, "mon");
+  }
+  else if (dialogue.id == "6"){
+    console.log("You're back!");
+  }
+  else{
+    history.back();
+  }
+}
+
+function oo(){
+  dialogue.id = 6;
+  dialogue
+    .write("* Frisk?\\b:;\\w:1000;* Where are you...?")
+    .write("\\w:1000;* Mom?\\b:;\\w:1500;* Dad?")
+    .write("\\w:1000;* . . . \\b:;\\w:1500;* Asriel?")
+    .write("* Oh\\w:500;, Asriel.\\b:;\\w:500;* I m-\\w:500;miss you s-\\w:500;so much.")
+    .done(function(){setTimeout(function () {
+      cc()
+    }, 1000);})
+    .start({noskip: true, voice: "talk"})
+    .position = "center";
+}
+
+function cc() {
+  dialogue
+    .write("\\playMusic:MemoryFallen;* R-remember how we u-used to g-go and play in the r-ruins?\\next:1500;")
+    .write("* \\<em>;sniff\\</em>;\\b:;* O-or shop with mom in H-home?\\w:2000;\\b:;* . . .\\next:1000;")
+    .write("* heh.\\w:1000;\\b:;* This v-void of n-nothingness is so lonely.\\next:1000;")
+    .write("\\voice:WD;\\<span class='wd'>;\\speed:150;Are you \"bonely\", as my brother would say?\\</span>;\\next:1000;")
+    .write("\\voice:talk;\\speed:50;* AAAH!\\b:;\\w:500;* Who are you?\\next:1000;")
+    .write("\\voice:WD;\\<span class='wd'>;\\speed:150;Dr. W.D. Gaster.\\b:;\\w:500;But you should know that.\\</span>;\\next:1000;")
+    .write("\\voice:talk;\\speed:50;* I'm sorry.\\b:;\\w:500;I don't understand you.\\next:1000;")
+    .write("\\voice:WD;\\<span class='wd'>;\\speed:150;Well.\\b:;\\w:500;We can remedy that.\\</span>;\\next:1000;")
+    .write("\\voice:az;\\speed:50;* Hey, " + $Story.name + ".\\next:2000;")
+    .done($Story._next)
+    .start({noskip: true, voice: "talk", nonext: true})
+    .position = "bottom";
+}
+
+dialogue.voice.add(["talk", "az"], "wav")
+dialogue.voice.addRand(["WD"], "wav", 7)
+$Aud.load(["MemoryFallen"])
+$Aud.loadSFX(["damage"], ".mp3")
+
+</script>
