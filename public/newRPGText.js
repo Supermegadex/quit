@@ -42,54 +42,40 @@ Polymer({
 
   // updates the position of the dialog box
   _move: function(x){
-    x ? this.position = x : false
-    switch(this.position){
-      case "top":
-        this.style.top = "10px"
-        this.style.left = 0
-        this.style.right = 0;
-        this.style.margin = "auto";
-        this.style.bottom = "initial";
-        break;
-      case "bottom":
-        this.style.margin = "0";
-        this.style.top = "initial";
-        this.style.right = "initial";
-        this.style.bottom = "5px";
-        if(window.innerWidth >= 400){
-          this.style.left = String(window.innerWidth / 2 - 200) + "px";
-        }
-        else{
-          this.style.left = "initial";
-        }
-        break;
-      case "center":
-        this.style.top = "0";
-        this.style.bottom = "0";
-        this.style.right = "0";
-        this.style.left = "0";
-        this.style.margin = "auto";
-        break;
-      default:
-        $(dialogue).css(JSON.parse(this.position));
-        break;
-    }
+    x ? this.position = x : false;
+    if (this.position === "top") {
+      this.style.top = "10px";
+      this.style.left = 0;
+      this.style.right = 0;
+      this.style.margin = "auto";
+      this.style.bottom = "initial";
+    } else if (this.position === "bottom") {
+      this.style.margin = "0";
+      this.style.top = "initial";
+      this.style.right = "initial";
+      this.style.bottom = "5px";
+      if (window.innerWidth >= 400) {
+        this.style.left = String(window.innerWidth / 2 - 200) + "px";
+      }
+      else {
+        this.style.left = "initial";
+      }
+    } else if (this.position === "center") {
+      this.style.top = "0";
+      this.style.bottom = "0";
+      this.style.right = "0";
+      this.style.left = "0";
+      this.style.margin = "auto";
+    } else $(dialogue).css(JSON.parse(this.position));
   },
+  html: "",
   _update: function(){
-    if(this.face){
-      speechc.style.width = "275px";
-    }
-    else{
-      speechc.style.width = "350px";
-    }
+    speechc.style.width = this.face ? "275px" : "350px";
     if(this.visible){
       $(dialogue).show();
     }
-    else{
-      $(dialogue).hide();
-    }
+    else $(dialogue).hide();
   },
-  html: "",
   str: null,
   loc: {},
   find: function(string){
@@ -214,7 +200,7 @@ Polymer({
     next: "z",
     skip: "x",
     noskip: false,
-    nonext: false,
+    nonext: false
   },
 
   test: function(s, j){
@@ -224,6 +210,7 @@ Polymer({
   keys: new window.keypress.Listener(),
 
   start: function(options){
+    dialogue.skip = false;
     dialogue.arr = dialogue.waiting.shift();
     dialogue.visible = true;
     dialogue.element.innerHTML = "";
@@ -366,7 +353,7 @@ Polymer({
       var i = 0;
       var r = "";
       while (i < num){
-        r += "&nbsp;"
+        r += "&nbsp;";
         i++;
       }
       return(r);
@@ -404,8 +391,14 @@ Polymer({
     },
 
     next: function(x) {
-      dialogue.html = ""
+      dialogue.html = "";
       setTimeout(function(){ dialogue.start() }, x || 0);
+    },
+
+    continue: function(x) {
+      dialogue.html = "";
+      $(dialogue).off("click");
+      setTimeout(function(){ dialogue.visible = false; dialogue.callback(); }, x || 0);
     },
 
     speed: function(ms) {
@@ -446,7 +439,7 @@ Polymer({
         }
       }
       else{
-        var r = this.commands[run[0]](run[1]);
+        r = this.commands[run[0]](run[1]);
       }
     }
     return(r);
@@ -454,5 +447,5 @@ Polymer({
 
   arr: [],
   element: null,
-  interval: null,
+  interval: null
 });

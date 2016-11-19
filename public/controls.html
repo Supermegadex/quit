@@ -148,14 +148,24 @@
                     }
                 }
             },
-            pause: function(){
+            pause: function(tf){
+              if($Aud.musics[this.audio].volume() && !tf){
+                this.fade(this.audio, 0, 1, 250);
+                setTimeout(function () {
+                  $Aud.musics[$Aud.audio].pause();
+                  $Aud.playing = 2;
+                }, 250);
+              }
+              else{
                 this.musics[this.audio].pause();
                 this.playing = 2;
+              }
             },
-            resume: function(){
+            resume: function(mus, tf){
                 if(!this.mute){
+                    mus ? this.audio = mus : false
                     this.musics[this.audio].play();
-                    this.fade(this.audio, 0, 1, 0, 50);
+                    !tf ? this.fade(this.audio, 0, 1, 250) : false
                     this.playing = 1;
                 }
             },
@@ -177,7 +187,9 @@
             fade: function(ab, v1, v2, d, t){
                 this.musics[ab].fade(v1, v2, d);
                 if(t){
-                    this.stop(ab);
+                  setTimeout(function () {
+                    $Aud.stop(ab);
+                  }, d);
                 }
             },
             unload: function(sound){

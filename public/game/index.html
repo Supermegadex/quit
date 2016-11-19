@@ -38,6 +38,21 @@
         }
       }
 
+      function together() {
+        window.tog = Crafty.e('2D, DOM, Color, SpriteAnimation, Collision, together, Furry')
+          .attr({x: az.x, y: az.y, w: 62, h: 60})
+          .bind("EnterFrame", function() {
+            tog.y += tog.y >= 330 ? 0 : 1
+            tog.x += 2
+          })
+          .reel("walk", 500, [
+            [0, 0], [0, 1]
+          ])
+          .animate("walk", -1)
+          frisk.undraw()
+          az.undraw()
+      }
+
       $(function() {
         var assetsObj = {
           "sprites": {
@@ -64,6 +79,17 @@
               // We give names to three individual images
               map: {
                 az: [0, 3]
+              }
+            },
+            "/game/together.png": {
+              // This is the width of each image in pixels
+              tile: 62,
+              // The height of each image
+              tileh: 60,
+              // padding
+              // We give names to three individual images
+              map: {
+                together: [0, 0]
               }
             },
             "/game/bg.png": {
@@ -97,26 +123,33 @@
 
         $(document).on("keydown", function(e) {
           az.DOM()._element.style.zIndex = 5
-          switch (e.key) {
-            case "ArrowUp":
+          switch (e.keyCode) {
+            case 38:
               g.keys.up = true
               g.facing = "up"
               break;
-            case "ArrowDown":
+            case 40:
               g.keys.down = true
               g.facing = "down"
               break;
-            case "ArrowLeft":
+            case 37:
               g.keys.left = true
               g.facing = "left"
               break;
-            case "ArrowRight":
+            case 39:
               g.keys.right = true
               g.facing = "right"
               break;
-            case "z":
+            case 90:
               testTalk()
               break;
+            case 13:
+              testTalk()
+              break;
+            case 88:
+              window.skip(1)
+            case "Shift":
+              window.skip(1)
             default:
               break;
           }
@@ -127,20 +160,20 @@
           }
         }
         $(document).on("keyup", function(e) {
-          switch (e.key) {
-            case "ArrowUp":
+          switch (e.keyCode) {
+            case 38:
               g.keys.up = false
               checkMV("ups")
               break;
-            case "ArrowDown":
+            case 40:
               g.keys.down = false
               checkMV("downs")
               break;
-            case "ArrowLeft":
+            case 37:
               g.keys.left = false
               checkMV("lefts")
               break;
-            case "ArrowRight":
+            case 39:
               g.keys.right = false
               checkMV("rights")
               break;
@@ -171,7 +204,7 @@
             y: 0,
             w: 600,
             h: 120
-          }).color('red');
+          }).color('black');
 
         var square2 = Crafty.e('2D, DOM, Color, Collision, Solid');
           square2.attr({
@@ -179,7 +212,7 @@
             y: 0,
             w: 10,
             h: window.innerHeight
-          }).color('red');
+          }).color('black');
 
         var square3 = Crafty.e('2D, DOM, Color, Collision, Solid');
           square3.attr({
@@ -187,7 +220,7 @@
             y: 480,
             w: 600,
             h: 120
-          }).color('red');
+          }).color('black');
 
         var square4 = Crafty.e('2D, DOM, Color, Collision, Solid');
           square4.attr({
@@ -195,7 +228,7 @@
             y: 400,
             w: 20,
             h: 60
-          }).color('red');
+          }).color('black');
 
         var square5 = Crafty.e('2D, DOM, Color, Collision, Solid');
           square5.attr({
@@ -203,7 +236,7 @@
             y: 445,
             w: 50,
             h: 60
-          }).color('red');
+          }).color('black');
 
         var square6 = Crafty.e('2D, DOM, Color, Collision, Solid');
           square6.attr({
@@ -211,7 +244,7 @@
             y: 120,
             w: 18,
             h: 40
-          }).color('red');
+          }).color('black');
 
         var square7 = Crafty.e('2D, DOM, Color, Collision, Solid');
           square7.attr({
@@ -219,7 +252,7 @@
             y: 120,
             w: 300,
             h: 40
-          }).color('red');
+          }).color('black');
 
         var square8 = Crafty.e('2D, DOM, Color, Collision, Solid');
           square8.attr({
@@ -227,7 +260,7 @@
             y: 120,
             w: 200,
             h: 195
-          }).color('red');
+          }).color('black');
 
         var square9 = Crafty.e('2D, DOM, Color, Collision, Solid');
           square9.attr({
@@ -235,7 +268,7 @@
             y: 400,
             w: 300,
             h: 195
-          }).color('red');
+          }).color('black');
 
         var square10 = Crafty.e('2D, DOM, Color, Collision, Solid');
           square10.attr({
@@ -243,14 +276,22 @@
             y: 445,
             w: 300,
             h: 195
-          }).color('red');
+          }).color('black');
+
+        var square11 = Crafty.e('2D, DOM, Skip, Color, Collision');
+          square11.attr({
+            x: 520,
+            y: 300,
+            w: 300,
+            h: 195
+          }).color('black');
 
         square.origin("center")
 
         var bg = Crafty.e('2D, DOM, Color, bg')
           .attr({x: -100, y: 0, w: 1360, h: 520});
 
-        window.az = Crafty.e('2D, DOM, Color, Solid, Collision, az, SpriteAnimation, Collision')
+        window.az = Crafty.e('2D, DOM, Color, Collision, az, SpriteAnimation, Collision, Solid')
           .attr({x: 240, y: 240, w: 32, h: 56})
           .collision([0,28, 32,28, 32,56, 0,56])
         az.reel("azd", 500, [
@@ -301,8 +342,8 @@
               frisk.animate("friskd", -1)
             }
           });
-        frisk.reel("friskd", 500, [
-          [1, 0], [2, 0]
+        frisk.reel("friskd", 1000, [
+          [0, 0], [1, 0], [0, 0], [2, 0]
         ])
         frisk.reel("downs", 500, [
           [0, 0]
@@ -313,8 +354,8 @@
         frisk.reel("lefts", 500, [
           [0, 3]
         ])
-        frisk.reel("frisku", 500, [
-          [1, 1], [2, 1]
+        frisk.reel("frisku", 1000, [
+          [0, 1], [1, 1], [0, 1], [2, 1]
         ])
         frisk.reel("ups", 500, [
           [0, 1]
@@ -328,6 +369,9 @@
         frisk.addComponent("Collision").bind('Moved', function(from) {
           if(this.hit('Solid')) {
              frisk[from.axis] = from.oldValue
+          }
+          if(this.hit('Skip')) {
+            window.skiip = confirm("Would you like to skip?")
           }
         });
       })

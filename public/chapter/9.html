@@ -47,10 +47,10 @@ function cc() {
     .write("\\voice:WD;\\<span class='wd'>;\\speed:150;Are you \"bonely\", as my brother would say?\\</span>;\\next:1000;")
     .write("\\voice:talk;\\speed:50;* AAAH!\\b:;\\w:500;* Who are you?\\next:1000;")
     .write("\\voice:WD;\\<span class='wd'>;\\speed:150;Dr. W.D. Gaster.\\b:;\\w:500;But you should know that.\\</span>;\\next:1000;")
-    .write("\\voice:talk;\\speed:50;* I'm sorry.\\b:;\\w:500;I don't understand you.\\next:1000;")
+    .write("\\voice:talk;\\speed:50;* I'm sorry.\\b:;\\w:500;* I don't understand you.\\next:1000;")
     .write("\\voice:WD;\\<span class='wd'>;\\speed:150;Well.\\b:;\\w:500;We can remedy that.\\</span>;\\next:1000;")
-    .write("\\voice:az;\\speed:50;* Hey, " + $Story.name + ".\\next:2000;")
-    .done($Story._next)
+    .write("\\voice:az;\\speed:50;* Hey, " + $Story.name + ".\\continue:2000;")
+    .done(function(){$Story._next()})
     .start({noskip: true, voice: "talk", nonext: true})
     .position = "bottom";
 }

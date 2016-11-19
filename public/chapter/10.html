@@ -11,11 +11,9 @@ function handleMessage(event) {
 
 function observable(value) {
   var listeners = [];
-
   function notify(newValue) {
     listeners.forEach(function(listener){ listener(newValue); });
   }
-
   function accessor(newValue) {
     if (arguments.length && newValue !== value) {
       value = newValue;
@@ -23,18 +21,15 @@ function observable(value) {
     }
     return value;
   }
-
   accessor.subscribe = function(listener) { listeners.push(listener); };
-
   return accessor;
 }
 
 function ld(){
-  window.addEventListener('message', handleMessage, false);
   if(dialogue.id == undefined){
     $(".blur").show();
-
-    Materialize.toast("Part 7", 10000, "mon");
+    setTimeout(oo, 1000);
+    Materialize.toast("Part 9", 10000, "mon");
   }
   else if (dialogue.id == "7"){
     console.log("You're back!");
@@ -45,32 +40,57 @@ function ld(){
 }
 
 function oo(){
+  if($Aud.audio == "MemoryFallen") {
+    $(".white").fadeOut(2000);
+    $Aud.fade("MemoryFallen", 1, 0, 2000)
+    setTimeout(function () {
+      $Aud.pause(true)
+      $Aud.play("Reunited")
+      $Aud.fade("Reunited", 0, 1, 2000)
+    }, 2000);
+  }
+  setTimeout(function () {
+    $Aud.play("Reunited")
+    $Aud.fade("Reunited", 0, 1, 2000)
+  }, 2000);
   dialogue.id = 7;
   dialogue
-    .write("* Frisk?\\b:;\\w:1000;* Where are you...?")
-    .write("\\w:1000;* Mom?\\b:;\\w:1500;* Dad?")
-    .write("\\w:1000;* . . . \\b:;\\w:1500;* Asriel?")
-    .write("* Oh\\w:500;, Asriel.\\b:;\\w:500;* I m-\\w:500;miss you s-\\w:500;so much.")
+    .write("\\voice:toriel;\\face:/torieltalk1.gif;* But before then…")
+    .write("* Perhaps you might want to take a walk?")
+    .write("* You can say goodbye to all of your wonderful friends.")
+    .write("* Do as you wish\\w:100;.\\b:;* We will all wait for you here.")
+    .write("\\voice:fr;* \\<span class='smol'>;(okay)\\</span>;", dialogue.disableFace)
+    .write("\\voice:talk;[Frisk wandered about the Underground for a long time.]")
+    .write("[They returned to Hotland, Waterfall, and Snowdin]")
+    .write("[They saw all of the wonderful monsters they’d met again.]")
+    .write("[Frisk realized something...\\b:;They didn’t want to get to the surface anymore.]")
+    .write("[No longer were they determined to escape.]")
+    .write("[So Frisk kept walking. It gave them time to think.]")
+    .write("[Into the ruins Frisk strolled, to the place they fell.]")
     .done(function(){setTimeout(function () {
       cc()
     }, 1000);})
-    .start({noskip: true, voice: "talk"})
-    .position = "center";
+    .start({noskip: false, voice: "talk", nonext: false})
 }
 
 function cc() {
-  $(".blur").html('<center><iframe src="/game" frameborder="0" width="520" height="520" class="raisedImportance"></iframe></center>')
-  window.zee = window.frames[0].zee = observable(0);
+  $Aud.fade("Reunited", 1, .5, 3000)
+  $(".blur").html('<center><iframe src="/game" id="game" frameborder="0" autofocus width="520" height="520" class="raisedImportance" style="display: none"></iframe></center>')
+  window.zee = window.frames[0].zee = observable(0)
   window.frames[0].zee.subscribe(z)
+  window.x = window.frames[0].skip = observable(0)
+  window.frames[0].skip.subscribe(xxxxx)
   window.frisk = window.frames[0].frisk
   window.az = window.frames[0].az
+  $("#game").fadeIn(2000)
   window.hello = setInterval(function () {
+    $("#game")[0].contentWindow.focus()
     switch (window.frames[0].azs) {
       case "l":
-        writing == true ? azanim("l") : frames[0].az.animate("azl")
+        (writing == true && undyne == false) ? azanim("l") : frames[0].az.animate("azl")
         break;
       case "r":
-        writing == true ? azanim("r") : frames[0].az.animate("azr")
+        (writing == true && undyne == false) ? azanim("r") : frames[0].az.animate("azr")
         break;
     }
   }, 250);
@@ -95,13 +115,16 @@ window.seven = true
 
 var azaz = [
   function() {
+    dialogue.id = 7;
     dialogue
     .write("\\face:/az.gif;* Don't worry about me.")
     .write("* Someone has to take care of these flowers.")
     .start({voice: "az"})
     .done(d)
+    .position = "bottom"
   },
   function() {
+    dialogue.id = 7;
     dialogue
     .write("\\face:/az.gif;* Frisk\\w:100;, please leave me alone.")
     .write("* I can't come back\\w:100;.\\b:;* I just can't\\w:100;, OK?")
@@ -109,8 +132,10 @@ var azaz = [
     .write("* It's better if they never see me.")
     .start({voice: "az"})
     .done(d)
+    .position = "bottom";
   },
   function() {
+    dialogue.id = 7;
     dialogue
     .write("* ... why are you still here?")
     .write("* Are you trying to keep me company?")
@@ -118,6 +143,7 @@ var azaz = [
     .done(d)
   },
   function() {
+    dialogue.id = 7;
     dialogue
     .write("* Frisk...")
     .write("* Hey.")
@@ -136,6 +162,8 @@ var azaz = [
     .done(d)
   },
   function() {
+    dialogue.id = 7;
+    $Aud.fade("Reunited", .5, .25, 2000)
     dialogue
     .write("* I know why " + $Story.name + " climbed the mountain.")
     .write("* It wasn't for a very happy reason.")
@@ -147,6 +175,8 @@ var azaz = [
     .done(d)
   },
   function() {
+    dialogue.id = 7;
+    $Aud.fade("Reunited", .25, .1, 2000)
     dialogue
     .write("* Frisk..\\w:100;.\\b:;* You really ARE different from " + $Story.name + ".")
     .write("* In fact\\w:100;, though you have similar\\w:100;, uh\\w:100;, fashion choices...")
@@ -156,18 +186,100 @@ var azaz = [
     .write("* While\\w:100;, Frisk...")
     .write("* You're the type of friend I wish I always had.")
     .write("* So maybe I was kind of projecting a little bit.")
-    .write("* Let's be honest\\w:100;.\\b:;* I did some weird stuff as a flower.")
+    .write("* Let's be honest\\w:100;.\\b:;* I did some weird stuff as a flower.", function(){
+      $Aud.fade("Reunited", .1, .0, 2000, true)
+    })
     .start({voice: "az"})
     .done(d)
   },
   function() {
+    dialogue.id = 7;
+    $Aud.play("Dreemurr's Return")
+    $Aud.fade("Dreemurr's Return", 0, .25, 2000)
     dialogue
-    .write("* ... why are you still here?")
-    .write("* Are you trying to keep me company?")
+    .write("* There's one last thing I feel like I should tell you.")
+    .write("* Frisk\\w:100;, when " + $Story.name + " and I combined our SOULs together...")
+    .write("* The control over our body was actually split between us.")
+    .write("* They were the one that picked up their own empty body.")
+    .write("* And then\\w:100;, when we got to the village...")
+    .write("* They were the one that wanted to...")
+    .write("* ... to use our full power.")
+    .write("* I was the one that resisted.")
+    .write("* And then\\w:100;, because of me\\w:100;, we...")
+    .write("* Well\\w:100;, that's why I ended up a flower.")
+    .write("* This whole time\\w:100;, I've blamed myself for that decision.")
+    .write("* That's why I adopted that horrible view of the world.")
+    .write("* “Kill or be killed.”")
+    .write("* But now..\\w:100;.\\b:;* After meeting you...")
+    .write("* Frisk\\w:100;, I don't regret that decision anymore.")
+    .write("* I did the right thing.")
+    .write("* If I killed those humans...")
+    .write("* We would have had to wage war against all of humanity.")
+    .write("* And in the end\\w:100;, everyone went free\\w:100;, right?")
+    .write("* I still feel kind of sad knowing how long it took...")
+    .write("* ... so maybe it wasn't a perfect decision.")
+    .write("* But you can't regret hard choices your whole life\\w:100;, right?")
+    .write("* Well\\w:100;, not that I have much of a life left.")
+    .write("* But that's besides the point.")
     .start({voice: "az"})
     .done(d)
+    .voice.s.az.volume = .25
+  },
+  function() {
+    $Aud.audio = "Dreemurr's Return"
+    dialogue.id = 7;
+    dialogue
+    .write("* Frisk\\w:100;, thank you for listening to me.")
+    .write("* You should really go be with your friends now\\w:100;, OK?")
+    .write("* Oh\\w:100;, and\\w:100;, please...")
+    .write("* In the future\\w:100;, if you uh\\w:100;, see me...")
+    .write("* Don't think of it as me\\w:100;, OK?")
+    .write("* I just want you to remember me like this.")
+    .write("* Someone that was your friend for a little while.")
+    .write("* Oh\\w:100;, and Frisk...")
+    .write("* Be careful in the outside world\\w:100;, OK?")
+    .write("* Despite what everyone thinks\\w:100;, it's not as nice as it is here.")
+    .write("* There are a lot of Floweys out there.")
+    .write("* And not everything can be resolved by just being nice.")
+    .write("* Don't kill\\w:100;, and don't be killed\\w:100;, alright?")
+    .write("* That's the best you can strive for.")
+    .write("* Well\\w:100;, see you.")
+    .start({voice: "az"})
+    .done(d)
+  },
+  function() {
+    dialogue.id = 7;
+    $Aud.fade("Dreemurr's Return", .25, .75, 2000)
+    dialogue
+    .write("* Don't you have anything better to do?")
+    .start({voice: "az"})
+    .done(d)
+  },
+  function() {
+    dialogue.id = 7;
+    dialogue
+    .write("* \\<span class='smol'>;(N\\w:100;-no)\\</span>;", dialogue.disableFace)
+    .write("\\voice:az;\\face:/az.gif;* What do you mean, Frisk?", function(){ undyne = false })
+    .write("\\w:500;* Listen, it's okay.\\b:;* Don't worry about me.")
+    .write("* Oh...!\\w:1000;\\toge();* Frisk? Where are we going?")
+    .write("\\voice:fr;* \\<span class='smol'>;Home.\\</span>;", dialogue.disableFace)
+    .start({voice: "fr"})
+    .done(function () {
+      d()
+      $("#game").fadeOut(2000)
+      clearInterval(hello)
+      setTimeout(function () {
+        $(".blur")[0].removeChild($("center")[0])
+        $Story._next()
+      }, 2000);
+    })
   }
 ]
+
+function toge() {
+  frames[0].together()
+  return("<br>")
+}
 
 function d() {
   setTimeout(function () {
@@ -191,12 +303,20 @@ function z(val) {
     azaz[written]()
     written++
     writing = true
+    undyne = (written == 10) ? true : false
   }
   zee(0)
 }
 
-dialogue.voice.add(["talk", "az"], "wav")
+var undyne = false
+
+function xxxxx(val) {
+  dialogue.skip = true
+  x(0)
+}
+
+dialogue.voice.add(["talk", "az", "fr", "toriel"], "wav")
 dialogue.voice.addRand(["WD"], "wav", 7)
-$Aud.load(["MemoryFallen", "Reunited"])
+$Aud.load(["Dreemurr's Return", "Reunited"])
 
 </script>

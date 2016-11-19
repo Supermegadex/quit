@@ -25,7 +25,7 @@ preload(
 );
 var ybf = new Howl( {
   src: "/music/Your Best Friend.mp3",
-  loop: true,
+  loop: true
 } );
 
 function canc() {
